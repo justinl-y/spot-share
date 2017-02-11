@@ -21,6 +21,6 @@ less@2.7.8                      # Leaner CSS language
 practicalmeteor:mocha             # A package for writing and running your meteor app and package tests with mocha
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 react-meteor-data
-accounts-ui-unstyled
-accounts-password
+accounts-ui-unstyled@1.1.13
+accounts-password@1.3.3
 aldeed:simple-schema
