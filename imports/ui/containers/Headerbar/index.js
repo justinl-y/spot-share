@@ -10,7 +10,7 @@ class HeaderBar extends Component {
   render() {
     let display = null;
 
-    switch (this.props.applicationLocation) {
+    switch (this.props.userLocation) {
       case 'HOME':
         display = (<AppBar
           iconElementLeft={
@@ -73,12 +73,12 @@ class HeaderBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    applicationLocation: state.appData.applicationLocation.applicationLocation,
+    userLocation: state.appData.userLocation.userLocation,
   };
 }
 
 HeaderBar.propTypes = {
-  applicationLocation: PropTypes.object.isRequired,
+  userLocation: PropTypes.string.isRequired,
 };
 
 // connect to redux

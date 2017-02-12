@@ -4,14 +4,14 @@ import {
 
 // intial state
 const locationInitialState = {
-  applicationLocation: '',
+  userLocation: '',
 };
 
 // reducers
 export default (state = locationInitialState, action) => {
   switch (action.type) {
     case SET_LOCATION:
-      return { ...state, applicationLocation: action.payload };
+      return { ...state, userLocation: action.payload };
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import shareSpotsReducer from '../ui/containers/ShareSpot/reducer';
 export default combineReducers({
   appData: combineReducers({
     // add local reducers here
-    applicationLocation: applicationLocationReducer,
+    userLocation: applicationLocationReducer,
     shareSpots: shareSpotsReducer,
   }),
 });
