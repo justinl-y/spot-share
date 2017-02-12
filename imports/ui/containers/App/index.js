@@ -20,7 +20,7 @@ App.propTypes = {
 
 export default createContainer(() => {
   Meteor.subscribe('bookings');
-  Meteor.subscribe('parking-spots');
+  Meteor.subscribe('getParkingSpots');
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),

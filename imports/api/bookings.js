@@ -10,3 +10,4 @@ if (Meteor.isServer) {
   });
 }
 
+// to do add meteor methods
