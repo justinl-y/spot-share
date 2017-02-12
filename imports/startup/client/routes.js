@@ -17,6 +17,7 @@ import Welcome from '../../ui/components/Welcome';
 import App from '../../ui/containers/App';
 
 import ShareSpot from '../../ui/containers/ShareSpot';
+import NewShareSpot from '../../ui/components/NewShareSpot';
 
 import NotFound from '../../ui/components/NotFound';
 
@@ -30,7 +31,10 @@ Meteor.startup(() => {
           <Route component={MainLayout}>
             <Route path="/" component={App}>
               <IndexRoute component={Welcome} />
-              <Route path="/sharespot" component={ShareSpot} />
+              <Route path="/sharespots">
+                <Route path="list" component={ShareSpot} />
+                <Route path="new" component={NewShareSpot} />
+              </Route>
             </Route>
             <Route path="*" component={NotFound} />
           </Route>

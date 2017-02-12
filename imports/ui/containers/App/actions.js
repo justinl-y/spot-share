@@ -1,8 +1,8 @@
 // action types
-export const CHANGE_LOCATION = 'CHANGE_LOCATION';
+export const SET_LOCATION = 'SET_LOCATION';
 
 // action creators
-export const changeApplicationLocation = location => ({
-  type: CHANGE_LOCATION,
+export const setApplicationLocation = location => ({
+  type: SET_LOCATION,
   payload: location,
 });

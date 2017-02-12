@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import HeaderBar from '../../components/Headerbar';
+import HeaderBar from '../../containers/Headerbar';
 
 /* const styles = {
   'main-layout': {
