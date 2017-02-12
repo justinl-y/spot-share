@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const styles = {
   welcome: {
@@ -6,17 +6,32 @@ const styles = {
     // display: 'flex',
     // justifyContent: 'center',
     // alignItems: 'center',
-    'text-align': 'center',
+    'textAlign': 'center',
   },
   h1: {
     // 'text-align': 'center',
   },
 };
 
-const ParkingSpot = () => (
-  <div style={styles.welcome}>
-    <h1>A parking spot</h1>
-  </div>
+const ParkingSpot = ({ id, userId, availableFrom, availableTo, pricePerHour, additionalInformation, onClick }) => (
+  <li
+    style={styles.welcome}
+  >
+    <h3>A parking spot - ID: {id}</h3>
+    <p>User ID: {userId} | Available From: {availableFrom} To: {availableTo} | Price per hour: {pricePerHour}</p>
+    <p>Additional Info: {additionalInformation}</p>
+    <button onClick={onClick}>Edit</button>
+  </li>
 );
+
+ParkingSpot.propTypes = {
+  id: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  availableFrom: PropTypes.string.isRequired,
+  availableTo: PropTypes.string.isRequired,
+  pricePerHour: PropTypes.number.isRequired,
+  additionalInformation: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default ParkingSpot;

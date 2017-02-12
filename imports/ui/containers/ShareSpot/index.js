@@ -8,6 +8,8 @@ import { ParkingSpots } from '../../../api/parking-spots';
 
 import ParkingSpot from '../../components/ParkingSpot';
 
+import { editParkingSpot } from './actions';
+
 
 // import { fetchPosts } from '../PostList/actions';
 // import { fetchCategories } from './actions';
@@ -23,8 +25,15 @@ class ShareSpace extends Component {
           {parkingSpots.map(parkingSpot =>
             <ParkingSpot
               key={parkingSpot._id}
-              {...parkingSpot}
-             // onClick={() => dispatch(toggleTodo(parkingSpot._id))}
+              id={parkingSpot._id}
+              userId={parkingSpot.user_id}
+              availableFrom={parkingSpot.available_from}
+              availableTo={parkingSpot.available_to}
+              pricePerHour={parkingSpot.price_per_hour}
+              additionalInformation={parkingSpot.additional_information}
+              // {...parkingSpot}
+
+              onClick={() => dispatch(editParkingSpot(parkingSpot))}
             />,
           )}
         </ul>

@@ -1,7 +1,5 @@
 import {
-    LOADING_SPOTS_BEGIN,
-    LOADING_SPOTS_END,
-    UPDATE_SPOTS,
+    EDIT_PARKING_SPOT,
   } from './actions';
 
 // intial state
@@ -13,12 +11,9 @@ const shareSpotsInitialState = {
 // reducer
 export default (state = shareSpotsInitialState, action) => {
   switch (action.type) {
-    case LOADING_SPOTS_BEGIN:
-      return { ...state, loadingResource: true };
-    case LOADING_SPOTS_END:
-      return { ...state, loadingResource: false };
-    case UPDATE_SPOTS:
-      return { ...state, parkingSpots: action.payload };
+    case EDIT_PARKING_SPOT:
+      console.log(action.payload);
+      return state;
     default:
       return state;
   }
