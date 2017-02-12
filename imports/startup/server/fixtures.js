@@ -35,6 +35,16 @@ Meteor.startup(() => {
       price_per_hour: 25.00,
       additional_information: 'Mostly a safe area although there is a chance you will be murdered. Oh yeah.',
     });
+    ParkingSpots.insert({
+      user_id: user1,
+      post_code: 'V5H8U3',
+      geolocation: { lat: -33.347, lng: 151.544 },
+      image_encoding: 'sdsdfsfsfsfwrw',
+      available_from: '2016-12-01',
+      available_to: '2017-11-30',
+      price_per_hour: 15.00,
+      additional_information: 'Rough as rats. You have been warned.',
+    });
   }
 
   const parkingSpot = ParkingSpots.findOne();

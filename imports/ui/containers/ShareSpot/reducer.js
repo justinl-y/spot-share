@@ -4,8 +4,7 @@ import {
 
 // intial state
 const shareSpotsInitialState = {
-  loadingResource: false,
-  parkingSpots: [],
+  visibilityFilter: 'ALL',
 };
 
 // reducer

@@ -9,18 +9,32 @@ import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
 
 import { editParkingSpot } from './actions';
+import { changeApplicationLocation } from '../App/actions';
 
 
 // import { fetchPosts } from '../PostList/actions';
 // import { fetchCategories } from './actions';
 
+const styles = {
+  shareSpot: {
+    textAlign: 'center',
+  },
+};
+
+const currentLocation = 'SHARE-SPOT';
+
 class ShareSpace extends Component {
+  componentWillMount() {
+    this.props.changeApplicationLocation(currentLocation);
+  }
+
   render() {
-    const { dispatch } = this.props;
+    // const { dispatch } = this.props;
     const parkingSpots = this.props.parkingSpotList;
 
     return (
-      <div>
+      <div style={styles.shareSpot}>
+        <h2>Parking Spots</h2>
         <ul>
           {parkingSpots.map(parkingSpot =>
             <ParkingSpot
@@ -33,7 +47,8 @@ class ShareSpace extends Component {
               additionalInformation={parkingSpot.additional_information}
               // {...parkingSpot}
 
-              onClick={() => dispatch(editParkingSpot(parkingSpot))}
+              // onClick={() => dispatch(editParkingSpot(parkingSpot))}
+              onClick={() => this.props.editParkingSpot(parkingSpot)}
             />,
           )}
         </ul>
@@ -41,7 +56,6 @@ class ShareSpace extends Component {
     );
   }
 }
-
 
 /* <div>
         <ul>
@@ -77,11 +91,27 @@ const ShareSpaceContainer = createContainer(() => {
 
 function mapStateToProps(state) {
   return {
-    // visibilityFilter: state.visibilityFilter,
-    // pageSkip: state.pageSkip
+    visibilityFilter: state.appData.visibilityFilter,
+    applicationLocation: state.appData.applicationLocation,
   };
 }
 
-export default connect(mapStateToProps)(ShareSpaceContainer);
+const mapDispatchToProps = dispatch => ({
+  editParkingSpot: (item) => {
+    dispatch(editParkingSpot(item));
+  },
+  changeApplicationLocation: (location) => {
+    dispatch(changeApplicationLocation(location));
+  },
+});
+
+ShareSpace.propTypes = {
+  // dispatch: PropTypes.func.isRequired,
+  parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  changeApplicationLocation: PropTypes.func.isRequired,
+  editParkingSpot: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShareSpaceContainer);
 
 // export default ShareSpace;

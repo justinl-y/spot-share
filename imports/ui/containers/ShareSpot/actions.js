@@ -6,7 +6,7 @@ export const UPDATE_POSTS = 'UPDATE_POSTS';*/
 export const EDIT_PARKING_SPOT = 'EDIT_PARKING_SPOT';
 
 // action creators
-/*const loadResource = () => ({
+/* const loadResource = () => ({
   type: LOADING_POSTS_BEGIN,
   payload: null,
 });

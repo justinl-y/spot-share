@@ -1,21 +1,19 @@
 import React, { PropTypes } from 'react';
 
 const styles = {
-  welcome: {
+  parkingSpot: {
     // height: '85vh',
     // display: 'flex',
     // justifyContent: 'center',
     // alignItems: 'center',
-    'textAlign': 'center',
-  },
-  h1: {
-    // 'text-align': 'center',
+    textAlign: 'center',
+    listStyle: 'none',
   },
 };
 
 const ParkingSpot = ({ id, userId, availableFrom, availableTo, pricePerHour, additionalInformation, onClick }) => (
   <li
-    style={styles.welcome}
+    style={styles.parkingSpot}
   >
     <h3>A parking spot - ID: {id}</h3>
     <p>User ID: {userId} | Available From: {availableFrom} To: {availableTo} | Price per hour: {pricePerHour}</p>
