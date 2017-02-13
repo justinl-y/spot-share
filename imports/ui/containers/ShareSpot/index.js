@@ -41,8 +41,8 @@ class ShareSpace extends Component {
               additionalInformation={parkingSpot.additional_information}
               // {...parkingSpot}
 
-              // onClick={() => dispatch(editParkingSpot(parkingSpot))}
-              onClick={() => this.props.editParkingSpot(parkingSpot)}
+              // onClickEdit={() => dispatch(editParkingSpot(parkingSpot))}
+              onClickEdit={() => this.props.editParkingSpot(parkingSpot)}
             />,
           )}
         </ul>
