@@ -17,7 +17,7 @@ const styles = {
 
 const currentLocation = 'SHARE-SPOT';
 
-class ShareSpace extends Component {
+class ShareSpotList extends Component {
   componentWillMount() {
     this.props.setApplicationLocation(currentLocation);
   }
@@ -97,10 +97,10 @@ const ShareSpaceContainer = createContainer(() => {
   return {
     parkingSpotList: ParkingSpots.find({}).fetch(),
   };
-}, ShareSpace);
+}, ShareSpotList);
 
 // proptypes validation
-ShareSpace.propTypes = {
+ShareSpotList.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setApplicationLocation: PropTypes.func.isRequired,

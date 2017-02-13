@@ -5,6 +5,7 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
+// import addParkingSpot from '../../containers/ShareSpot';
 
 class NewShareSpot extends Component {
   constructor() {
@@ -44,22 +45,6 @@ class NewShareSpot extends Component {
     this.setState({ fields });
   }
 
-  handleSubmit(e) {
-    const data = this.state.fields;
-    const fieldErrors = this.validate(data);
-
-    this.setState({ fieldErrors });
-
-    e.preventDefault();
-
-    if (Object.keys(fieldErrors).length) return;
-    // submit data
-    console.log('data submitted');
-
-    // reset form
-    // this.setState({ fields: {} });
-  }
-
   validate(data) {
     this.setState({
       fieldErrors: {},
@@ -82,6 +67,22 @@ class NewShareSpot extends Component {
     if (!data.pricePerHour) errors.pricePerHour = 'Required field';
 
     return errors;
+  }
+
+  handleSubmit(e) {
+    const data = this.state.fields;
+    const fieldErrors = this.validate(data);
+
+    this.setState({ fieldErrors });
+
+    e.preventDefault();
+
+    if (Object.keys(fieldErrors).length) return;
+    // submit data
+    console.log('data submitted');
+
+    // reset form or navigate to list
+    // this.setState({ fields: {} });
   }
 
   render() {
