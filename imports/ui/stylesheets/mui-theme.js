@@ -4,7 +4,7 @@ import * as colors from 'material-ui/styles/colors';
 const muiTheme = getMuiTheme({
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: colors.deepPurple200,
+    /* primary1Color: colors.deepPurple200,
     primary2Color: colors.cyan700,
     primary3Color: colors.grey400,
     accent1Color: colors.grey100,
@@ -17,7 +17,7 @@ const muiTheme = getMuiTheme({
     disabledColor: colors.grey300,
     pickerHeaderColor: colors.cyan500,
     clockCircleColor: colors.black100,
-    shadowColor: colors.fullBlack,
+    shadowColor: colors.fullBlack, */
   },
 });
 
