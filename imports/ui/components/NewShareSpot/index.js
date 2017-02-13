@@ -30,8 +30,27 @@ class NewShareSpot extends Component {
     if (!data) return;
     console.log(data);
 
+    this.loginFormIsValid();
+
     // submit to redux
     // console.log('Going to redux');
+  }
+
+  loginFormIsValid() {
+    let formIsValid = true;
+
+    this.setState({
+      fieldErrors: {},
+    });
+
+    if (this.state.fields.address === undefined) {
+      const newErrors = Object.assign(this.state.fieldErrors, { address: 'Address is required' });
+      this.setState({ fieldErrors: newErrors });
+
+      formIsValid = false;
+    }
+
+    return formIsValid;
   }
 
   render() {
@@ -71,7 +90,7 @@ class NewShareSpot extends Component {
                   style={styles.textField}
                   name="address"
                   hintText="Address"
-                  errorText="Address"
+                  errorText={this.state.fieldErrors.address}
                   floatingLabelText="Address"
                   value={this.state.fields.address}
                   onChange={this.handleTextFieldChange.bind(this)}
@@ -81,7 +100,7 @@ class NewShareSpot extends Component {
                   style={styles.textField}
                   name="postCode"
                   hintText="Post Code"
-                  errorText="Please provide a post code"
+                  errorText={this.state.fieldErrors.postCode}
                   floatingLabelText="Post Code"
                   value={this.state.fields.postCode}
                   onChange={this.handleTextFieldChange.bind(this)}
@@ -91,7 +110,7 @@ class NewShareSpot extends Component {
                   style={styles.textFieldSmall}
                   name="longitude"
                   hintText="Longitude"
-                  errorText="Longitude"
+                  errorText={this.state.fieldErrors.longitude}
                   floatingLabelText="Longitude"
                   value={this.state.fields.longitude}
                   onChange={this.handleTextFieldChange.bind(this)}
@@ -101,7 +120,7 @@ class NewShareSpot extends Component {
                   style={styles.textFieldSmall}
                   name="latitude"
                   hintText="Latitude"
-                  errorText="Latitude"
+                  errorText={this.state.fieldErrors.latitude}
                   floatingLabelText="Latitude"
                   value={this.state.fields.latitude}
                   onChange={this.handleTextFieldChange.bind(this)}
@@ -111,7 +130,7 @@ class NewShareSpot extends Component {
                   <DatePicker
                     textFieldStyle={{ width: '100%' }}
                     floatingLabelText="Available from"
-                    errorText="Available from"
+                    errorText={this.state.fieldErrors.availableFrom}
                     hintText="Available from"
                     container="inline"
                     autoOk
@@ -122,7 +141,7 @@ class NewShareSpot extends Component {
                   <DatePicker
                     textFieldStyle={{ width: '100%' }}
                     floatingLabelText="Available to"
-                    errorText="Available to"
+                    errorText={this.state.fieldErrors.availableTo}
                     hintText="Available to"
                     container="inline"
                     autoOk
@@ -135,7 +154,7 @@ class NewShareSpot extends Component {
                   style={styles.textField}
                   name="pricePerHour"
                   hintText="Price per hour"
-                  errorText="Price per hour"
+                  errorText={this.state.fieldErrors.pricePerHour}
                   floatingLabelText="Price per hour"
                   value={this.state.fields.pricePerHour}
                   onChange={this.handleTextFieldChange.bind(this)}
@@ -144,7 +163,7 @@ class NewShareSpot extends Component {
                 <TextField
                   style={styles.textField}
                   name="additionalInformation"
-                  hintText="Additional Information"
+                  hintText={this.state.fieldErrors.additionalInformation}
                   floatingLabelText="Additional Information"
                   multiLine
                   rows={3}
