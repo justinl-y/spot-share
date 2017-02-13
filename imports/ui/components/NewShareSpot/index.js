@@ -16,41 +16,72 @@ class NewShareSpot extends Component {
     };
   }
 
-  handleTextFieldChange(e) {
-    const fields = this.state.fields;
+  handleTextFieldChange(e, validation) {
+    const fieldErrors = this.state.fieldErrors;
+    delete fieldErrors[e.target.name];
 
+    const fields = this.state.fields;
     fields[e.target.name] = e.target.value;
+
+    validation.forEach((type) => {
+      switch (type) {
+        case 'req':
+          if (!fields[e.target.name]) {
+            const errorObject = { [e.target.name]: 'Required field' };
+            this.setState({ fieldErrors: { ...this.state.fieldErrors, ...errorObject } });
+          }
+          break;
+        case 'num':
+          if (isNaN(fields[e.target.name])) {
+            const errorObject = { [e.target.name]: 'Number required' };
+            this.setState({ fieldErrors: { ...this.state.fieldErrors, ...errorObject } });
+          }
+          break;
+        default:
+      }
+    });
 
     this.setState({ fields });
   }
 
-  handleSubmit() {
-    const data = this.state;
+  handleSubmit(e) {
+    const data = this.state.fields;
+    const fieldErrors = this.validate(data);
 
-    if (!data) return;
-    console.log(data);
+    this.setState({ fieldErrors });
 
-    this.loginFormIsValid();
+    e.preventDefault();
 
-    // submit to redux
-    // console.log('Going to redux');
+    if (Object.keys(fieldErrors).length) return;
+    // submit data
+    console.log('data submitted');
+
+    // reset form
+    // this.setState({ fields: {} });
   }
 
-  loginFormIsValid() {
-    let formIsValid = true;
-
+  validate(data) {
     this.setState({
       fieldErrors: {},
     });
 
-    if (this.state.fields.address === undefined) {
-      const newErrors = Object.assign(this.state.fieldErrors, { address: 'Address is required' });
-      this.setState({ fieldErrors: newErrors });
+    const errors = {};
+    // TODO date comparison
+    // TODO validation errors into central source
+    // TODO data formats
 
-      formIsValid = false;
-    }
+    if (!data.address) errors.address = 'Required field';
+    if (!data.postCode) errors.postCode = 'Required field';
+    if (isNaN(data.longitude)) errors.longitude = 'Number required';
+    if (!data.longitude) errors.longitude = 'Required field';
+    if (isNaN(data.latitude)) errors.latitude = 'Number required';
+    if (!data.latitude) errors.latitude = 'Required field';
+    if (!data.availableFrom) errors.availableFrom = 'Required field';
+    if (!data.availableTo) errors.availableTo = 'Required field';
+    if (isNaN(data.pricePerHour)) errors.pricePerHour = 'Number required';
+    if (!data.pricePerHour) errors.pricePerHour = 'Required field';
 
-    return formIsValid;
+    return errors;
   }
 
   render() {
@@ -93,7 +124,7 @@ class NewShareSpot extends Component {
                   errorText={this.state.fieldErrors.address}
                   floatingLabelText="Address"
                   value={this.state.fields.address}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
 
                 <TextField
@@ -103,7 +134,8 @@ class NewShareSpot extends Component {
                   errorText={this.state.fieldErrors.postCode}
                   floatingLabelText="Post Code"
                   value={this.state.fields.postCode}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  // onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
 
                 <TextField
@@ -113,7 +145,7 @@ class NewShareSpot extends Component {
                   errorText={this.state.fieldErrors.longitude}
                   floatingLabelText="Longitude"
                   value={this.state.fields.longitude}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
 
                 <TextField
@@ -123,7 +155,7 @@ class NewShareSpot extends Component {
                   errorText={this.state.fieldErrors.latitude}
                   floatingLabelText="Latitude"
                   value={this.state.fields.latitude}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
 
                 <div style={styles.datePickerContainer}>
@@ -157,7 +189,7 @@ class NewShareSpot extends Component {
                   errorText={this.state.fieldErrors.pricePerHour}
                   floatingLabelText="Price per hour"
                   value={this.state.fields.pricePerHour}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
 
                 <TextField
@@ -168,14 +200,14 @@ class NewShareSpot extends Component {
                   multiLine
                   rows={3}
                   value={this.state.fields.additionalInformation}
-                  onChange={this.handleTextFieldChange.bind(this)}
+                  onChange={e => this.handleTextFieldChange(e, [])}
                 />
 
                 <RaisedButton
                   // backgroundColor="rgb(183, 28, 28)"
                   // labelColor="white"
                   label="Submit"
-                  onClick={(e) => { e.preventDefault(); this.handleSubmit(); }}
+                  onClick={e => this.handleSubmit(e)}
                 />
               </form>
             </CardText>
