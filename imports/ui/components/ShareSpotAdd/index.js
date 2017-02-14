@@ -5,9 +5,8 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
-// import addParkingSpot from '../../containers/ShareSpot';
 
-class NewShareSpot extends Component {
+class ShareSpotAdd extends Component {
   constructor() {
     super();
 
@@ -70,16 +69,18 @@ class NewShareSpot extends Component {
   }
 
   handleSubmit(e) {
-    const data = this.state.fields;
-    const fieldErrors = this.validate(data);
+    const parkingSpot = this.state.fields;
+    const fieldErrors = this.validate(parkingSpot);
 
     this.setState({ fieldErrors });
 
     e.preventDefault();
 
     if (Object.keys(fieldErrors).length) return;
+
     // submit data
-    console.log('data submitted');
+    this.props.addShareSpot(parkingSpot);
+    // console.log('data submitted');
 
     // reset form or navigate to list
     // this.setState({ fields: {} });
@@ -219,8 +220,8 @@ class NewShareSpot extends Component {
   }
 }
 
-NewShareSpot.propTypes = {
-  // handleSubmit: PropTypes.func.isRequired,
+ShareSpotAdd.propTypes = {
+  addShareSpot: PropTypes.func.isRequired,
 };
 
-export default NewShareSpot;
+export default ShareSpotAdd;

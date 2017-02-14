@@ -32,36 +32,68 @@ if (Meteor.isServer) {
   Meteor.publish('getParkingSpots', getParkingSpotsPublication);
 }
 
-/*
-const todoPubFields = {
-  text: 1,
-  completed: 1
-};
+// meteor methods
+Meteor.methods({
+  addParkingSpot(parkingSpot) {
+    // check permissions
+    /* if (!this.userId) {
+      throw new Meteor.Error('Not-Authorised');
+    }*/
 
-const getTodoPublication = function (filter, pageSkip = 0) {
-  const query = {};
+    // data validataion
+    /* new SimpleSchema({
+      inputValue: { type: String },
+    }).validate({ inputValue }); */
 
-  switch (filter) {
-    case 'SHOW_COMPLETED':
-      query.completed = true;
-      break;
-    case 'SHOW_ACTIVE':
-      query.completed = false;
-      break;
-    default:
-      break;
-  }
+    const insert = ParkingSpots.insert({
+      user_id: 'JLjpvCHbBvkSaaKwm',
+      address: parkingSpot.address,
+      post_code: parkingSpot.postCode,
+      geolocation: { lat: parseInt(parkingSpot.latitude, 10).latitude, lng: parseInt(parkingSpot.longitude, 10) },
+      available_from: parkingSpot.availableFrom.toString(),
+      available_to: parkingSpot.availableTo.toString(),
+      price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
+      additional_information: parkingSpot.additionalInformation,
+    });
 
-  Counts.publish(this, 'TodoCount', Todos.find(query));
+    console.log('inserted');
+    return insert;
+  },
+  deleteParkingSpot(id) {
+    // check permissions
+    /* if (!this.userId) {
+      throw new Meteor.Error('Not-Authorised');
+    }*/
 
-  return Todos.find(query, {
-    fields: todoPubFields,
-    skip: pageSkip,
-    limit: 10
-  });
-};
+    // data validataion
+    /* new SimpleSchema({
+      id: { type: String },
+    }).validate({ id });*/
 
-Meteor.publish('getTodos', getTodoPublication);
-*/
+    const remove = ParkingSpots.remove({
+      _id: id,
+    });
 
-// add meteor methods
+    console.log('deleted');
+    return remove;
+  },
+});
+
+/* Meteor.methods({
+  'todos.addToDo'(inputValue) {
+    if(!this.userId) {
+      throw new Meteor.Error('Not-Authorised');
+    }
+
+    // data validataion
+    new SimpleSchema({
+      inputValue: { type: String },
+    }).validate({ inputValue });
+
+    ToDos.insert({      
+      title: inputValue,     
+      complete: false,
+      owner: this.userId
+    });
+  },
+}) */

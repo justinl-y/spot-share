@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
 
-import { editParkingSpot } from './actions';
+import { editParkingSpot, deleteParkingSpot } from './actions';
 import { setApplicationLocation } from '../App/actions';
 
 const styles = {
@@ -23,7 +23,6 @@ class ShareSpotList extends Component {
   }
 
   render() {
-    // const { dispatch } = this.props;
     const parkingSpots = this.props.parkingSpotList;
 
     return (
@@ -35,14 +34,14 @@ class ShareSpotList extends Component {
               key={parkingSpot._id}
               id={parkingSpot._id}
               userId={parkingSpot.user_id}
+              address={parkingSpot.address}
               availableFrom={parkingSpot.available_from}
               availableTo={parkingSpot.available_to}
+              postCode={parkingSpot.post_code}
               pricePerHour={parkingSpot.price_per_hour}
               additionalInformation={parkingSpot.additional_information}
-              // {...parkingSpot}
-
-              // onClickEdit={() => dispatch(editParkingSpot(parkingSpot))}
-              onClickEdit={() => this.props.editParkingSpot(parkingSpot)}
+              onClickEdit={this.props.editParkingSpot}
+              onClickDelete={this.props.deleteParkingSpot}
             />,
           )}
         </ul>
@@ -83,8 +82,12 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editParkingSpot: (item) => {
-    dispatch(editParkingSpot(item));
+  editParkingSpot: (parkingSpot) => {
+    dispatch(editParkingSpot(parkingSpot));
+  },
+  deleteParkingSpot: (id) => {
+    console.log('delete');
+    dispatch(deleteParkingSpot(id));
   },
   setApplicationLocation: (location) => {
     dispatch(setApplicationLocation(location));
@@ -105,6 +108,7 @@ ShareSpotList.propTypes = {
   parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
   editParkingSpot: PropTypes.func.isRequired,
+  deleteParkingSpot: PropTypes.func.isRequired,
 };
 
 // connect to redux

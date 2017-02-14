@@ -27,9 +27,9 @@ Meteor.startup(() => {
   if (ParkingSpots.find().count() === 0) {
     ParkingSpots.insert({
       user_id: user1,
+      address: '34 Flibble Street',
       post_code: 'V3Z7W3',
       geolocation: { lat: -34.397, lng: 150.644 },
-      image_encoding: 'sdsdfsfsfsfwrw',
       available_from: '2016-12-01',
       available_to: '2017-11-30',
       price_per_hour: 25.00,
@@ -37,9 +37,9 @@ Meteor.startup(() => {
     });
     ParkingSpots.insert({
       user_id: user1,
+      address: '5680 Pacific Boulevard',
       post_code: 'V5H8U3',
       geolocation: { lat: -33.347, lng: 151.544 },
-      image_encoding: 'sdsdfsfsfsfwrw',
       available_from: '2016-12-01',
       available_to: '2017-11-30',
       price_per_hour: 15.00,

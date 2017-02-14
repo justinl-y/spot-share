@@ -1,17 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 
 // action types
-export const EDIT_PARKING_SPOT = 'EDIT_PARKING_SPOT';
+export const FILTER_PARKING_SPOT = 'FILTER_PARKING_SPOT';
 
 // action creators
-export const editParkingSpot = item => ({
-  type: EDIT_PARKING_SPOT,
+export const filterParkingSpot = item => ({
+  type: FILTER_PARKING_SPOT,
   payload: item,
 });
 
 // functions
-export default function addParkingSpot(parkingSpot) {
+export function deleteParkingSpot(id) {
+  console.log('delete');
   return () => {
-    Meteor.call('addParkingSpot', parkingSpot);
+    Meteor.call('deleteParkingSpot', id);
   };
 }
