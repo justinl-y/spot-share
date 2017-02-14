@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -74,7 +74,6 @@ const SignUp = () => (
                   labelColor="white"
                   label="Sign Up"
                   primary={true}
-                  width="100%"
                 />
               </form>
             </CardText>
