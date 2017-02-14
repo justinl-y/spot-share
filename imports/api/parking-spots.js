@@ -46,12 +46,12 @@ Meteor.methods({
     }).validate({ inputValue }); */
 
     const insert = ParkingSpots.insert({
-      user_id: 'JLjpvCHbBvkSaaKwm',
+      user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
       geolocation: { lat: parseInt(parkingSpot.latitude, 10).latitude, lng: parseInt(parkingSpot.longitude, 10) },
-      available_from: parkingSpot.availableFrom.toString(),
-      available_to: parkingSpot.availableTo.toString(),
+      available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
+      available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
       price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
       additional_information: parkingSpot.additionalInformation,
     });

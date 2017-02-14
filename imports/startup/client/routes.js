@@ -38,6 +38,7 @@ Meteor.startup(() => {
               <Route path="/sharespots">
                 <Route path="list" component={ShareSpotList} />
                 <Route path="new" component={ShareSpotInput} />
+                <Route path="edit" component={ShareSpotInput} />
               </Route>
             </Route>
             <Route path="*" component={NotFound} />

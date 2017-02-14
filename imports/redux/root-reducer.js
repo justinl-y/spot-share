@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
-import applicationLocationReducer from '../ui/containers/App/reducer';
-import shareSpotReducer from '../ui/containers/ShareSpotList/reducer';
 // TDDO add local reducers to root-reducer
+import applicationLocationReducer from '../ui/containers/App/reducer';
+import shareSpotListReducer from '../ui/containers/ShareSpotList/reducer';
+import shareSpotInputReducer from '../ui/containers/ShareSpotInput/reducer';
 
 // combined reducer
 export default combineReducers({
   appData: combineReducers({
-    // add local reducers here
+    // TODO add local reducers here
     userLocation: applicationLocationReducer,
-    shareSpots: shareSpotReducer,
+    shareSpotList: shareSpotListReducer,
+    shareSpotInput: shareSpotInputReducer,
   }),
 });

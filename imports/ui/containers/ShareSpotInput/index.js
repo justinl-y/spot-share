@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ShareSpotAdd from '../../components/ShareSpotAdd';
 // import ShareSpotEdit from '../../components/ShareSpotEdit';
 
-import { addParkingSpot } from './actions';
+import { insertParkingSpot } from './actions';
 
 class ShareSpotInput extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class ShareSpotInput extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addParkingSpot: (parkingSpot) => {
-    dispatch(addParkingSpot(parkingSpot));
+    dispatch(insertParkingSpot(parkingSpot));
   },
 });
 

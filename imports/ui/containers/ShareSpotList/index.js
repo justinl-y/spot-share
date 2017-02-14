@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { connect } from 'react-redux';
 
+import { browserHistory } from 'react-router';
+
 import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
 
@@ -84,6 +86,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => ({
   editParkingSpot: (id) => {
     dispatch(editParkingSpot(id));
+    browserHistory.push('/sharespots/edit');
   },
   deleteParkingSpot: (id) => {
     dispatch(deleteParkingSpot(id));
