@@ -35,4 +35,4 @@ ShareSpotInput.propTypes = {
 export default connect(
   null,
   mapDispatchToProps,
-)(ShareSpotInput);   // mapStateToProps,
+)(ShareSpotInput);
