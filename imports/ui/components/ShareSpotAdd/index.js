@@ -17,6 +17,10 @@ class ShareSpotAdd extends Component {
     };
   }
 
+  componentDidUnmount() {
+    
+  }
+
   handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
     delete fieldErrors[e.target.name];

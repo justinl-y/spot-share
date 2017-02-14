@@ -8,11 +8,12 @@ import { browserHistory } from 'react-router';
 import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
 
-import { editParkingSpot, deleteParkingSpot } from './actions';
+import { deleteParkingSpot } from './actions';
+import { editParkingSpot } from '../ShareSpotInput/actions';
 import { setApplicationLocation } from '../App/actions';
 
 const styles = {
-  shareSpot: {
+  component: {
     textAlign: 'center',
   },
 };
@@ -28,7 +29,7 @@ class ShareSpotList extends Component {
     const parkingSpots = this.props.parkingSpotList;
 
     return (
-      <div style={styles.shareSpot}>
+      <div style={styles.component}>
         <h2>Parking Spots</h2>
         <ul>
           {parkingSpots.map(parkingSpot =>
@@ -42,7 +43,7 @@ class ShareSpotList extends Component {
               postCode={parkingSpot.post_code}
               pricePerHour={parkingSpot.price_per_hour}
               additionalInformation={parkingSpot.additional_information}
-              onClickEdit={this.props.editParkingSpot}
+              onClickEdit={this.props.editParkingSpot1}
               onClickDelete={this.props.deleteParkingSpot}
             />,
           )}
@@ -84,7 +85,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editParkingSpot: (id) => {
+  editParkingSpot1: (id) => {
     dispatch(editParkingSpot(id));
     browserHistory.push('/sharespots/edit');
   },
@@ -109,7 +110,7 @@ ShareSpotList.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
-  editParkingSpot: PropTypes.func.isRequired,
+  editParkingSpot1: PropTypes.func.isRequired,
   deleteParkingSpot: PropTypes.func.isRequired,
 };
 

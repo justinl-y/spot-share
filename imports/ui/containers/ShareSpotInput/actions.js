@@ -27,3 +27,9 @@ export function updateParkingSpot(parkingSpot) {
     Meteor.call('updateParkingSpot', parkingSpot);
   };
 }
+
+/* export function editParkingSpot(id) {
+  return () => {
+    Meteor.call('editParkingSpot', id);
+  };
+} */
