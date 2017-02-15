@@ -16,7 +16,8 @@ import BookSpotInput from '../../ui/containers/BookSpotInput';
 import ShareSpotList from '../../ui/containers/ShareSpotList';
 import ShareSpotInput from '../../ui/containers/ShareSpotInput';
 import NotFound from '../../ui/components/NotFound';
-
+import SignUp from '../../ui/components/SignUp/signUp';
+import SignIn from '../../ui/components/SignIn/signIn';
 import Welcome from '../../ui/components/Welcome';
 import LoginPage from '../../ui/containers/LoginPage/loginPage';
 
@@ -29,7 +30,8 @@ Meteor.startup(() => {
         <Router history={browserHistory}>
           <Route component={MainLayout}>
             <Route path="/" component={App}>
-              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
               <IndexRoute component={Welcome} />
               <Route path="/menu" component={ApplicationMenu} />
               <Route path="/bookspot">
