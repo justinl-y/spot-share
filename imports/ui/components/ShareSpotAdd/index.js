@@ -105,7 +105,7 @@ class ShareSpotAdd extends Component {
         alignItems: 'center',
       },
       card: {
-        width: '480px',
+        width: '500px',
       },
       textField: {
         width: '100%',

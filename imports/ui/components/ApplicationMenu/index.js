@@ -18,10 +18,12 @@ const styles = {
     alignItems: 'center',
   },
   card: {
-    width: '480px',
+    width: '500px',
   },
   li: {
+    alignItems: 'center',
     listStyle: 'none',
+    width: '200px',
   },
 
 };
