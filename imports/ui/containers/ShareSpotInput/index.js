@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ShareSpotAdd from '../../components/ShareSpotAdd';
 import ShareSpotEdit from '../../components/ShareSpotEdit';
 
-import { insertParkingSpot } from './actions';
+import { insertParkingSpot, updateParkingSpot } from './actions';
 
 class ShareSpotInput extends Component {
   constructor() {
@@ -26,6 +26,7 @@ class ShareSpotInput extends Component {
           :
             <ShareSpotEdit
               parkingSpotId={this.props.parkingSpotId}
+              editShareSpot={this.props.editParkingSpot}
             />
         }
       </div>
@@ -44,6 +45,9 @@ const mapDispatchToProps = dispatch => ({
   addParkingSpot: (parkingSpot) => {
     dispatch(insertParkingSpot(parkingSpot));
   },
+  editParkingSpot: (parkingSpot) => {
+    dispatch(updateParkingSpot(parkingSpot));
+  },
 });
 
 ShareSpotInput.defaultProps = {
@@ -54,6 +58,7 @@ ShareSpotInput.propTypes = {
   shareSpotInputType: PropTypes.string.isRequired,
   parkingSpotId: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,
+  editParkingSpot: PropTypes.func.isRequired,
 };
 
 export default connect(

@@ -39,6 +39,7 @@ class ShareSpotEdit extends Component {
 
     const fields = {};
 
+    fields._id = parkingSpot[0]._id;
     fields.address = parkingSpot[0].address;
     fields.postCode = parkingSpot[0].post_code;
     fields.longitude = parkingSpot[0].geolocation.lng;
@@ -46,7 +47,7 @@ class ShareSpotEdit extends Component {
     fields.availableFrom = new Date(parkingSpot[0].available_from);
     fields.availableTo = new Date(parkingSpot[0].available_to);
     fields.pricePerHour = parkingSpot[0].price_per_hour;
-    fields.additionaInformation = parkingSpot[0].additional_information;
+    fields.additionalInformation = parkingSpot[0].additional_information;
 
     this.setState({ fields });
   }
@@ -114,7 +115,7 @@ class ShareSpotEdit extends Component {
     if (Object.keys(fieldErrors).length) return;
 
     // submit data
-    // this.props.editShareSpot(parkingSpot);
+    this.props.editShareSpot(parkingSpot);
 
     // navigate to list
     browserHistory.push('/sharespots/list');
@@ -273,6 +274,7 @@ ShareSpotEdit.propTypes = {
   // parkingSpotId: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,
   parkingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editShareSpot: PropTypes.func.isRequired,
 };
 
 const ShareSpaceEditContainer = createContainer((parkingSpotId) => {

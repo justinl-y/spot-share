@@ -18,7 +18,7 @@ export const editParkingSpot = id => ({
 // functions
 export function insertParkingSpot(parkingSpot) {
   return () => {
-    Meteor.call('addParkingSpot', parkingSpot);
+    Meteor.call('insertParkingSpot', parkingSpot);
   };
 }
 
