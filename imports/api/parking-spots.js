@@ -101,6 +101,7 @@ Meteor.methods({
         additional_information: parkingSpot.additionalInformation },
       });
 
+    console.log('Updated');
     return update;
   },
 });
