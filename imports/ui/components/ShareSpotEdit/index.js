@@ -118,7 +118,7 @@ class ShareSpotEdit extends Component {
     this.props.editShareSpot(parkingSpot);
 
     // navigate to list
-    browserHistory.push('/sharespots/list');
+    browserHistory.push('/sharespot/list');
   }
 
   render() {

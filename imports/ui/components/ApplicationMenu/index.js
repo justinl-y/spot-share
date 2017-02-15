@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -15,10 +15,18 @@ const styles = {
   card: {
     width: '480px',
   },
-  linkItems: {
+  li: {
     listStyle: 'none',
   },
+
 };
+
+const menuItems = [
+  { link: '/bookspot/new', label: 'Book A Spot' },
+  { link: '/sharespot/new', label: 'Share A Spot' },
+  { link: '/bookspot/list', label: 'Manage Book Spots' },
+  { link: '/sharespot/list', label: 'Manage Share Spots' },
+];
 
 const ApplicationMenu = () => (
   <div style={styles.component}>
@@ -29,46 +37,23 @@ const ApplicationMenu = () => (
         </Toolbar>
         <CardText>
           <ul>
-            <li style={styles.linkItems}>
-              <Link
-                to="/bookspot/new"
+            {
+            menuItems.map(e =>
+              <li
+                key={Math.random() * Date.now()}
+                style={styles.li}
               >
-                <RaisedButton
-                  label="Book A Spot"
-                  // onClick={e => this.handleSubmit(e)}
-                />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/sharespot/new"
-              >
-                <RaisedButton
-                  label="Share A Spot"
-                  // onClick={e => this.handleSubmit(e)}
-                />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/bookspot/list"
-              >
-                <RaisedButton
-                  label="Manage Book Spots"
-                  // onClick={e => this.handleSubmit(e)}
-                />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/sharespot/list"
-              >
-                <RaisedButton
-                  label="Manage Share Spots"
-                  // onClick={e => this.handleSubmit(e)}
-                />
-              </Link>
-            </li>
+                <Link
+                  to={e.link}
+                >
+                  <RaisedButton
+                    label={e.label}
+                    // onClick={userLogout}
+                  />
+                </Link>
+              </li>,
+              )
+            }
           </ul>
         </CardText>
       </Paper>
