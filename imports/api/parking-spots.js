@@ -5,12 +5,13 @@ export const ParkingSpots = new Mongo.Collection('parking_spots');
 
 // meteor publish
 
-// fields to return
+// fields of document to return
 const parkingSpotPubFields = {
   // text: 1,
   // completed: 1
 };
 
+// get all parking spots
 const getParkingSpotsPublication = function (filter) {
   const query = {};
 
@@ -34,7 +35,7 @@ if (Meteor.isServer) {
 
 // meteor methods
 Meteor.methods({
-  addParkingSpot(parkingSpot) {
+  insertParkingSpot(parkingSpot) {
     // check permissions
     /* if (!this.userId) {
       throw new Meteor.Error('Not-Authorised');
@@ -46,17 +47,17 @@ Meteor.methods({
     }).validate({ inputValue }); */
 
     const insert = ParkingSpots.insert({
-      user_id: 'JLjpvCHbBvkSaaKwm',
+      user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
-      geolocation: { lat: parseInt(parkingSpot.latitude, 10).latitude, lng: parseInt(parkingSpot.longitude, 10) },
-      available_from: parkingSpot.availableFrom.toString(),
-      available_to: parkingSpot.availableTo.toString(),
+      geolocation: { lat: parseInt(parkingSpot.latitude, 10), lng: parseInt(parkingSpot.longitude, 10) },
+      available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
+      available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
       price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
       additional_information: parkingSpot.additionalInformation,
     });
 
-    console.log('inserted');
+    console.log('Inserted');
     return insert;
   },
   deleteParkingSpot(id) {
@@ -74,29 +75,33 @@ Meteor.methods({
       _id: id,
     });
 
-    console.log('deleted');
+    console.log('Deleted');
     return remove;
   },
-  editParkingSpot(id) {
-    console.log(id);
-  },
-});
-
-/* Meteor.methods({
-  'todos.addToDo'(inputValue) {
-    if(!this.userId) {
+  updateParkingSpot(parkingSpot) {
+    // check permissions
+    /* if (!this.userId) {
       throw new Meteor.Error('Not-Authorised');
-    }
+    }*/
 
     // data validataion
-    new SimpleSchema({
+    /* new SimpleSchema({
       inputValue: { type: String },
-    }).validate({ inputValue });
+    }).validate({ inputValue }); */
 
-    ToDos.insert({      
-      title: inputValue,     
-      complete: false,
-      owner: this.userId
-    });
+    const update = ParkingSpots.update(
+      { _id: parkingSpot._id },
+      { $set: { user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
+        address: parkingSpot.address,
+        post_code: parkingSpot.postCode,
+        geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
+        available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
+        available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
+        price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
+        additional_information: parkingSpot.additionalInformation },
+      });
+
+    console.log('Updated');
+    return update;
   },
-}) */
+});
