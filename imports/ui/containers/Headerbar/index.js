@@ -39,7 +39,7 @@ class HeaderBar extends Component {
           iconElementRight={
             <div>
               <Link
-                to="/sharespots/new"
+                to="/sharespot/new"
               >
                 <FlatButton
                   label="New share spot"

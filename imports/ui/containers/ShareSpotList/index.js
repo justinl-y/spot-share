@@ -87,7 +87,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => ({
   editParkingSpot: (id) => {
     dispatch(editParkingSpot(id));
-    browserHistory.push('/sharespots/edit');
+    browserHistory.push('/sharespot/edit');
   },
   deleteParkingSpot: (id) => {
     dispatch(deleteParkingSpot(id));

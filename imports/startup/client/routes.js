@@ -16,13 +16,15 @@ import MainLayout from '../../ui/layouts/MainLayout';
 import Welcome from '../../ui/components/Welcome';
 import App from '../../ui/containers/App';
 
-import ShareSpotList from '../../ui/containers/ShareSpotList';
-// import ShareSpotAdd from '../../ui/components/ShareSpotAdd';
+import BookSpotList from '../../ui/containers/BookSpotList';
+import BookSpotInput from '../../ui/containers/BookSpotInput';
 
+import ShareSpotList from '../../ui/containers/ShareSpotList';
 import ShareSpotInput from '../../ui/containers/ShareSpotInput';
 
 import NotFound from '../../ui/components/NotFound';
 import LoginPage from '../../ui/containers/LoginPage/loginPage';
+import ApplicationMenu from '../../ui/components/ApplicationMenu';
 
 injectTapEventPlugin();
 
@@ -35,7 +37,13 @@ Meteor.startup(() => {
             <Route path="/" component={App}>
               <Route path="/login" component={LoginPage} />
               <IndexRoute component={Welcome} />
-              <Route path="/sharespots">
+              <Route path="/menu" component={ApplicationMenu} />
+              <Route path="/bookspot">
+                <Route path="list" component={BookSpotList} />
+                <Route path="new" component={BookSpotInput} />
+                <Route path="edit" component={BookSpotInput} />
+              </Route>
+              <Route path="/sharespot">
                 <Route path="list" component={ShareSpotList} />
                 <Route path="new" component={ShareSpotInput} />
                 <Route path="edit" component={ShareSpotInput} />
