@@ -248,7 +248,7 @@ class ShareSpotEdit extends Component {
                 />
 
                 <Link
-                  to="/sharespots/list"
+                  to="/sharespot/list"
                 >
                   <RaisedButton
                     label="Cancel"
