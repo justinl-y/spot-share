@@ -17,7 +17,7 @@ class HeaderBar extends Component {
           iconElementLeft={
             <IconButton>
               <Link
-                to="/"
+                to="/menu"
               >
                 <MapsDirectionsCar />
               </Link>
@@ -30,7 +30,7 @@ class HeaderBar extends Component {
           iconElementLeft={
             <IconButton>
               <Link
-                to="/"
+                to="/menu"
               >
                 <MapsDirectionsCar />
               </Link>

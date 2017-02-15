@@ -88,7 +88,7 @@ class ShareSpotAdd extends Component {
     this.props.addShareSpot(parkingSpot);
 
     // navigate to list
-    browserHistory.push('/sharespots/list');
+    browserHistory.push('/sharespot/list');
   }
 
   render() {
