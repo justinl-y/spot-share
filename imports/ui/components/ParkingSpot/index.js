@@ -22,6 +22,10 @@ const ParkingSpot = ({ id, userId, address, postCode, availableFrom, availableTo
   </li>
 );
 
+ParkingSpot.defaultProps = {
+  additionalInformation: '',
+};
+
 ParkingSpot.propTypes = {
   id: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
@@ -30,7 +34,7 @@ ParkingSpot.propTypes = {
   availableFrom: PropTypes.string.isRequired,
   availableTo: PropTypes.string.isRequired,
   pricePerHour: PropTypes.number.isRequired,
-  additionalInformation: PropTypes.string.isRequired,
+  additionalInformation: PropTypes.string,
   onClickEdit: PropTypes.func.isRequired,
   onClickDelete: PropTypes.func.isRequired,
 };

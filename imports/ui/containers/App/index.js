@@ -13,6 +13,7 @@ class App extends Component {
   componentWillMount() {
     this.props.setApplicationLocation(currentLocation);
   }
+
   render() {
     return (
       <div>
