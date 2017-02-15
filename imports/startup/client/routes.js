@@ -19,7 +19,6 @@ import NotFound from '../../ui/components/NotFound';
 import SignUp from '../../ui/components/SignUp/signUp';
 import SignIn from '../../ui/components/SignIn/signIn';
 import Welcome from '../../ui/components/Welcome';
-import LoginPage from '../../ui/containers/LoginPage/loginPage';
 
 injectTapEventPlugin();
 
