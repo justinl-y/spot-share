@@ -25,7 +25,7 @@ class ShareSpotInput extends Component {
             />
           :
             <ShareSpotEdit
-              id={this.props.parkingSpotId}
+              parkingSpotId={this.props.parkingSpotId}
             />
         }
       </div>
@@ -36,7 +36,7 @@ class ShareSpotInput extends Component {
 const mapStateToProps = (state) => {
   return {
     shareSpotInputType: state.appData.shareSpotInput.inputType,
-    parkingSpotId: state.appData.shareSpotInput.Id,
+    parkingSpotId: state.appData.shareSpotInput.id,
   };
 };
 

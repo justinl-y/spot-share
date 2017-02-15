@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { browserHistory } from 'react-router';
@@ -43,7 +43,7 @@ class ShareSpotList extends Component {
               postCode={parkingSpot.post_code}
               pricePerHour={parkingSpot.price_per_hour}
               additionalInformation={parkingSpot.additional_information}
-              onClickEdit={this.props.editParkingSpot1}
+              onClickEdit={this.props.editParkingSpot}
               onClickDelete={this.props.deleteParkingSpot}
             />,
           )}
@@ -85,7 +85,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editParkingSpot1: (id) => {
+  editParkingSpot: (id) => {
     dispatch(editParkingSpot(id));
     browserHistory.push('/sharespots/edit');
   },
@@ -97,6 +97,15 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+// proptypes validation
+ShareSpotList.propTypes = {
+  // dispatch: PropTypes.func.isRequired,
+  parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setApplicationLocation: PropTypes.func.isRequired,
+  editParkingSpot: PropTypes.func.isRequired,
+  deleteParkingSpot: PropTypes.func.isRequired,
+};
+
 // connect meteor pub sub
 const ShareSpaceContainer = createContainer(() => {
   Meteor.subscribe('getParkingSpots');
@@ -104,15 +113,6 @@ const ShareSpaceContainer = createContainer(() => {
     parkingSpotList: ParkingSpots.find({}).fetch(),
   };
 }, ShareSpotList);
-
-// proptypes validation
-ShareSpotList.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setApplicationLocation: PropTypes.func.isRequired,
-  editParkingSpot1: PropTypes.func.isRequired,
-  deleteParkingSpot: PropTypes.func.isRequired,
-};
 
 // connect to redux
 export default connect(

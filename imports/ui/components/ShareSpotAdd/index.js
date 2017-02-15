@@ -6,6 +6,7 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
+// import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
 
 class ShareSpotAdd extends Component {
   constructor() {
@@ -17,9 +18,9 @@ class ShareSpotAdd extends Component {
     };
   }
 
-  componentDidUnmount() {
-    
-  }
+  /* componentWillUnmount() {
+    this.props.addParkingSpot();
+  }*/
 
   handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
@@ -231,6 +232,12 @@ class ShareSpotAdd extends Component {
     );
   }
 }
+
+/* const mapDispatchToProps = dispatch => ({
+  addParkingSpot: () => {
+    dispatch(addParkingSpot());
+  },
+});*/
 
 ShareSpotAdd.propTypes = {
   addShareSpot: PropTypes.func.isRequired,

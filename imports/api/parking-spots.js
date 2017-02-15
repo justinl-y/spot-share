@@ -5,12 +5,13 @@ export const ParkingSpots = new Mongo.Collection('parking_spots');
 
 // meteor publish
 
-// fields to return
+// fields of document to return
 const parkingSpotPubFields = {
   // text: 1,
   // completed: 1
 };
 
+// get all parking spots
 const getParkingSpotsPublication = function (filter) {
   const query = {};
 
