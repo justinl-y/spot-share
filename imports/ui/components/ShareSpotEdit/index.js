@@ -270,8 +270,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 ShareSpotEdit.propTypes = {
-  // addShareSpot: PropTypes.func.isRequired,
-  // parkingSpotId: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,
   parkingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
   editShareSpot: PropTypes.func.isRequired,

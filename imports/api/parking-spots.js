@@ -50,7 +50,7 @@ Meteor.methods({
       user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
-      geolocation: { lat: parseInt(parkingSpot.latitude, 10).latitude, lng: parseInt(parkingSpot.longitude, 10) },
+      geolocation: { lat: parseInt(parkingSpot.latitude, 10), lng: parseInt(parkingSpot.longitude, 10) },
       available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
       available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
       price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
@@ -94,7 +94,7 @@ Meteor.methods({
       { $set: { user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
         address: parkingSpot.address,
         post_code: parkingSpot.postCode,
-        geolocation: { lat: parseInt(parkingSpot.latitude, 10), lng: parseInt(parkingSpot.longitude, 10) },
+        geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
         available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
         available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
         price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
@@ -104,23 +104,3 @@ Meteor.methods({
     return update;
   },
 });
-
-
-/* Meteor.methods({
-  'todos.addToDo'(inputValue) {
-    if(!this.userId) {
-      throw new Meteor.Error('Not-Authorised');
-    }
-
-    // data validataion
-    new SimpleSchema({
-      inputValue: { type: String },
-    }).validate({ inputValue });
-
-    ToDos.insert({      
-      title: inputValue,     
-      complete: false,
-      owner: this.userId
-    });
-  },
-}) */
