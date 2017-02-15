@@ -7,14 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { cyan500 } from 'material-ui/styles/colors';
 import styles from './styles.css';
 
-const style = {
-  floatingLabelStyle: {
-    color: cyan500,
-  },
-  errorStyle: {
-    color: cyan500,
-  },
-};
+
 
 const SignIn = () => (
       <div className={styles.formContainer}>

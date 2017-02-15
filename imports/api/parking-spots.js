@@ -66,9 +66,9 @@ Meteor.methods({
     }*/
 
     // data validataion
-    /* new SimpleSchema({
+    new SimpleSchema({
       id: { type: String },
-    }).validate({ id });*/
+    }).validate({ id });
 
     const remove = ParkingSpots.remove({
       _id: id,
@@ -76,6 +76,9 @@ Meteor.methods({
 
     console.log('deleted');
     return remove;
+  },
+  editParkingSpot(id) {
+    console.log(id);
   },
 });
 

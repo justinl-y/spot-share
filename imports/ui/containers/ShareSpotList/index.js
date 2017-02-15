@@ -82,11 +82,10 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editParkingSpot: (parkingSpot) => {
-    dispatch(editParkingSpot(parkingSpot));
+  editParkingSpot: (id) => {
+    dispatch(editParkingSpot(id));
   },
   deleteParkingSpot: (id) => {
-    console.log('delete');
     dispatch(deleteParkingSpot(id));
   },
   setApplicationLocation: (location) => {

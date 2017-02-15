@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -80,10 +81,9 @@ class ShareSpotAdd extends Component {
 
     // submit data
     this.props.addShareSpot(parkingSpot);
-    // console.log('data submitted');
 
-    // reset form or navigate to list
-    // this.setState({ fields: {} });
+    // navigate to list
+    browserHistory.push('/sharespots/list');
   }
 
   render() {
@@ -211,6 +211,14 @@ class ShareSpotAdd extends Component {
                   label="Submit"
                   onClick={e => this.handleSubmit(e)}
                 />
+
+                <Link
+                  to="/sharespots/list"
+                >
+                  <RaisedButton
+                    label="Cancel"
+                  />
+                </Link>
               </form>
             </CardText>
           </Paper>

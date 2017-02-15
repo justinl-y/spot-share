@@ -7,8 +7,8 @@ export function addParkingSpot(parkingSpot) {
   };
 }
 
-export function editParkingSpot(parkingSpot) {
+export function updateParkingSpot(parkingSpot) {
   return () => {
-    Meteor.call('editParkingSpot', parkingSpot);
+    Meteor.call('updateParkingSpot', parkingSpot);
   };
 }
