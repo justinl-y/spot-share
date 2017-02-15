@@ -2,28 +2,24 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import { Provider } from 'react-redux';
 import store from '../../redux/store';
-
 import muiTheme from '../../ui/stylesheets/mui-theme';
 import '../../ui/stylesheets/index.css';
-
 import MainLayout from '../../ui/layouts/MainLayout';
-import Welcome from '../../ui/components/Welcome';
 import App from '../../ui/containers/App';
-
+import ApplicationMenu from '../../ui/components/ApplicationMenu';
+import BookSpotList from '../../ui/containers/BookSpotList';
+import BookSpotInput from '../../ui/containers/BookSpotInput';
 import ShareSpotList from '../../ui/containers/ShareSpotList';
-// import ShareSpotAdd from '../../ui/components/ShareSpotAdd';
-
 import ShareSpotInput from '../../ui/containers/ShareSpotInput';
-
 import NotFound from '../../ui/components/NotFound';
 import SignUp from '../../ui/components/SignUp/signUp';
 import SignIn from '../../ui/components/SignIn/signIn';
+import Welcome from '../../ui/components/Welcome';
+import LoginPage from '../../ui/containers/LoginPage/loginPage';
 
 injectTapEventPlugin();
 
@@ -37,9 +33,16 @@ Meteor.startup(() => {
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               <IndexRoute component={Welcome} />
-              <Route path="/sharespots">
+              <Route path="/menu" component={ApplicationMenu} />
+              <Route path="/bookspot">
+                <Route path="list" component={BookSpotList} />
+                <Route path="new" component={BookSpotInput} />
+                <Route path="edit" component={BookSpotInput} />
+              </Route>
+              <Route path="/sharespot">
                 <Route path="list" component={ShareSpotList} />
                 <Route path="new" component={ShareSpotInput} />
+                <Route path="edit" component={ShareSpotInput} />
               </Route>
             </Route>
             <Route path="*" component={NotFound} />

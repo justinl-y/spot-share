@@ -1,16 +1,19 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
+import { browserHistory } from 'react-router';
 
 import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
 
-import { editParkingSpot, deleteParkingSpot } from './actions';
+import { deleteParkingSpot } from './actions';
+import { editParkingSpot } from '../ShareSpotInput/actions';
 import { setApplicationLocation } from '../App/actions';
 
 const styles = {
-  shareSpot: {
+  component: {
     textAlign: 'center',
   },
 };
@@ -26,7 +29,7 @@ class ShareSpotList extends Component {
     const parkingSpots = this.props.parkingSpotList;
 
     return (
-      <div style={styles.shareSpot}>
+      <div style={styles.component}>
         <h2>Parking Spots</h2>
         <ul>
           {parkingSpots.map(parkingSpot =>
@@ -50,30 +53,6 @@ class ShareSpotList extends Component {
   }
 }
 
-/* <div>
-        <ul>
-          {todos.map(todo =>
-            <Todo
-              key={todo._id}
-              {...todo}
-              onClick={() => dispatch(toggleTodo(todo._id))}
-            />
-          )}
-        </ul>
-        {pagination}
-</div>
-
-const TodoContainer = createContainer(({visibilityFilter, pageSkip}) => {
-  const todoSub = Meteor.subscribe('getTodos', visibilityFilter, pageSkip);
-
-  return {
-    todoSubReady: todoSub.ready(),
-    todoList: Todos.find({}, {limit: 10}).fetch() || [],
-    todoCount: Counts.get('TodoCount')
-  };
-}, TodoList);
-*/
-
 function mapStateToProps(state) {
   return {
     visibilityFilter: state.appData.visibilityFilter,
@@ -82,16 +61,25 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
+  setApplicationLocation: (location) => {
+    dispatch(setApplicationLocation(location));
+  },
   editParkingSpot: (id) => {
     dispatch(editParkingSpot(id));
+    browserHistory.push('/sharespot/edit');
   },
   deleteParkingSpot: (id) => {
     dispatch(deleteParkingSpot(id));
   },
-  setApplicationLocation: (location) => {
-    dispatch(setApplicationLocation(location));
-  },
 });
+
+// proptypes validation
+ShareSpotList.propTypes = {
+  parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setApplicationLocation: PropTypes.func.isRequired,
+  editParkingSpot: PropTypes.func.isRequired,
+  deleteParkingSpot: PropTypes.func.isRequired,
+};
 
 // connect meteor pub sub
 const ShareSpaceContainer = createContainer(() => {
@@ -100,15 +88,6 @@ const ShareSpaceContainer = createContainer(() => {
     parkingSpotList: ParkingSpots.find({}).fetch(),
   };
 }, ShareSpotList);
-
-// proptypes validation
-ShareSpotList.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setApplicationLocation: PropTypes.func.isRequired,
-  editParkingSpot: PropTypes.func.isRequired,
-  deleteParkingSpot: PropTypes.func.isRequired,
-};
 
 // connect to redux
 export default connect(

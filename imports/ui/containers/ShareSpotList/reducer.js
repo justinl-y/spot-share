@@ -3,12 +3,12 @@ import {
   } from './actions';
 
 // intial state
-const shareSpotsInitialState = {
+const shareSpotListInitialState = {
   visibilityFilter: 'ALL',
 };
 
 // reducer
-export default (state = shareSpotsInitialState, action) => {
+export default (state = shareSpotListInitialState, action) => {
   switch (action.type) {
     case FILTER_PARKING_SPOT:
       console.log(action.payload);

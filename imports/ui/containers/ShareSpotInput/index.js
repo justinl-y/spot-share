@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ShareSpotAdd from '../../components/ShareSpotAdd';
-// import ShareSpotEdit from '../../components/ShareSpotEdit';
+import ShareSpotEdit from '../../components/ShareSpotEdit';
 
-import { addParkingSpot } from './actions';
+import { insertParkingSpot, updateParkingSpot } from './actions';
 
 class ShareSpotInput extends Component {
   constructor() {
@@ -14,25 +14,54 @@ class ShareSpotInput extends Component {
   }
 
   render() {
+    const { shareSpotInputType } = this.props;
+
     return (
-      <ShareSpotAdd
-        addShareSpot={this.props.addParkingSpot}
-      />
+      <div>
+        {
+          shareSpotInputType !== 'EDIT' ?
+            <ShareSpotAdd
+              addShareSpot={this.props.addParkingSpot}
+            />
+          :
+            <ShareSpotEdit
+              parkingSpotId={this.props.parkingSpotId}
+              editShareSpot={this.props.editParkingSpot}
+            />
+        }
+      </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    shareSpotInputType: state.appData.shareSpotInput.inputType,
+    parkingSpotId: state.appData.shareSpotInput.id,
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
   addParkingSpot: (parkingSpot) => {
-    dispatch(addParkingSpot(parkingSpot));
+    dispatch(insertParkingSpot(parkingSpot));
+  },
+  editParkingSpot: (parkingSpot) => {
+    dispatch(updateParkingSpot(parkingSpot));
   },
 });
 
+ShareSpotInput.defaultProps = {
+  parkingSpotId: '',
+};
+
 ShareSpotInput.propTypes = {
+  shareSpotInputType: PropTypes.string.isRequired,
+  parkingSpotId: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,
+  editParkingSpot: PropTypes.func.isRequired,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(ShareSpotInput);

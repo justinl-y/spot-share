@@ -10,12 +10,6 @@ export const filterParkingSpot = item => ({
 });
 
 // functions
-export function editParkingSpot(id) {
-  return () => {
-    Meteor.call('editParkingSpot', id);
-  };
-}
-
 export function deleteParkingSpot(id) {
   return () => {
     Meteor.call('deleteParkingSpot', id);

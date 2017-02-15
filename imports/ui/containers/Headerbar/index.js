@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import MapsDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
+import { addParkingSpot } from '../ShareSpotInput/actions';
 
 class HeaderBar extends Component {
   render() {
@@ -16,7 +17,7 @@ class HeaderBar extends Component {
           iconElementLeft={
             <IconButton>
               <Link
-                to="/"
+                to="/menu"
               >
                 <MapsDirectionsCar />
               </Link>
@@ -29,7 +30,7 @@ class HeaderBar extends Component {
           iconElementLeft={
             <IconButton>
               <Link
-                to="/"
+                to="/menu"
               >
                 <MapsDirectionsCar />
               </Link>
@@ -38,10 +39,11 @@ class HeaderBar extends Component {
           iconElementRight={
             <div>
               <Link
-                to="/sharespots/new"
+                to="/sharespot/new"
               >
                 <FlatButton
                   label="New share spot"
+                  onClick={this.props.addParkingSpot}
                 />
               </Link>
               <Link
@@ -77,11 +79,19 @@ function mapStateToProps(state) {
   };
 }
 
+const mapDispatchToProps = dispatch => ({
+  addParkingSpot: () => {
+    dispatch(addParkingSpot());
+  },
+});
+
 HeaderBar.propTypes = {
   userLocation: PropTypes.string.isRequired,
+  addParkingSpot: PropTypes.func.isRequired,
 };
 
 // connect to redux
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(HeaderBar);

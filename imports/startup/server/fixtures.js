@@ -10,15 +10,11 @@ Meteor.startup(() => {
 
   if (Meteor.users.find().count() === 0) {
     user1 = Accounts.createUser({
-      first_name: 'Bob',
-      last_name: 'Bobby',
       email: 'bob@bob.com',
       password: '123456',
     });
 
     user2 = Accounts.createUser({
-      first_name: 'Bill',
-      last_name: 'Billy',
       email: 'bill@bill.com',
       password: '123456',
     });
