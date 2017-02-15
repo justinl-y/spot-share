@@ -1,56 +1,46 @@
-import React from 'react';
-import { Card, CardText } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import { cyan500 } from 'material-ui/styles/colors';
-import styles from './styles.css';
+import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { Router } from 'react-router';
 
+class SignIn extends Component {
+  constructor() {
+    super();
+    this.submitAction = this.submitAction.bind(this);
+  }
+  submitAction(event) {
+    event.preventDefault();
+    const signInForm = $(event.target);
 
+    const email = signInForm.find('#email').val();
+    const password = signInForm.find('#password').val();
 
-const SignIn = () => (
-      <div className={styles.formContainer}>
-        <Card className={styles.card}>
-          <Paper>
-            <Toolbar>
-              <ToolbarTitle text="Sign In" />
-            </Toolbar>
-            <CardText>
-              <form>
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Enter your email address"
-                  errorText="Please enter your email address."
-                  errorStyle={style.errorStyle}
-                  floatingLabelText="Email"
-                  floatingLabelStyle={style.floatingLabelStyle}
-                /><br />
+  // login
+    Meteor.loginWithPassword(email, password, (error) => {
+      if (error) {
+        console.log('There was an error:' + error.reason);
+      } else {
+        this.props.router.push('/');
+      }
+    });
+  }
 
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Enter your password"
-                  errorText="Please enter your password"
-                  errorStyle={style.errorStyle}
-                  floatingLabelText="Password"
-                  floatingLabelStyle={style.floatingLabelStyle}
-                /><br />
-
-                <RaisedButton
-                  backgroundColor="cyan500"
-                  labelColor="white"
-                  label="Sign In"
-                  primary={true}
-                />
-              </form>
-            </CardText>
-          </Paper>
-        </Card>
-      </div>
+  render() {
+    return (
+      <form onSubmit={this.submitAction}>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input placeholder="Email" type="email" id="email" className="form-control" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input placeholder="Password" type="password" id="password" className="form-control" />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary">Button</button>
+        </div>
+      </form>
     );
-
+  }
+}
 export default SignIn;
+

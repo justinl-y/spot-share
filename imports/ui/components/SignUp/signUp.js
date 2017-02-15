@@ -1,85 +1,66 @@
-import React from 'react';
-import { Card, CardText } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import { cyan500 } from 'material-ui/styles/colors';
+import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 
-const styles = {
-  floatingLabelStyle: {
-    color: cyan500,
-  },
-  errorStyle: {
-    color: cyan500,
-  },
-};
+class SignUp extends Component {
+  constructor() {
+    super();
+    this.submitAction = this.submitAction.bind(this);
+  }
+  submitAction(event) {
+    event.preventDefault();
+    const signUpForm = $(event.target);
 
-const SignUp = () => (
-      <div>
-        <Card>
-          <Paper>
-            <Toolbar>
-              <ToolbarTitle text="Sign Up" />
-            </Toolbar>
-            <CardText>
-              <form>
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Choose a Username"
-                  hello={styles.hello}
-                  errorText="Please choose a username!"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelText="Username"
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                /><br />
+    const email = signUpForm.find('#email').val();
+    const password = signUpForm.find('#password').val();
+    const confirmPassword = signUpForm.find('#confirm-password').val();
 
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Enter your email address"
-                  errorText="Please enter your email address."
-                  errorStyle={styles.errorStyle}
-                  floatingLabelText="Email"
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                /><br />
+    if (password === confirmPassword && password !== '' && confirmPassword !== '') {
+      const accountInfo = {
+        email,
+        password,
+      };
+      Accounts.createUser(accountInfo, (error) => {
+        if (error) {
+          console.log('There was an error, you suck!', 4000);
+        } else {
+          Meteor.loginWithPassword(email, password, (err) => {
+            if (err) {
+              console.log('There was an error creating your account!', 4000);
+            } else {
+              this.props.router.push('/');
+            }
+          });
+        }
+      });
+    } else {
+      console.log('Your passwords do not match!');
+    }
 
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Choose a Password"
-                  errorText="Please enter your password."
-                  errorStyle={styles.errorStyle}
-                  floatingLabelText="Password"
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                /><br />
+  }
+  // createUser
 
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Confirm Password"
-                  errorText="Please confirm your password."
-                  errorStyle={styles.errorStyle}
-                  floatingLabelText="Confirm Password"
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                /><br />
 
-                <RaisedButton
-                  backgroundColor="cyan500"
-                  labelColor="white"
-                  label="Sign Up"
-                  primary={true}
-                />
-              </form>
-            </CardText>
-          </Paper>
-        </Card>
-      </div>
+  render() {
+    return (
+      <form onSubmit={this.submitAction}>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input placeholder="Email" type="email" id="email" className="form-control" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input placeholder="Password" type="password" id="password" className="form-control" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Confirm Password:</label>
+          <input placeholder="Confirm Password" type="password" id="confirm-password" className="form-control" />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary">Button</button>
+        </div>
+      </form>
     );
-
+  }
+}
 export default SignUp;
+
