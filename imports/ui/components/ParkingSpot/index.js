@@ -2,10 +2,6 @@ import React, { PropTypes } from 'react';
 
 const styles = {
   li: {
-    // height: '85vh',
-    // display: 'flex',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     textAlign: 'center',
     listStyle: 'none',
   },
