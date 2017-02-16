@@ -10,16 +10,12 @@ import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
   component: {
-    // height: '85vh',
-    // display: 'flex',
-    // justifyContent: 'center',
     height: '85vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   card: {
-    // alignSelf: 'center',
     width: '500px',
   },
   textField: {
