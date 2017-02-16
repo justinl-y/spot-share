@@ -45,7 +45,7 @@ class SignIn extends Component {
   submitAction() {
     const { email, password } = this.state;
 
-  // login
+    // login
     Meteor.loginWithPassword(email, password, (error) => {
       if (error) {
         console.log('There was an error:' + error.reason);
