@@ -20,12 +20,17 @@ const styles = {
   card: {
     width: '500px',
   },
-  li: {
-    alignItems: 'center',
-    listStyle: 'none',
-    width: '200px',
+  ul: {
+    margin: '0',
+    padding: '0',
   },
-
+  li: {
+    textAlign: 'center',
+    listStyle: 'none',
+  },
+  button: {
+    width: '300px',
+  },
 };
 
 const menuItems = [
@@ -49,7 +54,7 @@ class ApplicationMenu extends Component {
               <ToolbarTitle text="Where do you want to go today?" />
             </Toolbar>
             <CardText>
-              <ul>
+              <ul style={styles.ul}>
                 {
                 menuItems.map(e =>
                   <li
@@ -60,6 +65,7 @@ class ApplicationMenu extends Component {
                       to={e.link}
                     >
                       <RaisedButton
+                        style={styles.button}
                         label={e.label}
                         // onClick={userLogout}
                       />

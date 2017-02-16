@@ -98,7 +98,7 @@ class ShareSpotAdd extends Component {
 
   render() {
     const styles = {
-      'new-share-spot': {
+      component: {
         height: '85vh',
         display: 'flex',
         justifyContent: 'center',
@@ -121,7 +121,7 @@ class ShareSpotAdd extends Component {
     };
 
     return (
-      <div style={styles['new-share-spot']}>
+      <div style={styles.component}>
         <Card style={styles.card}>
           <Paper>
             <Toolbar>
