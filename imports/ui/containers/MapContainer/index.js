@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ParkingSpots } from '../../../api/parking-spots';
-import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, InfoWindow, Marker, SearchBox } from 'react-google-maps';
 
 const styles = {
   mapContainer: {
@@ -16,6 +16,21 @@ const styles = {
     height: '300px',
   }
 };
+
+// const INPUT_STYLE = {
+//   boxSizing: `border-box`,
+//   MozBoxSizing: `border-box`,
+//   border: `1px solid transparent`,
+//   width: `240px`,
+//   height: `32px`,
+//   marginTop: `27px`,
+//   padding: `0 12px`,
+//   borderRadius: `1px`,
+//   boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+//   fontSize: `14px`,
+//   outline: `none`,
+//   textOverflow: `ellipses`,
+// };
 
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
@@ -34,7 +49,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
           That is, when the Marker pin has been clicked and 'onCloseClick' has been
           Successfully fired.
         */}
-        {marker.showInfo && (
+        {!marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
             <div style={styles.infoBox}>
               <h2>{marker.address}</h2>
@@ -45,6 +60,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
         )}
       </Marker>
     ))}
+    <SearchBox />
   </GoogleMap>
 ));
 
@@ -55,9 +71,6 @@ class mapContainer extends Component {
       lat: -25.363882,
       lng: 131.044922,
     },
-
-
-    // array of objects of markers
     markers: [],
   };
 
