@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
@@ -7,6 +8,10 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 // import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
+
+import { setApplicationLocation } from '../../containers/App/actions';
+
+const currentLocation = 'SHARE-SPOT';
 
 class ShareSpotAdd extends Component {
   constructor() {
@@ -18,9 +23,9 @@ class ShareSpotAdd extends Component {
     };
   }
 
-  /* componentWillUnmount() {
-    this.props.addParkingSpot();
-  }*/
+  componentWillMount() {
+    this.props.setApplicationLocation(currentLocation);
+  }
 
   handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
@@ -100,7 +105,7 @@ class ShareSpotAdd extends Component {
         alignItems: 'center',
       },
       card: {
-        width: '480px',
+        width: '500px',
       },
       textField: {
         width: '100%',
@@ -233,14 +238,25 @@ class ShareSpotAdd extends Component {
   }
 }
 
-/* const mapDispatchToProps = dispatch => ({
-  addParkingSpot: () => {
-    dispatch(addParkingSpot());
+function mapStateToProps(state) {
+  return {
+    applicationLocation: state.appData.applicationLocation,
+  };
+}
+
+const mapDispatchToProps = dispatch => ({
+  setApplicationLocation: (location) => {
+    dispatch(setApplicationLocation(location));
   },
-});*/
+});
 
 ShareSpotAdd.propTypes = {
   addShareSpot: PropTypes.func.isRequired,
+  setApplicationLocation: PropTypes.func.isRequired,
 };
 
-export default ShareSpotAdd;
+// connect to redux
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ShareSpotAdd);
