@@ -31,6 +31,9 @@ const styles = {
   errorStyle: {
     color: cyan500,
   },
+  buttonStyle: {
+    width: '100%',
+  },
 };
 
 class SignIn extends Component {
@@ -66,7 +69,9 @@ class SignIn extends Component {
         <Card style={styles.card}>
           <Paper>
             <Toolbar>
-              <ToolbarTitle text="Sign In" />
+              <ToolbarTitle
+                text="Sign In"
+              />
             </Toolbar>
             <CardText>
               <TextField
@@ -88,6 +93,7 @@ class SignIn extends Component {
                 onChange={(event) => { this.handleInputChange('password', event)}}
               /><br />
               <RaisedButton
+                style={styles.buttonStyle}
                 labelColor="black"
                 label="Login"
                 onClick={(e) => { this.submitAction(e); }}

@@ -13,7 +13,7 @@ const styles = {
     height: '85vh',
     display: 'flex',
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
   },
   card: {
     width: '500px',
@@ -26,6 +26,9 @@ const styles = {
   },
   errorStyle: {
     color: cyan500,
+  },
+  buttonStyle: {
+    width: '100%',
   },
 };
 
@@ -73,7 +76,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div style={styles.component}>
         <Card style={styles.card}>
           <Paper>
             <Toolbar>
@@ -84,6 +87,7 @@ class SignUp extends Component {
                 hintText="Email"
                 errorText="Please enter your email."
                 floatingLabelText="Email"
+                style={styles.textField}
                 errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 onChange={(event) => { this.handleInputChange('email', event)}}
@@ -93,6 +97,7 @@ class SignUp extends Component {
                 errorText="Please enter your password."
                 floatingLabelText="Password"
                 theme="primary"
+                style={styles.textField}
                 errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 onChange={(event) => { this.handleInputChange('password', event)}}
@@ -101,6 +106,7 @@ class SignUp extends Component {
                 hintText="Confirm Password"
                 errorText="Please enter your password."
                 floatingLabelText="Confirm Password"
+                style={styles.textField}
                 errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 onChange={(event) => { this.handleInputChange('confirmPassword', event)}}
@@ -108,6 +114,7 @@ class SignUp extends Component {
               <RaisedButton
                 labelColor="black"
                 label="Sign Up"
+                style={styles.buttonStyle}
                 onClick={(e) => { this.submitAction(e); }}
               />
             </CardText>
