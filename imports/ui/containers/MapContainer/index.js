@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ParkingSpots } from '../../../api/parking-spots';
-import { withGoogleMap, GoogleMap, InfoWindow, Marker, SearchBox } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
+import SearchBox from './lib/places/SearchBox';
+
 
 const styles = {
   mapContainer: {
@@ -17,20 +19,20 @@ const styles = {
   }
 };
 
-// const INPUT_STYLE = {
-//   boxSizing: `border-box`,
-//   MozBoxSizing: `border-box`,
-//   border: `1px solid transparent`,
-//   width: `240px`,
-//   height: `32px`,
-//   marginTop: `27px`,
-//   padding: `0 12px`,
-//   borderRadius: `1px`,
-//   boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-//   fontSize: `14px`,
-//   outline: `none`,
-//   textOverflow: `ellipses`,
-// };
+const INPUT_STYLE = {
+  boxSizing: `border-box`,
+  MozBoxSizing: `border-box`,
+  border: `1px solid transparent`,
+  width: `240px`,
+  height: `32px`,
+  marginTop: `27px`,
+  padding: `0 12px`,
+  borderRadius: `1px`,
+  boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+  fontSize: `14px`,
+  outline: `none`,
+  textOverflow: `ellipses`,
+};
 
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
@@ -60,13 +62,21 @@ const ParkingGoogleMap = withGoogleMap(props => (
         )}
       </Marker>
     ))}
-    <SearchBox />
+    <SearchBox
+      ref={props.onSearchBoxMounted}
+      bounds={props.bounds}
+      controlPosition={google.maps.ControlPosition.TOP_LEFT}
+      onPlacesChanged={props.onPlacesChanged}
+      inputPlaceholder="Customized your placeholder"
+      inputStyle={INPUT_STYLE}
+    />
   </GoogleMap>
 ));
 
 class mapContainer extends Component {
 
   state = {
+    bounds: null,
     center: {
       lat: -25.363882,
       lng: 131.044922,
@@ -74,9 +84,17 @@ class mapContainer extends Component {
     markers: [],
   };
 
+  //These click/close events are for the Info Window
   handleMarkerClick = this.handleMarkerClick.bind(this);
   handleMarkerClose = this.handleMarkerClose.bind(this);
 
+  //This handles the Search Box
+  handleMapMounted = this.handleMapMounted.bind(this);
+  handleBoundsChanged = this.handleBoundsChanged.bind(this);
+  handleSearchBoxMounted = this.handleSearchBoxMounted.bind(this);
+  handlePlacesChanged = this.handlePlacesChanged.bind(this);
+
+  //Functions for the Info Window events
   handleMarkerClick(targetMarker) {
     this.setState({
       markers: this.state.markers.map(marker => {
@@ -105,6 +123,39 @@ class mapContainer extends Component {
     });
   }
 
+  //Functions for the Search Box events
+
+  handleMapMounted(map) {
+    this._map = map;
+  }
+
+  handleBoundsChanged() {
+    this.setState({
+      bounds: this._map.getBounds(),
+      center: this._map.getCenter(),
+    });
+  }
+
+  handleSearchBoxMounted(searchBox) {
+    this._searchBox = searchBox;
+  }
+
+  handlePlacesChanged() {
+    const places = this._searchBox.getPlaces();
+
+    // Add a marker for each place returned from search bar
+    const spot = places.map(place => ({
+      position: place.geometry.location,
+    }));
+
+    // Set markers; set map center to first search result
+    const mapCenter = spot.length > 0 ? spot[0].position : this.state.center;
+
+    this.setState({
+      center: mapCenter,
+    });
+  }
+
   render() {
     const parkingSpot = this.props.parkingSpotList
     return (
@@ -116,10 +167,15 @@ class mapContainer extends Component {
           mapElement={
             <div style={{ height: `100%`, width: '100%' }} />
           }
-          center={this.state.center}
           markers={parkingSpot}
           onMarkerClick={this.handleMarkerClick}
           onMarkerClose={this.handleMarkerClose}
+          center={this.state.center}
+          onMapMounted={this.handleMapMounted}
+          onBoundsChanged={this.handleBoundsChanged}
+          onSearchBoxMounted={this.handleSearchBoxMounted}
+          bounds={this.state.bounds}
+          onPlacesChanged={this.handlePlacesChanged}
         />
       </div>
     );
