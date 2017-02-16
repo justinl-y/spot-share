@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardText } from 'material-ui/Card';
@@ -10,12 +10,16 @@ import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
   component: {
+    // height: '85vh',
+    // display: 'flex',
+    // justifyContent: 'center',
     height: '85vh',
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   card: {
-    justifyContent: 'center',
-    alignSelf: 'center',
+    // alignSelf: 'center',
     width: '500px',
   },
   textField: {
@@ -58,7 +62,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div style={styles.component}>
         <Card style={styles.card}>
           <Paper>
             <Toolbar>
@@ -95,4 +99,9 @@ class SignIn extends Component {
     );
   }
 }
+
+SignIn.propTypes = {
+  router: PropTypes.object.isRequired,
+};
+
 export default SignIn;
