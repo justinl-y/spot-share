@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import { Meteor } from 'meteor/meteor';
-import { Router } from 'react-router';
+
 
 class SignIn extends Component {
   constructor() {
     super();
     this.submitAction = this.submitAction.bind(this);
+    this.state = {
+      email: '',
+      password: '',
+    };
   }
-  submitAction(event) {
-    event.preventDefault();
-    const signInForm = $(event.target);
-
-    const email = signInForm.find('#email').val();
-    const password = signInForm.find('#password').val();
+  submitAction() {
+    const { email, password } = this.state;
 
   // login
     Meteor.loginWithPassword(email, password, (error) => {
@@ -23,24 +25,45 @@ class SignIn extends Component {
       }
     });
   }
+  handleInputChange(input, event) {
+    const updateState = {};
+    updateState[input] = event.target.value;
+    this.setState(updateState);
+  }
 
   render() {
     return (
-      <form onSubmit={this.submitAction}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input placeholder="Email" type="email" id="email" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input placeholder="Password" type="password" id="password" className="form-control" />
-        </div>
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary">Button</button>
-        </div>
-      </form>
+             <div>
+                <TextField
+                  style={{
+                    width: '100%',
+                  }}
+                  hintText="Email"
+                  errorText="Please enter your email."
+                  floatingLabelText="Email"
+                  onChange={(event) => { this.handleInputChange('email', event)}}
+                /><br />
+
+                <TextField
+                  style={{
+                    width: '100%',
+                  }}
+                  hintText="Password"
+                  errorText="Please enter your password."
+                  floatingLabelText="Password"
+                  onChange={(event) => { this.handleInputChange('password', event)}}
+                /><br />
+                <RaisedButton
+                  labelColor="black"
+                  label="Login"
+                  onClick={(e) => { this.submitAction(e); }}
+                />
+                <RaisedButton
+                  labelColor="black"
+                  label="Sign Up"
+                />
+              </div>
     );
   }
 }
 export default SignIn;
-
