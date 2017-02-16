@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { ParkingSpots } from '../../../api/parking-spots';
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 
 const styles = {
@@ -24,7 +26,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
     {props.markers.map((marker, index) => (
       <Marker
         key={index}
-        position={new google.maps.LatLng(marker.lat, marker.long)}
+        position={new google.maps.LatLng(marker.geolocation.lat, marker.geolocation.lng)}
         onClick={() => props.onMarkerClick(marker)}
       >
         {/*
@@ -35,9 +37,9 @@ const ParkingGoogleMap = withGoogleMap(props => (
         {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
             <div style={styles.infoBox}>
-              <h2>{marker.title}</h2>
-              <p>Price per hour: {marker.price}</p>
-              <p>{marker.description}</p>
+              <h2>{marker.address}</h2>
+              <p>Price per hour: {marker.price_per_hour}</p>
+              <p>{marker.additional_information}</p>
             </div>
           </InfoWindow>
         )}
@@ -46,7 +48,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
-export default class mapContainer extends Component {
+class mapContainer extends Component {
 
   state = {
     center: {
@@ -54,25 +56,9 @@ export default class mapContainer extends Component {
       lng: 131.044922,
     },
 
+
     // array of objects of markers
-    markers: [
-      {
-        lat: -27.363882,
-        long: 137.044922,
-        showInfo: false,
-        title: 'Red Academy',
-        price: 15,
-        description: 'Nothing of interest.'
-      },
-      {
-        lat: -23.363882,
-        long: 129.044922,
-        showInfo: false,
-        title: 'BCIT',
-        price: 15,
-        description: 'Nothing of interest.'
-      },
-    ],
+    markers: [],
   };
 
   handleMarkerClick = this.handleMarkerClick.bind(this);
@@ -107,6 +93,7 @@ export default class mapContainer extends Component {
   }
 
   render() {
+    const parkingSpot = this.props.parkingSpotList
     return (
       <div style={styles.mapContainer}>
         <ParkingGoogleMap
@@ -117,7 +104,7 @@ export default class mapContainer extends Component {
             <div style={{ height: `100%`, width: '100%' }} />
           }
           center={this.state.center}
-          markers={this.state.markers}
+          markers={parkingSpot}
           onMarkerClick={this.handleMarkerClick}
           onMarkerClose={this.handleMarkerClose}
         />
@@ -125,3 +112,16 @@ export default class mapContainer extends Component {
     );
   }
 }
+
+mapContainer.propTypes = {
+  parkingSpotList: PropTypes.array.isRequired
+};
+
+const ShareSpaceContainer = createContainer(() => {
+  Meteor.subscribe('getParkingSpots');
+  return {
+    parkingSpotList: ParkingSpots.find({}).fetch(),
+  };
+}, mapContainer);
+
+export default ShareSpaceContainer
