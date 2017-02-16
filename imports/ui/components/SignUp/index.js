@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
+import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import { Meteor } from 'meteor/meteor';
 import { cyan500 } from 'material-ui/styles/colors';
-
 
 const styles = {
   component: {
@@ -35,13 +34,16 @@ const styles = {
 class SignUp extends Component {
   constructor() {
     super();
+
     this.submitAction = this.submitAction.bind(this);
+
     this.state = {
       email: '',
       password: '',
       confirmPassword: '',
     };
   }
+
   submitAction() {
     const { email, password, confirmPassword } = this.state;
 
@@ -50,6 +52,8 @@ class SignUp extends Component {
         email,
         password,
       };
+
+      // Accounts from meteor package
       Accounts.createUser(accountInfo, (error) => {
         if (error) {
           console.log('There was an error, you suck!', 4000);
@@ -67,12 +71,12 @@ class SignUp extends Component {
       console.log('Your passwords do not match!');
     }
   }
+
   handleInputChange(input, event) {
     const updateState = {};
     updateState[input] = event.target.value;
     this.setState(updateState);
   }
-
 
   render() {
     return (
@@ -100,7 +104,7 @@ class SignUp extends Component {
                 style={styles.textField}
                 errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
-                onChange={(event) => { this.handleInputChange('password', event)}}
+                onChange={(event) => { this.handleInputChange('password', event); }}
               /><br />
               <TextField
                 hintText="Confirm Password"
@@ -109,7 +113,7 @@ class SignUp extends Component {
                 style={styles.textField}
                 errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
-                onChange={(event) => { this.handleInputChange('confirmPassword', event)}}
+                onChange={(event) => { this.handleInputChange('confirmPassword', event); }}
               /><br />
               <RaisedButton
                 labelColor="black"
@@ -124,5 +128,9 @@ class SignUp extends Component {
     );
   }
 }
-export default SignUp;
 
+SignUp.propTypes = {
+  router: PropTypes.object.isRequired,
+};
+
+export default SignUp;
