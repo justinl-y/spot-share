@@ -7,7 +7,20 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import { Meteor } from 'meteor/meteor';
 import { cyan500 } from 'material-ui/styles/colors';
 
+
 const styles = {
+  component: {
+    height: '85vh',
+    display: 'flex',
+  },
+  card: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '500px',
+  },
+  textField: {
+    width: '100%',
+  },
   floatingLabelStyle: {
     color: cyan500,
   },
@@ -45,45 +58,40 @@ class SignIn extends Component {
 
   render() {
     return (
-          <div>
-             <Card>
-              <Paper>
-               <Toolbar>
-                <ToolbarTitle text="Sign In" />
-                </Toolbar>
-                <CardText>
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Email"
-                  errorText="Please enter your email."
-                  floatingLabelText="Email"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  onChange={(event) => { this.handleInputChange('email', event)}}
-                /><br />
-
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Password"
-                  errorText="Please enter your password."
-                  floatingLabelText="Password"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  onChange={(event) => { this.handleInputChange('password', event)}}
-                /><br />
-                <RaisedButton
-                  labelColor="black"
-                  label="Login"
-                  onClick={(e) => { this.submitAction(e); }}
-                />
-                 </CardText>
-                </Paper>
-               </Card>
-              </div>
+      <div style={styles.container}>
+        <Card style={styles.card}>
+          <Paper>
+            <Toolbar>
+              <ToolbarTitle text="Sign In" />
+            </Toolbar>
+            <CardText>
+              <TextField
+                hintText="Email"
+                errorText="Please enter your email."
+                floatingLabelText="Email"
+                errorStyle={styles.errorStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+                style={styles.textField}
+                onChange={(event) => { this.handleInputChange('email', event)}}
+              /><br />
+              <TextField
+                hintText="Password"
+                errorText="Please enter your password."
+                floatingLabelText="Password"
+                style={styles.textField}
+                errorStyle={styles.errorStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+                onChange={(event) => { this.handleInputChange('password', event)}}
+              /><br />
+              <RaisedButton
+                labelColor="black"
+                label="Login"
+                onClick={(e) => { this.submitAction(e); }}
+              />
+            </CardText>
+          </Paper>
+        </Card>
+      </div>
     );
   }
 }

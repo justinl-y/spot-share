@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardText } from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
+import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import { Meteor } from 'meteor/meteor';
 import { cyan500 } from 'material-ui/styles/colors';
 
 
-const styles = {
-  floatingLabelStyle: {
-    color: cyan500,
-  },
-  errorStyle: {
-    color: cyan500,
-  },
-};
+    const styles = {
+      component: {
+        height: '85vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignSelf: 'center',
+      },
+      card: {
+        width: '500px',
+      },
+      textField: {
+        width: '100%',
+      },
+      floatingLabelStyle: {
+        color: cyan500,
+      },
+      errorStyle: {
+        color: cyan500,
+      },
+    };
 
 class SignUp extends Component {
   constructor() {
@@ -59,7 +74,13 @@ class SignUp extends Component {
 
   render() {
     return (
-             <div>
+          <div style={styles.container}>
+             <Card style={styles.card}>
+              <Paper>
+               <Toolbar>
+                <ToolbarTitle text="Sign Up" />
+                </Toolbar>
+                <CardText>
                 <TextField
                   style={{
                     width: '100%',
@@ -103,6 +124,9 @@ class SignUp extends Component {
                   label="Sign Up"
                   onClick={(e) => { this.submitAction(e); }}
                 />
+                 </CardText>
+                </Paper>
+               </Card>
               </div>
     );
   }
