@@ -40,7 +40,7 @@ class SignUp extends Component {
             if (err) {
               console.log('There was an error creating your account!', 4000);
             } else {
-              this.props.router.push('/');
+              this.props.router.push('/menu');
             }
           });
         }

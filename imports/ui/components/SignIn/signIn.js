@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardText } from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
+import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import { Meteor } from 'meteor/meteor';
+import { cyan500 } from 'material-ui/styles/colors';
 
+const styles = {
+  floatingLabelStyle: {
+    color: cyan500,
+  },
+  errorStyle: {
+    color: cyan500,
+  },
+};
 
 class SignIn extends Component {
   constructor() {
@@ -21,7 +33,7 @@ class SignIn extends Component {
       if (error) {
         console.log('There was an error:' + error.reason);
       } else {
-        this.props.router.push('/');
+        this.props.router.push('/menu');
       }
     });
   }
@@ -33,7 +45,13 @@ class SignIn extends Component {
 
   render() {
     return (
-             <div>
+          <div>
+             <Card>
+              <Paper>
+               <Toolbar>
+                <ToolbarTitle text="Sign In" />
+                </Toolbar>
+                <CardText>
                 <TextField
                   style={{
                     width: '100%',
@@ -41,6 +59,8 @@ class SignIn extends Component {
                   hintText="Email"
                   errorText="Please enter your email."
                   floatingLabelText="Email"
+                  errorStyle={styles.errorStyle}
+                  floatingLabelStyle={styles.floatingLabelStyle}
                   onChange={(event) => { this.handleInputChange('email', event)}}
                 /><br />
 
@@ -51,6 +71,8 @@ class SignIn extends Component {
                   hintText="Password"
                   errorText="Please enter your password."
                   floatingLabelText="Password"
+                  errorStyle={styles.errorStyle}
+                  floatingLabelStyle={styles.floatingLabelStyle}
                   onChange={(event) => { this.handleInputChange('password', event)}}
                 /><br />
                 <RaisedButton
@@ -58,10 +80,9 @@ class SignIn extends Component {
                   label="Login"
                   onClick={(e) => { this.submitAction(e); }}
                 />
-                <RaisedButton
-                  labelColor="black"
-                  label="Sign Up"
-                />
+                 </CardText>
+                </Paper>
+               </Card>
               </div>
     );
   }
