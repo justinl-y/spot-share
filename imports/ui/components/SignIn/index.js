@@ -1,10 +1,10 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import { Meteor } from 'meteor/meteor';
 import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
@@ -111,13 +111,10 @@ class SignIn extends Component {
     if (Object.keys(fieldErrors).length) return;
 
     // submit data
-    // this.props.addShareSpot(parkingSpot);
+    // console.log(login);
+    this.props.onSignInClick(login);
 
-    // navigate to list
-    // browserHistory.push('/sharespot/list');
-
-    // login
-    Meteor.loginWithPassword(login.email, login.password, (error) => {
+    /* Meteor.loginWithPassword(login.email, login.password, (error) => {
       if (error) {
         console.log(`Login Unsucessful: ${error.reason}`);
       } else {
@@ -125,7 +122,7 @@ class SignIn extends Component {
 
         console.log('Login Successful');
       }
-    });
+    });*/
   }
 
   /* submitAction() {
@@ -142,12 +139,12 @@ class SignIn extends Component {
     });
   }*/
 
-  handleInputChange(input, event) {
+  /* handleInputChange(input, event) {
     const updateState = {};
 
     updateState[input] = event.target.value;
     this.setState(updateState);
-  }
+  }*/
 
   render() {
     return (
@@ -191,7 +188,8 @@ class SignIn extends Component {
                   labelColor="black"
                   label="Login"
                   // onClick={(e) => { this.submitAction(e); }}
-                  onClick={e => this.handleSubmit(e)}
+                  // onClick={e => this.handleSubmit(e)}
+                  onClick={(e) => { this.handleSubmit(e); }}
                 />
                 <RaisedButton
                   style={styles.buttonStyle}
@@ -209,7 +207,9 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  router: PropTypes.object.isRequired,
+  // router: PropTypes.object.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
+  onSignUpClick: PropTypes.func.isRequired,
 };
 
 export default SignIn;

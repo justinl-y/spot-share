@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router';
 import Login from '../../components/SignIn';
 import SignUp from '../../components/SignUp';
 import { userVerifyLogin, userSignUp, registerUser } from './actions';
 
 class PostList extends Component {
-  componentWillUpdate() {
-    /* if (!this.props.userLoggedIn) {
-      browserHistory.push('/');
-    }*/
+  componentDidUpdate() {
+    if (this.props.userLoggedIn) {
+      // browserHistory.push('/menu');
+      this.props.router.push('/menu');
+    }
   }
 
   render() {
@@ -51,6 +52,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 PostList.propTypes = {
+  router: PropTypes.object.isRequired,
   userToSignUp: PropTypes.bool.isRequired,
   verifyLogin: PropTypes.func.isRequired,
   signUpUser: PropTypes.func.isRequired,

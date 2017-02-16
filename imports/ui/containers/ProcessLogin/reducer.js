@@ -14,7 +14,7 @@ const processLoginPageInitialState = {
 export default (state = processLoginPageInitialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP:
-      return { ...state, signup: !state.signup };
+      return { ...state, signup: true };
     case SIGN_UP_LOGIN: {
       let login = false;
 
@@ -27,9 +27,11 @@ export default (state = processLoginPageInitialState, action) => {
     case UPDATE_LOGIN: {
       let login = false;
 
-      if (action.payload.response) {
+      if (action.payload.success) {
         login = true;
       }
+
+      console.log(action.payload.message);
 
       return { ...state, login, userId: action.payload.userId };
     }

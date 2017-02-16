@@ -1,4 +1,4 @@
-// import { getJSON, postJSON } from '../../lib/fetch-json';
+import { Meteor } from 'meteor/meteor';
 
 // action type
 export const USER_SIGN_UP = 'USER_SIGN_UP';
@@ -22,18 +22,31 @@ const updateLogin = result => ({
 });
 
 export const userVerifyLogin = (login) => {
-  // const loginString = JSON.stringify(login);
-
   return (dispatch) => {
+    Meteor.loginWithPassword(login.email, login.password, (error) => {
+      const result = {};
+      if (error) {
+        result.success = false;
+        result.message = `Sign In Unsucessful: ${error.reason}`;
+      } else {
+        result.success = true;
+        result.message = 'Sign In Successful';
+      }
+
+      dispatch(updateLogin(result));
+    });
+
     // dispatch(loadResource());
     // postJSON('http://localhost:8000/auth/login', loginString).then((result) => {
       // dispatch(updateLogin(result));
       // dispatch(doneLoading());
-    //});
+    // });
   };
 };
 
 export const userLogout = () => {
+  console.log('sign out');
+
   return (dispatch) => {
     // dispatch(loadResource());
     // getJSON('http://localhost:8000/auth/logout').then((result) => {
@@ -44,7 +57,9 @@ export const userLogout = () => {
 };
 
 export const registerUser = (register) => {
-  const loginString = JSON.stringify(register);
+  // const loginString = JSON.stringify(register);
+
+  console.log('register user');
 
   return (dispatch) => {
     // dispatch(loadResource());
