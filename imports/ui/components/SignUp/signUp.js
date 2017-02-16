@@ -8,26 +8,26 @@ import { Meteor } from 'meteor/meteor';
 import { cyan500 } from 'material-ui/styles/colors';
 
 
-    const styles = {
-      component: {
-        height: '85vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignSelf: 'center',
-      },
-      card: {
-        width: '500px',
-      },
-      textField: {
-        width: '100%',
-      },
-      floatingLabelStyle: {
-        color: cyan500,
-      },
-      errorStyle: {
-        color: cyan500,
-      },
-    };
+const styles = {
+  component: {
+    height: '85vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  card: {
+    width: '500px',
+  },
+  textField: {
+    width: '100%',
+  },
+  floatingLabelStyle: {
+    color: cyan500,
+  },
+  errorStyle: {
+    color: cyan500,
+  },
+};
 
 class SignUp extends Component {
   constructor() {
@@ -39,7 +39,7 @@ class SignUp extends Component {
       confirmPassword: '',
     };
   }
-  submitAction(event) {
+  submitAction() {
     const { email, password, confirmPassword } = this.state;
 
     if (password === confirmPassword && password !== '' && confirmPassword !== '') {
@@ -69,65 +69,51 @@ class SignUp extends Component {
     updateState[input] = event.target.value;
     this.setState(updateState);
   }
-  // createUser
 
 
   render() {
     return (
-          <div style={styles.container}>
-             <Card style={styles.card}>
-              <Paper>
-               <Toolbar>
-                <ToolbarTitle text="Sign Up" />
-                </Toolbar>
-                <CardText>
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Email"
-                  errorText="Please enter your email."
-                  floatingLabelText="Email"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  onChange={(event) => { this.handleInputChange('email', event)}}
-
-                /><br />
-
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Password"
-                  errorText="Please enter your password."
-                  floatingLabelText="Password"
-                  theme="primary"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  onChange={(event) => { this.handleInputChange('password', event)}}
-                /><br />
-
-                <TextField
-                  style={{
-                    width: '100%',
-                  }}
-                  hintText="Confirm Password"
-                  errorText="Please enter your password."
-                  floatingLabelText="Confirm Password"
-                  errorStyle={styles.errorStyle}
-                  floatingLabelStyle={styles.floatingLabelStyle}
-                  onChange={(event) => { this.handleInputChange('confirmPassword', event)}}
-                /><br />
-
-                <RaisedButton
-                  labelColor="black"
-                  label="Sign Up"
-                  onClick={(e) => { this.submitAction(e); }}
-                />
-                 </CardText>
-                </Paper>
-               </Card>
-              </div>
+      <div style={styles.container}>
+        <Card style={styles.card}>
+          <Paper>
+            <Toolbar>
+              <ToolbarTitle text="Sign Up" />
+            </Toolbar>
+            <CardText>
+              <TextField
+                hintText="Email"
+                errorText="Please enter your email."
+                floatingLabelText="Email"
+                errorStyle={styles.errorStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+                onChange={(event) => { this.handleInputChange('email', event)}}
+              /><br />
+              <TextField
+                hintText="Password"
+                errorText="Please enter your password."
+                floatingLabelText="Password"
+                theme="primary"
+                errorStyle={styles.errorStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+                onChange={(event) => { this.handleInputChange('password', event)}}
+              /><br />
+              <TextField
+                hintText="Confirm Password"
+                errorText="Please enter your password."
+                floatingLabelText="Confirm Password"
+                errorStyle={styles.errorStyle}
+                floatingLabelStyle={styles.floatingLabelStyle}
+                onChange={(event) => { this.handleInputChange('confirmPassword', event)}}
+              /><br />
+              <RaisedButton
+                labelColor="black"
+                label="Sign Up"
+                onClick={(e) => { this.submitAction(e); }}
+              />
+            </CardText>
+          </Paper>
+        </Card>
+      </div>
     );
   }
 }
