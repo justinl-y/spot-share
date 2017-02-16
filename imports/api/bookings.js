@@ -12,7 +12,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   insertBooking(booking) {
-    const insert = bookings.insert({
+    const insert = Bookings.insert({
       user_id: 'L58QnShYsYheWYMPy',
       parking_spot_id: booking.parkingSpotId,
       date_booked: booking.dateBooked,
@@ -20,7 +20,6 @@ Meteor.methods({
       duration: booking.duration,
       booking_cost: booking.bookingCost,
     });
-    console.log('Inserted');
     return insert;
   },
 });
