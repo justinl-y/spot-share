@@ -16,8 +16,7 @@ import BookSpotInput from '../../ui/containers/BookSpotInput';
 import ShareSpotList from '../../ui/containers/ShareSpotList';
 import ShareSpotInput from '../../ui/containers/ShareSpotInput';
 import NotFound from '../../ui/components/NotFound';
-
-import mapContainer from '../../ui/containers/Map';
+import mapContainer from '../../ui/containers/MapContainer';
 import LoginPage from '../../ui/containers/LoginPage/loginPage';
 
 injectTapEventPlugin();
