@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const styles = {
   'not-found': {
@@ -9,10 +9,11 @@ const styles = {
   },
 };
 
-const Booking = () => (
+const Booking = ({ duration }) => (
   <div style={styles['not-found']}>
-    <h1> Booking </h1>
+    <h1> Booking ID: {duration} </h1>
   </div>
 );
+
 
 export default Booking;
