@@ -25,7 +25,7 @@ const INPUT_STYLE = {
   border: `1px solid transparent`,
   width: `240px`,
   height: `32px`,
-  marginTop: `27px`,
+  marginTop: `10px`,
   padding: `0 12px`,
   borderRadius: `1px`,
   boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
@@ -37,7 +37,7 @@ const INPUT_STYLE = {
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
     style={{ height: `100%`, width: '100%' }}
-    defaultZoom={4}
+    defaultZoom={13}
     center={props.center}
   >
     {props.markers.map((marker, index) => (
@@ -79,8 +79,8 @@ class mapContainer extends Component {
   state = {
     bounds: null,
     center: {
-      lat: -25.363882,
-      lng: 131.044922,
+      lat: 49.2827291,
+      lng: -123.12073750000002,
     },
   };
 
