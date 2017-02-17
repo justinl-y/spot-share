@@ -34,7 +34,7 @@ const styles = {
 };
 
 const menuItems = [
-  { link: '/bookspot/new', label: 'Book A Spot' },
+  { link: '/', label: 'Book A Spot' },
   { link: '/sharespot/new', label: 'Share A Spot' },
   { link: '/bookspot/list', label: 'Manage Book Spots' },
   { link: '/sharespot/list', label: 'Manage Share Spots' },

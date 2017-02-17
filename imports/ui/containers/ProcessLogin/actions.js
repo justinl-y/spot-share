@@ -35,12 +35,6 @@ export const userVerifyLogin = (login) => {
 
       dispatch(updateLogin(result));
     });
-
-    // dispatch(loadResource());
-    // postJSON('http://localhost:8000/auth/login', loginString).then((result) => {
-      // dispatch(updateLogin(result));
-      // dispatch(doneLoading());
-    // });
   };
 };
 

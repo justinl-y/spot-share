@@ -11,37 +11,28 @@ class HeaderBar extends Component {
   render() {
     const { userLoggedIn } = this.props;
     let display = null;
-
-    console.log(userLoggedIn);
-
-    /* const signedInLinks = (isUserLoggedIn) => {
-      if (!isUserLoggedIn) return '';
-      return (<Link
-        to="/login"
-      >
-        <FlatButton
-          label="Logout"
-          // onClick={userLogout}
-        />
-      </Link>);
-    };*/
-
     let signedInLinks = '';
 
-    userLoggedIn
-    ?
+    // set up sign in/ sign out cmponent on user login
+    if (userLoggedIn) {
       signedInLinks = (<Link
         to="/login"
       >
         <FlatButton
-          label="Logout"
+          label="Sign Out"
           // onClick={userLogout}
         />
-      </Link>)
-    :
-    null;
-
-    console.log(signedInLinks);
+      </Link>);
+    } else {
+      signedInLinks = (<Link
+        to="/login"
+      >
+        <FlatButton
+          label="Sign In"
+          // onClick={userLogIn}
+        />
+      </Link>);
+    }
 
     switch (this.props.userLocation) {
       case 'HOME':
@@ -61,6 +52,8 @@ class HeaderBar extends Component {
             </div>
           }
         />);
+        break;
+      case 'FIND-SPOT':
         break;
       case 'BOOK-SPOT':
         break;
@@ -85,14 +78,7 @@ class HeaderBar extends Component {
                   onClick={this.props.addParkingSpot}
                 />
               </Link>
-              <Link
-                to="/login"
-              >
-                <FlatButton
-                  label="Logout"
-                  // onClick={userLogout}
-                />
-              </Link>
+              { signedInLinks }
             </div>
           }
         />);
