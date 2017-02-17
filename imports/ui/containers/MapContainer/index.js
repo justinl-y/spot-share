@@ -51,12 +51,13 @@ const ParkingGoogleMap = withGoogleMap(props => (
           That is, when the Marker pin has been clicked and 'onCloseClick' has been
           Successfully fired.
         */}
-        {!marker.showInfo && (
+        {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
             <div style={styles.infoBox}>
               <h2>{marker.address}</h2>
               <p>Price per hour: {marker.price_per_hour}</p>
               <p>{marker.additional_information}</p>
+              <p>{marker.showInfo}</p>
             </div>
           </InfoWindow>
         )}
@@ -81,7 +82,6 @@ class mapContainer extends Component {
       lat: -25.363882,
       lng: 131.044922,
     },
-    markers: [],
   };
 
   //These click/close events are for the Info Window
@@ -94,33 +94,12 @@ class mapContainer extends Component {
   handleSearchBoxMounted = this.handleSearchBoxMounted.bind(this);
   handlePlacesChanged = this.handlePlacesChanged.bind(this);
 
-  //Functions for the Info Window events
-  handleMarkerClick(targetMarker) {
-    this.setState({
-      markers: this.state.markers.map(marker => {
-        if (marker === targetMarker) {
-          return {
-            ...marker,
-            showInfo: true,
-          };
-        }
-        return marker;
-      }),
-    });
+  handleMarkerClick(parkingSpot) {
+    Meteor.call('handleMarkerClick', parkingSpot);
   }
 
-  handleMarkerClose(targetMarker) {
-    this.setState({
-      markers: this.state.markers.map(marker => {
-        if (marker === targetMarker) {
-          return {
-            ...marker,
-            showInfo: false,
-          };
-        }
-        return marker;
-      }),
-    });
+  handleMarkerClose(parkingSpot) {
+    Meteor.call('handleMarkerClose', parkingSpot);
   }
 
   //Functions for the Search Box events
