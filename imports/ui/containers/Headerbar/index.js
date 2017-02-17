@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import MapsDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
 import { addParkingSpot } from '../ShareSpotInput/actions';
+import { userSignOut } from '../ProcessLogin/actions';
 
 class HeaderBar extends Component {
   render() {
@@ -20,7 +21,7 @@ class HeaderBar extends Component {
       >
         <FlatButton
           label="Sign Out"
-          // onClick={userLogout}
+          onClick={this.props.userLogout}
         />
       </Link>);
     } else {
@@ -29,7 +30,6 @@ class HeaderBar extends Component {
       >
         <FlatButton
           label="Sign In"
-          // onClick={userLogIn}
         />
       </Link>);
     }
@@ -109,12 +109,16 @@ const mapDispatchToProps = dispatch => ({
   addParkingSpot: () => {
     dispatch(addParkingSpot());
   },
+  userLogout: () => {
+    dispatch(userSignOut());
+  },
 });
 
 HeaderBar.propTypes = {
   addParkingSpot: PropTypes.func.isRequired,
   userLocation: PropTypes.string.isRequired,
   userLoggedIn: PropTypes.bool.isRequired,
+  userLogout: PropTypes.func.isRequired,
 };
 
 // connect to redux

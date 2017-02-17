@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Login from '../../components/SignIn';
 import SignUp from '../../components/SignUp';
-import { userVerifyLogin, userSignUp, registerUser } from './actions';
+import { userSignIn, updateSignUp, userSignUpSignIn } from './actions';
 
 class ProcessLogin extends Component {
   componentDidUpdate() {
@@ -19,12 +19,12 @@ class ProcessLogin extends Component {
         {
           !userToSignUp ?
             <Login
-              onSignInClick={this.props.verifyLogin}
-              onSignUpClick={this.props.signUpUser}
+              onSignInClick={this.props.signIn}
+              onSignUpClick={this.props.signUp}
             />
           :
             <SignUp
-              onSignUpSignInClick={this.props.signUpLogin}
+              onSignUpSignInClick={this.props.signUpSignIn}
             />
         }
       </div>
@@ -38,24 +38,24 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  verifyLogin: (login) => {
-    dispatch(userVerifyLogin(login));
+  signIn: (login) => {
+    dispatch(userSignIn(login));
   },
-  signUpUser: () => {
-    dispatch(userSignUp());
+  signUp: () => {
+    dispatch(updateSignUp());
   },
-  signUpLogin: (register) => {
-    dispatch(registerUser(register));
+  signUpSignIn: (register) => {
+    dispatch(userSignUpSignIn(register));
   },
 });
 
 ProcessLogin.propTypes = {
   router: PropTypes.object.isRequired,
   userToSignUp: PropTypes.bool.isRequired,
-  verifyLogin: PropTypes.func.isRequired,
-  signUpUser: PropTypes.func.isRequired,
-  signUpLogin: PropTypes.func.isRequired,
   userLoggedIn: PropTypes.bool.isRequired,
+  signIn: PropTypes.func.isRequired,
+  signUp: PropTypes.func.isRequired,
+  signUpSignIn: PropTypes.func.isRequired,
 };
 
 export default connect(

@@ -1,27 +1,33 @@
 import { Meteor } from 'meteor/meteor';
 
 // action type
-export const USER_SIGN_UP = 'USER_SIGN_UP';
-export const SIGN_UP_LOGIN = 'SIGN_UP_LOGIN';
-export const UPDATE_LOGIN = 'UPDATE_LOGIN';
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_SIGN_IN = 'SIGN_UP_SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
 
 // action creator
-export const userSignUp = () => ({
-  type: USER_SIGN_UP,
+const updateSignIn = result => ({
+  type: SIGN_IN,
+  payload: result,
+});
+
+export const updateSignUp = () => ({
+  type: SIGN_UP,
   payload: null,
 });
 
-const userSignUpLogin = result => ({
-  type: SIGN_UP_LOGIN,
+const updateSignUpSignIn = result => ({
+  type: SIGN_UP_SIGN_IN,
   payload: result,
 });
 
-const updateLogin = result => ({
-  type: UPDATE_LOGIN,
+const updateSignOut = result => ({
+  type: SIGN_OUT,
   payload: result,
 });
 
-export const userVerifyLogin = (login) => {
+export const userSignIn = (login) => {
   return (dispatch) => {
     Meteor.loginWithPassword(login.email, login.password, (error) => {
       const result = {};
@@ -34,24 +40,12 @@ export const userVerifyLogin = (login) => {
         result.message = 'Sign In Successful';
       }
 
-      dispatch(updateLogin(result));
+      dispatch(updateSignIn(result));
     });
   };
 };
 
-export const userLogout = () => {
-  console.log('sign out');
-
-  return (dispatch) => {
-    // dispatch(loadResource());
-    // getJSON('http://localhost:8000/auth/logout').then((result) => {
-      // dispatch(updateLogin(result));
-      // dispatch(doneLoading());
-    // });
-  };
-};
-
-export const registerUser = (register) => {
+export const userSignUpSignIn = (register) => {
   return (dispatch) => {
     Accounts.createUser(register, (error) => {
       const result = {};
@@ -68,10 +62,28 @@ export const registerUser = (register) => {
             result.success = true;
             result.message = 'Sign Up, Sign In Successful';
           }
-        });
 
-        dispatch(userSignUpLogin(result));
+          dispatch(updateSignUpSignIn(result));
+        });
       }
+    });
+  };
+};
+
+export const userSignOut = () => {
+  return (dispatch) => {
+    Meteor.logout((error) => { 
+      const result = {};
+
+      if (error) {
+        result.success = false;
+        result.message = `Sign out unsucessful: ${error.reason}`;
+      } else {
+        result.success = true;
+        result.message = 'Sign out successful';
+      }
+
+      dispatch(updateSignOut(result));
     });
   };
 };
