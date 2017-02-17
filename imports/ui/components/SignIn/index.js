@@ -100,12 +100,11 @@ class SignIn extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     const login = this.state.fields;
     const fieldErrors = this.validate(login);
 
     this.setState({ fieldErrors });
-
-    e.preventDefault();
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -177,7 +176,7 @@ class SignIn extends Component {
                   style={styles.buttonStyle}
                   labelColor="black"
                   label="SignUp"
-                  onClick={(e) => { this.props.onSignUpClick(e); }}
+                  onClick={(e) => { e.preventDefault(); this.props.onSignUpClick(); }}
                 />
               </div>
             </CardText>

@@ -107,12 +107,13 @@ class SignUp extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
     const signUp = this.state.fields;
     const fieldErrors = this.validate(signUp);
 
     this.setState({ fieldErrors });
     delete signUp.confirmPassword;
-    e.preventDefault();
 
     if (Object.keys(fieldErrors).length) return;
 

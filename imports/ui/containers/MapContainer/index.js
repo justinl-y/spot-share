@@ -7,11 +7,11 @@ import SearchBox from './lib/places/SearchBox';
 //Styles for the mapContainer & intoBox
 const styles = {
   mapContainer: {
-    height: '100vh',
+    height: '93vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
   },
   infoBox: {
     width: '200px',
