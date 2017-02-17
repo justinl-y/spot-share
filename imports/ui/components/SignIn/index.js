@@ -38,7 +38,6 @@ const styles = {
 class SignIn extends Component {
   constructor(props, onSignInClick, onSignUpClick) {
     super(props, onSignInClick, onSignUpClick);
-    // this.submitAction = this.submitAction.bind(this);
 
     this.state = {
       fields: {
@@ -111,18 +110,7 @@ class SignIn extends Component {
     if (Object.keys(fieldErrors).length) return;
 
     // submit data
-    // console.log(login);
     this.props.onSignInClick(login);
-
-    /* Meteor.loginWithPassword(login.email, login.password, (error) => {
-      if (error) {
-        console.log(`Login Unsucessful: ${error.reason}`);
-      } else {
-        this.props.router.push('/menu');
-
-        console.log('Login Successful');
-      }
-    });*/
   }
 
   /* submitAction() {
@@ -163,10 +151,8 @@ class SignIn extends Component {
                 hintText="Email"
                 errorText={this.state.fieldErrors.email}
                 floatingLabelText="Email"
-                // errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 value={this.state.fields.email}
-                // onChange={(event) => { this.handleInputChange('email', event); }}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               />
               <TextField
@@ -175,11 +161,9 @@ class SignIn extends Component {
                 hintText="Password"
                 errorText={this.state.fieldErrors.password}
                 floatingLabelText="Password"
-                // errorStyle={styles.errorStyle}
                 floatingLabelStyle={styles.floatingLabelStyle}
                 type="password"
                 value={this.state.fields.password}
-                // onChange={(event) => { this.handleInputChange('password', event); }}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               />
               <div style={styles.buttonContainer}>
@@ -187,8 +171,6 @@ class SignIn extends Component {
                   style={styles.buttonStyle}
                   labelColor="black"
                   label="Login"
-                  // onClick={(e) => { this.submitAction(e); }}
-                  // onClick={e => this.handleSubmit(e)}
                   onClick={(e) => { this.handleSubmit(e); }}
                 />
                 <RaisedButton

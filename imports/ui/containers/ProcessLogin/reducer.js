@@ -18,7 +18,7 @@ export default (state = processLoginPageInitialState, action) => {
     case SIGN_UP_LOGIN: {
       let login = false;
 
-      if (action.payload.response) {
+      if (action.payload) {
         login = true;
       }
 
@@ -30,8 +30,6 @@ export default (state = processLoginPageInitialState, action) => {
       if (action.payload.success) {
         login = true;
       }
-
-      console.log(action.payload.message);
 
       return { ...state, login, userId: action.payload.userId };
     }

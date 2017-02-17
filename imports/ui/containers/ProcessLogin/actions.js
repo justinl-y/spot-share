@@ -11,7 +11,7 @@ export const userSignUp = () => ({
   payload: null,
 });
 
-export const userSignUpLogin = result => ({
+const userSignUpLogin = result => ({
   type: SIGN_UP_LOGIN,
   payload: result,
 });
@@ -25,6 +25,7 @@ export const userVerifyLogin = (login) => {
   return (dispatch) => {
     Meteor.loginWithPassword(login.email, login.password, (error) => {
       const result = {};
+
       if (error) {
         result.success = false;
         result.message = `Sign In Unsucessful: ${error.reason}`;
@@ -51,15 +52,26 @@ export const userLogout = () => {
 };
 
 export const registerUser = (register) => {
-  // const loginString = JSON.stringify(register);
-
-  console.log('register user');
-
   return (dispatch) => {
-    // dispatch(loadResource());
-    // postJSON('http://localhost:8000/auth/register', loginString).then((result) => {
-      // dispatch(userSignUpLogin(result));
-      // dispatch(doneLoading());
-    // });
+    Accounts.createUser(register, (error) => {
+      const result = {};
+
+      if (error) {
+        result.success = false;
+        result.message = `Sign Up Unsucessful: ${error.reason}`;
+      } else {
+        Meteor.loginWithPassword(register.email, register.password, (err) => {
+          if (err) {
+            result.success = false;
+            result.message = `Sign Up, Sign In Unsucessful: ${err.reason}`;
+          } else {
+            result.success = true;
+            result.message = 'Sign Up, Sign In Successful';
+          }
+        });
+
+        dispatch(userSignUpLogin(result));
+      }
+    });
   };
 };
