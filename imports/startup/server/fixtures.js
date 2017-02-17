@@ -30,6 +30,7 @@ Meteor.startup(() => {
       available_to: '2017-11-30',
       price_per_hour: 25.00,
       additional_information: 'Mostly a safe area although there is a chance you will be murdered. Oh yeah.',
+      showInfo: false,
     });
     ParkingSpots.insert({
       user_id: user1,
@@ -40,6 +41,7 @@ Meteor.startup(() => {
       available_to: '2017-11-30',
       price_per_hour: 15.00,
       additional_information: 'Rough as rats. You have been warned.',
+      showInfo: false,
     });
   }
 
