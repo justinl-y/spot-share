@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ParkingSpots } from '../../../api/parking-spots';
+import InfoBox from './../../components/InfoBox'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import SearchBox from './lib/places/SearchBox';
+import RaisedButton from 'material-ui/RaisedButton';
+
+console.log(InfoBox)
 
 //Styles for the mapContainer & intoBox
 const styles = {
   mapContainer: {
-    height: '100vh',
+    height: 'calc(100vh - 64px)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'red',
   },
-  infoBox: {
-    width: '200px',
-    height: '300px',
-  }
 };
 
 //Style for Search Box
@@ -39,7 +39,7 @@ const INPUT_STYLE = {
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
     style={{ height: `100%`, width: '100%' }}
-    defaultZoom={13}
+    defaultZoom={15}
     center={props.center}
   >
     {props.markers.map((marker, index) => (
@@ -50,12 +50,11 @@ const ParkingGoogleMap = withGoogleMap(props => (
       >
         {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-            <div style={styles.infoBox}>
-              <h2>{marker.address}</h2>
-              <p>Price per hour: {marker.price_per_hour}</p>
-              <p>{marker.additional_information}</p>
-              <p>{marker.showInfo}</p>
-            </div>
+            <InfoBox
+              address={marker.address}
+              price={marker.price_per_hour}
+              info={marker.additional_information}
+            />
           </InfoWindow>
         )}
       </Marker>
