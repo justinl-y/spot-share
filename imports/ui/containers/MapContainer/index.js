@@ -4,7 +4,7 @@ import { ParkingSpots } from '../../../api/parking-spots';
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import SearchBox from './lib/places/SearchBox';
 
-
+//Styles for the mapContainer & intoBox
 const styles = {
   mapContainer: {
     height: '100vh',
@@ -19,6 +19,7 @@ const styles = {
   }
 };
 
+//Style for Search Box
 const INPUT_STYLE = {
   boxSizing: `border-box`,
   MozBoxSizing: `border-box`,
@@ -34,6 +35,7 @@ const INPUT_STYLE = {
   textOverflow: `ellipses`,
 };
 
+//This renders Google Map
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
     style={{ height: `100%`, width: '100%' }}
@@ -46,11 +48,6 @@ const ParkingGoogleMap = withGoogleMap(props => (
         position={new google.maps.LatLng(marker.geolocation.lat, marker.geolocation.lng)}
         onClick={() => props.onMarkerClick(marker)}
       >
-        {/*
-          Show info window only if the 'showInfo' key of the marker is true.
-          That is, when the Marker pin has been clicked and 'onCloseClick' has been
-          Successfully fired.
-        */}
         {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
             <div style={styles.infoBox}>
@@ -74,8 +71,10 @@ const ParkingGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
+//This contains the map
 class mapContainer extends Component {
 
+  //Initial state for the map's current location
   state = {
     bounds: null,
     center: {
@@ -84,25 +83,30 @@ class mapContainer extends Component {
     },
   };
 
-  //These click/close events are for the Info Window
+  //Functions for the Search Box events
+
+  //These are the bindings for the open/close info window functions
   handleMarkerClick = this.handleMarkerClick.bind(this);
   handleMarkerClose = this.handleMarkerClose.bind(this);
 
-  //This handles the Search Box
+  //These are the bindings for the search box functions
   handleMapMounted = this.handleMapMounted.bind(this);
   handleBoundsChanged = this.handleBoundsChanged.bind(this);
   handleSearchBoxMounted = this.handleSearchBoxMounted.bind(this);
   handlePlacesChanged = this.handlePlacesChanged.bind(this);
 
+  //This will call the Meteor Method to update showInfo to true
   handleMarkerClick(parkingSpot) {
     Meteor.call('handleMarkerClick', parkingSpot);
   }
 
+  //This will call the Meteor Method to update showInfo to false
   handleMarkerClose(parkingSpot) {
     Meteor.call('handleMarkerClose', parkingSpot);
   }
 
   //Functions for the Search Box events
+
 
   handleMapMounted(map) {
     this._map = map;
@@ -121,8 +125,6 @@ class mapContainer extends Component {
 
   handlePlacesChanged() {
     const places = this._searchBox.getPlaces();
-
-    // Add a marker for each place returned from search bar
     const spot = places.map(place => ({
       position: place.geometry.location,
     }));
