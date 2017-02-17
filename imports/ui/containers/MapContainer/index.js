@@ -65,7 +65,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
       bounds={props.bounds}
       controlPosition={google.maps.ControlPosition.TOP_LEFT}
       onPlacesChanged={props.onPlacesChanged}
-      inputPlaceholder="Customized your placeholder"
+      inputPlaceholder="Find a parking spot"
       inputStyle={INPUT_STYLE}
     />
   </GoogleMap>
