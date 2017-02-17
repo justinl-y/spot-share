@@ -10,6 +10,8 @@ import Booking from '../../components/Booking';
 class BookSpotList extends Component {
   render() {
     const bookingsList = this.props.bookingsList;//eslint-disable-line
+
+    console.log(bookingsList);
     return (
       <div>
         <h2>Bookings List</h2>
@@ -18,11 +20,11 @@ class BookSpotList extends Component {
             <Booking
               key={booking._id}
               id={booking._id}
-              parkingSpotId={booking.parkingSpotID}
-              dateBooked={booking.dateBooked}
-              timeBooked={booking.TimeBooked}
+              parkingSpotId={booking.parking_spot_id}
+              dateBooked={booking.date_booked}
+              timeBooked={booking.time_booked}
               duration={booking.duration}
-              bookingCost={booking.bookingCost}
+              bookingCost={booking.booking_cost}
             />,
           )}
         </ul>
@@ -30,6 +32,9 @@ class BookSpotList extends Component {
     );
   }
 }
+
+// todo add proptype validation
+
 const BookingsContainer = createContainer(() => {
   Meteor.subscribe('getBookings');
   return {

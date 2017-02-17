@@ -56,5 +56,13 @@ Meteor.startup(() => {
       duration: 2,
       booking_cost: 50,
     });
+    Bookings.insert({
+      user_id: user2,
+      parking_spot_id: parkingSpot._id,
+      date_booked: '2016-02-01',
+      time_booked: '09:00',
+      duration: 5,
+      booking_cost: 60,
+    });
   }
 });
