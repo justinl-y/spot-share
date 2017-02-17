@@ -91,17 +91,34 @@ Meteor.methods({
 
     const update = ParkingSpots.update(
       { _id: parkingSpot._id },
-      { $set: { user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
-        address: parkingSpot.address,
-        post_code: parkingSpot.postCode,
-        geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
-        available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
-        available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
-        price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
-        additional_information: parkingSpot.additionalInformation },
+      {
+        $set: {
+          user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
+          address: parkingSpot.address,
+          post_code: parkingSpot.postCode,
+          geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
+          available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
+          available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
+          price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
+          additional_information: parkingSpot.additionalInformation
+        },
       });
 
     console.log('Updated');
     return update;
+  },
+
+  //Set showInfo to true
+  handleMarkerClick(parkingSpot) {
+    ParkingSpots.update(parkingSpot._id, {
+      $set: { showInfo: !parkingSpot.showInfo }
+    });
+  },
+
+  //Set showInfo to false
+  handleMarkerClose(parkingSpot) {
+    ParkingSpots.update(parkingSpot._id, {
+      $set: { showInfo: parkingSpot.showInfo }
+    });
   },
 });
