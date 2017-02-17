@@ -17,7 +17,7 @@ import ShareSpotList from '../../ui/containers/ShareSpotList';
 import ShareSpotInput from '../../ui/containers/ShareSpotInput';
 import NotFound from '../../ui/components/NotFound';
 import ShareSpaceContainer from '../../ui/containers/MapContainer';
-import LoginPage from '../../ui/containers/LoginPage/loginPage';
+import PostList from '../../ui/containers/ProcessLogin';
 
 injectTapEventPlugin();
 
@@ -28,7 +28,7 @@ Meteor.startup(() => {
         <Router history={browserHistory}>
           <Route component={MainLayout}>
             <Route path="/" component={App}>
-              <Route path="/login" component={LoginPage} />
+              <Route path="/login" component={PostList} />
               <IndexRoute component={ShareSpaceContainer} />
               <Route path="/menu" component={ApplicationMenu} />
               <Route path="/bookspot">
