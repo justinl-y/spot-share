@@ -9,7 +9,39 @@ import { addParkingSpot } from '../ShareSpotInput/actions';
 
 class HeaderBar extends Component {
   render() {
+    const { userLoggedIn } = this.props;
     let display = null;
+
+    console.log(userLoggedIn);
+
+    /* const signedInLinks = (isUserLoggedIn) => {
+      if (!isUserLoggedIn) return '';
+      return (<Link
+        to="/login"
+      >
+        <FlatButton
+          label="Logout"
+          // onClick={userLogout}
+        />
+      </Link>);
+    };*/
+
+    let signedInLinks = '';
+
+    userLoggedIn
+    ?
+      signedInLinks = (<Link
+        to="/login"
+      >
+        <FlatButton
+          label="Logout"
+          // onClick={userLogout}
+        />
+      </Link>)
+    :
+    null;
+
+    console.log(signedInLinks);
 
     switch (this.props.userLocation) {
       case 'HOME':
@@ -23,7 +55,14 @@ class HeaderBar extends Component {
               </Link>
             </IconButton>
           }
+          iconElementRight={
+            <div>
+              { signedInLinks }
+            </div>
+          }
         />);
+        break;
+      case 'BOOK-SPOT':
         break;
       case 'SHARE-SPOT':
         display = (<AppBar
@@ -76,6 +115,7 @@ class HeaderBar extends Component {
 function mapStateToProps(state) {
   return {
     userLocation: state.appData.userLocation.userLocation,
+    userLoggedIn: state.appData.processLogin.login,
   };
 }
 
@@ -86,8 +126,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 HeaderBar.propTypes = {
-  userLocation: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,
+  userLocation: PropTypes.string.isRequired,
+  userLoggedIn: PropTypes.bool.isRequired,
 };
 
 // connect to redux

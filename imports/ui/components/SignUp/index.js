@@ -130,7 +130,7 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  router: PropTypes.object.isRequired,
+  // router: PropTypes.object.isRequired,
 };
 
 export default SignUp;
