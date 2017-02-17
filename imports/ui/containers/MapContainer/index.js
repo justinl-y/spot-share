@@ -54,6 +54,8 @@ const ParkingGoogleMap = withGoogleMap(props => (
               address={marker.address}
               price={marker.price_per_hour}
               info={marker.additional_information}
+              link={props.currentUser ? '/bookspot/list' : '/login'}
+              label={props.currentUser ? 'Book Spot' : 'Login to Book'}
             />
           </InfoWindow>
         )}
@@ -137,7 +139,6 @@ class mapContainer extends Component {
   }
 
   render() {
-    const parkingSpot = this.props.parkingSpotList
     return (
       <div style={styles.mapContainer}>
         <ParkingGoogleMap
@@ -147,7 +148,8 @@ class mapContainer extends Component {
           mapElement={
             <div style={{ height: `100%`, width: '100%' }} />
           }
-          markers={parkingSpot}
+          markers={this.props.parkingSpotList}
+          currentUser={this.props.currentUser}
           onMarkerClick={this.handleMarkerClick}
           onMarkerClose={this.handleMarkerClose}
           center={this.state.center}
@@ -163,12 +165,14 @@ class mapContainer extends Component {
 }
 
 mapContainer.propTypes = {
-  parkingSpotList: PropTypes.array.isRequired
+  parkingSpotList: PropTypes.array.isRequired,
+  currentUser: PropTypes.object,
 };
 
 const ShareSpaceContainer = createContainer(() => {
   Meteor.subscribe('getParkingSpots');
   return {
+    currentUser: Meteor.user(),
     parkingSpotList: ParkingSpots.find({}).fetch(),
   };
 }, mapContainer);
