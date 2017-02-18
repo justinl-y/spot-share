@@ -19,9 +19,12 @@ class ShareSpotAdd extends Component {
   constructor() {
     super();
     this.state = {
-      fields: {},
+      fields: {
+        longitude: -123.12073750000002,//Default location
+        latitude: 49.2827291,//Default location
+      },
       fieldErrors: {},
-      address: 'San Francisco, CA',
+      address: 'Vancouver, BC',
     };
     this.onChange = address => this.setState({ address });
   }
@@ -82,6 +85,7 @@ class ShareSpotAdd extends Component {
     return errors;
   }
 
+  //Google Map input functionality
   handleFormSubmit = (event) => {
     event.preventDefault()
     const { address } = this.state
@@ -89,7 +93,7 @@ class ShareSpotAdd extends Component {
     geocodeByAddress(address, (err, { lat, lng }) => {
       if (err) { console.log('Oh no!', err) }
 
-      console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
+      console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
       this.setState({ fields: { ...this.state.fields, longitude: lng } });
       this.setState({ fields: { ...this.state.fields, latitude: lat } });
     })
@@ -143,11 +147,9 @@ class ShareSpotAdd extends Component {
     const lng = this.state.fields.longitude
 
     const position = {
-      latitude: lat,
-      longitude: lng
+      lat: lat,
+      lng: lng
     }
-
-    console.log('Position is...', position)
 
     return (
       <div style={styles.component}>
@@ -164,7 +166,7 @@ class ShareSpotAdd extends Component {
                 />
                 <button type="submit">Submit</button>
               </form>
-              <ShareSpotMap position={position} />
+              <ShareSpotMap position={position} center={position} />
               <form>
                 <TextField
                   style={styles.textField}
