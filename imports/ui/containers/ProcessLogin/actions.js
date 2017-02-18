@@ -5,6 +5,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_SIGN_IN = 'SIGN_UP_SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+export const CLEAR_MESSAGE_TEXT = 'CLEAR_MESSAGE_TEXT';
 
 // action creator
 const updateSignIn = result => ({
@@ -25,6 +26,11 @@ const updateSignUpSignIn = result => ({
 const updateSignOut = result => ({
   type: SIGN_OUT,
   payload: result,
+});
+
+export const clearMessageText = () => ({
+  type: CLEAR_MESSAGE_TEXT,
+  payload: null,
 });
 
 export const userSignIn = (login) => {
@@ -57,10 +63,10 @@ export const userSignUpSignIn = (register) => {
         Meteor.loginWithPassword(register.email, register.password, (err) => {
           if (err) {
             result.success = false;
-            result.message = `Sign Up, Sign In Unsucessful: ${err.reason}`;
+            result.message = `Sign Up Unsucessful: ${err.reason}`;
           } else {
             result.success = true;
-            result.message = 'Sign Up, Sign In Successful';
+            result.message = 'Sign Up Successful';
           }
 
           dispatch(updateSignUpSignIn(result));
@@ -77,10 +83,10 @@ export const userSignOut = () => {
 
       if (error) {
         result.success = false;
-        result.message = `Sign out unsucessful: ${error.reason}`;
+        result.message = `Sign Out Unsucessful: ${error.reason}`;
       } else {
         result.success = true;
-        result.message = 'Sign out successful';
+        result.message = 'Sign Out Successful';
       }
 
       dispatch(updateSignOut(result));
