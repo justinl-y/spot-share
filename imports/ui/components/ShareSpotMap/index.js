@@ -7,16 +7,15 @@ const ShareGoogleMap = withGoogleMap(props => (
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
   >
-    <Marker position={new google.maps.LatLng(-27.363882, 137.044922)} />
+    <Marker position={new google.maps.LatLng(props.marker.latitude, props.marker.longitude)} />
   </GoogleMap>
 ));
 
 class ShareSpotMap extends Component {
 
-
   render() {
 
-    console.log(this.props.position)
+    console.log('I be in the ShareSpotMap!', this.props.position)
 
     return (
       <ShareGoogleMap
