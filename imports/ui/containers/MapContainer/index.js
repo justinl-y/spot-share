@@ -11,11 +11,7 @@ console.log(InfoBox)
 //Styles for the mapContainer & intoBox
 const styles = {
   mapContainer: {
-<<<<<<< HEAD
-    height: '93vh',
-=======
     height: 'calc(100vh - 64px)',
->>>>>>> jonathan
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
