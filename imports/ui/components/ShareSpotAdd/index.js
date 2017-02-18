@@ -19,7 +19,10 @@ class ShareSpotAdd extends Component {
   constructor() {
     super();
     this.state = {
-      fields: {},
+      fields: {
+        longitude: -123.12073750000002,
+        latitude: 49.2827291,
+      },
       fieldErrors: {},
       address: 'San Francisco, CA',
     };
