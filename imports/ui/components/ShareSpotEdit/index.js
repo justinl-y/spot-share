@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -20,7 +22,9 @@ class ShareSpotEdit extends Component {
     this.state = {
       fields: {},
       fieldErrors: {},
+      address: 'Vancouver, BC',
     };
+    this.onChange = address => this.setState({ address });
   }
 
   componentWillMount() {
@@ -104,6 +108,20 @@ class ShareSpotEdit extends Component {
     return errors;
   }
 
+  //Google Map input functionality
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    const { address } = this.state
+
+    geocodeByAddress(address, (err, { lat, lng }) => {
+      if (err) { console.log('Oh no!', err) }
+
+      console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
+      this.setState({ fields: { ...this.state.fields, longitude: lng } });
+      this.setState({ fields: { ...this.state.fields, latitude: lat } });
+    })
+  }
+
   handleSubmit(e) {
     const parkingSpot = this.state.fields;
     const fieldErrors = this.validate(parkingSpot);
@@ -145,6 +163,14 @@ class ShareSpotEdit extends Component {
       },
     };
 
+    const lat = this.state.fields.latitude
+    const lng = this.state.fields.longitude
+
+    const position = {
+      lat: lat,
+      lng: lng
+    }
+
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
@@ -153,6 +179,14 @@ class ShareSpotEdit extends Component {
               <ToolbarTitle text="Edit an existing share spot" />
             </Toolbar>
             <CardText>
+              <form onSubmit={this.handleFormSubmit}>
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.onChange}
+                />
+                <button type="submit">Submit</button>
+              </form>
+              <ShareSpotMap position={position} center={position} />
               <form>
                 <TextField
                   style={styles.textField}
