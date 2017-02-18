@@ -20,11 +20,11 @@ class ShareSpotAdd extends Component {
     super();
     this.state = {
       fields: {
-        longitude: -123.12073750000002,
-        latitude: 49.2827291,
+        longitude: -123.12073750000002,//Default location
+        latitude: 49.2827291,//Default location
       },
       fieldErrors: {},
-      address: 'San Francisco, CA',
+      address: 'Vancouver, BC',
     };
     this.onChange = address => this.setState({ address });
   }
@@ -85,6 +85,7 @@ class ShareSpotAdd extends Component {
     return errors;
   }
 
+  //Google Map input functionality
   handleFormSubmit = (event) => {
     event.preventDefault()
     const { address } = this.state
@@ -92,7 +93,7 @@ class ShareSpotAdd extends Component {
     geocodeByAddress(address, (err, { lat, lng }) => {
       if (err) { console.log('Oh no!', err) }
 
-      console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
+      console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
       this.setState({ fields: { ...this.state.fields, longitude: lng } });
       this.setState({ fields: { ...this.state.fields, latitude: lat } });
     })
@@ -149,8 +150,6 @@ class ShareSpotAdd extends Component {
       lat: lat,
       lng: lng
     }
-
-    console.log('Position is...', position)
 
     return (
       <div style={styles.component}>
