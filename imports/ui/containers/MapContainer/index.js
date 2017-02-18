@@ -6,7 +6,7 @@ import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps'
 import SearchBox from './lib/places/SearchBox';
 import RaisedButton from 'material-ui/RaisedButton';
 
-console.log(InfoBox)
+// console.log(InfoBox)
 
 //Styles for the mapContainer & intoBox
 const styles = {
@@ -75,15 +75,18 @@ const ParkingGoogleMap = withGoogleMap(props => (
 
 //This contains the map
 class mapContainer extends Component {
+  constructor(props) {
+    super(props);
 
-  //Initial state for the map's current location
-  state = {
-    bounds: null,
-    center: {
-      lat: 49.2827291,
-      lng: -123.12073750000002,
-    },
-  };
+    //Initial state for the map's current location
+    this.state = {
+      bounds: null,
+      center: {
+        lat: 49.2827291,
+        lng: -123.12073750000002,
+      },
+    };
+  }
 
   //Functions for the Search Box events
 

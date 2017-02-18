@@ -78,7 +78,7 @@ export const userSignUpSignIn = (register) => {
 
 export const userSignOut = () => {
   return (dispatch) => {
-    Meteor.logout((error) => { 
+    Meteor.logout((error) => {
       const result = {};
 
       if (error) {
