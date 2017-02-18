@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -116,10 +117,11 @@ class ShareSpotAdd extends Component {
   render() {
     const styles = {
       component: {
-        height: '85vh',
+        height: 'calc(100vh - 64px)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'auto',
       },
       card: {
         width: '500px',
@@ -137,6 +139,16 @@ class ShareSpotAdd extends Component {
       },
     };
 
+    const lat = this.state.fields.latitude
+    const lng = this.state.fields.longitude
+
+    const position = {
+      latitude: lat,
+      longitude: lng
+    }
+
+    console.log('Position is...', position)
+
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
@@ -152,6 +164,7 @@ class ShareSpotAdd extends Component {
                 />
                 <button type="submit">Submit</button>
               </form>
+              <ShareSpotMap position={position} />
               <form>
                 <TextField
                   style={styles.textField}
