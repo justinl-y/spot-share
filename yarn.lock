@@ -2683,6 +2683,12 @@ react-meteor-data@^0.2.10:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/react-meteor-data/-/react-meteor-data-0.2.10.tgz#6eef553548f4b8c4b567223994210965013d8ba1"
 
+react-places-autocomplete@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-places-autocomplete/-/react-places-autocomplete-3.0.0.tgz#ea72ea9e7c7c7735cfecd7d1a152fbf7f976855d"
+  dependencies:
+    react "15.4.2"
+
 react-prop-types-element-of-type@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-prop-types-element-of-type/-/react-prop-types-element-of-type-2.2.0.tgz#bcc332d3903c2259cf68c28a81c4a663faba59ac"
@@ -2713,7 +2719,7 @@ react-tap-event-plugin@^2.0.1:
   dependencies:
     fbjs "^0.8.6"
 
-react@^15.4.2:
+react@15.4.2, react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:

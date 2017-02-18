@@ -1,15 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
-import { clearMessageText } from '../ProcessLogin/actions';
-
-
-// import { Meteor } from 'meteor/meteor';
-// import { createContainer } from 'meteor/react-meteor-data';
-// import { Bookings } from '../../../api/bookings';
-// import { ParkingSpots } from '../../../api/parking-spots';
-
 import { setApplicationLocation } from '../App/actions';
+import { clearMessageText } from '../ProcessLogin/actions';
 
 const currentLocation = 'HOME';
 
@@ -26,8 +19,8 @@ class App extends Component {
     this.props.setApplicationLocation(currentLocation);
   }
 
-  componentWillReceiveProps() {
-    if (this.props.signInMessage.active) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.signInMessage.active) {
       this.setState({
         open: true,
       });
