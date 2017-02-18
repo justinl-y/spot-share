@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -16,11 +17,12 @@ const currentLocation = 'SHARE-SPOT';
 class ShareSpotAdd extends Component {
   constructor() {
     super();
-
     this.state = {
       fields: {},
       fieldErrors: {},
+      address: 'San Francisco, CA',
     };
+    this.onChange = address => this.setState({ address });
   }
 
   componentWillMount() {
@@ -84,8 +86,21 @@ class ShareSpotAdd extends Component {
     const fieldErrors = this.validate(parkingSpot);
 
     this.setState({ fieldErrors });
+    const { address } = this.state;
 
     e.preventDefault();
+
+    // geocodeByAddress function from React Places Autocomplete
+    geocodeByAddress(address, (err, { lat, lng }) => {
+      if (err) { console.log('Oh no!', err); }
+      console.log({ lat, lng });
+
+      this.setState({ fields: { ...this.state.fields, longitude: lng } });
+      this.setState({ fields: { ...this.state.fields, latitude: lat } });
+
+    });
+
+    console.log(parkingSpot);
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -135,7 +150,7 @@ class ShareSpotAdd extends Component {
                   hintText="Address"
                   errorText={this.state.fieldErrors.address}
                   floatingLabelText="Address"
-                  value={this.state.fields.address}
+                  value={this.state.fields.address || ''}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
 
@@ -145,9 +160,13 @@ class ShareSpotAdd extends Component {
                   hintText="Post Code"
                   errorText={this.state.fieldErrors.postCode}
                   floatingLabelText="Post Code"
-                  value={this.state.fields.postCode}
+                  value={this.state.fields.postCode || ''}
                   // onChange={this.handleTextFieldChange.bind(this)}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
+                />
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.onChange}
                 />
 
                 <TextField
