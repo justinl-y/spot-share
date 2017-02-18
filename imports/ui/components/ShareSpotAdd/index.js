@@ -143,8 +143,8 @@ class ShareSpotAdd extends Component {
     const lng = this.state.fields.longitude
 
     const position = {
-      latitude: lat,
-      longitude: lng
+      lat: lat,
+      lng: lng
     }
 
     console.log('Position is...', position)
@@ -164,7 +164,7 @@ class ShareSpotAdd extends Component {
                 />
                 <button type="submit">Submit</button>
               </form>
-              <ShareSpotMap position={position} />
+              <ShareSpotMap position={position} center={position} />
               <form>
                 <TextField
                   style={styles.textField}
