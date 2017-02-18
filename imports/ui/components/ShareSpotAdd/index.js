@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -16,11 +18,12 @@ const currentLocation = 'SHARE-SPOT';
 class ShareSpotAdd extends Component {
   constructor() {
     super();
-
     this.state = {
       fields: {},
       fieldErrors: {},
+      address: 'San Francisco, CA',
     };
+    this.onChange = address => this.setState({ address });
   }
 
   componentWillMount() {
@@ -79,6 +82,19 @@ class ShareSpotAdd extends Component {
     return errors;
   }
 
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    const { address } = this.state
+
+    geocodeByAddress(address, (err, { lat, lng }) => {
+      if (err) { console.log('Oh no!', err) }
+
+      console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
+      this.setState({ fields: { ...this.state.fields, longitude: lng } });
+      this.setState({ fields: { ...this.state.fields, latitude: lat } });
+    })
+  }
+
   handleSubmit(e) {
     const parkingSpot = this.state.fields;
     const fieldErrors = this.validate(parkingSpot);
@@ -86,6 +102,8 @@ class ShareSpotAdd extends Component {
     this.setState({ fieldErrors });
 
     e.preventDefault();
+
+    console.log(parkingSpot);
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -99,10 +117,11 @@ class ShareSpotAdd extends Component {
   render() {
     const styles = {
       component: {
-        height: '85vh',
+        height: 'calc(100vh - 64px)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'auto',
       },
       card: {
         width: '500px',
@@ -120,6 +139,16 @@ class ShareSpotAdd extends Component {
       },
     };
 
+    const lat = this.state.fields.latitude
+    const lng = this.state.fields.longitude
+
+    const position = {
+      latitude: lat,
+      longitude: lng
+    }
+
+    console.log('Position is...', position)
+
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
@@ -128,6 +157,14 @@ class ShareSpotAdd extends Component {
               <ToolbarTitle text="Add a new spot to share" />
             </Toolbar>
             <CardText>
+              <form onSubmit={this.handleFormSubmit}>
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.onChange}
+                />
+                <button type="submit">Submit</button>
+              </form>
+              <ShareSpotMap position={position} />
               <form>
                 <TextField
                   style={styles.textField}
@@ -135,7 +172,7 @@ class ShareSpotAdd extends Component {
                   hintText="Address"
                   errorText={this.state.fieldErrors.address}
                   floatingLabelText="Address"
-                  value={this.state.fields.address}
+                  value={this.state.fields.address || ''}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
 
@@ -145,11 +182,10 @@ class ShareSpotAdd extends Component {
                   hintText="Post Code"
                   errorText={this.state.fieldErrors.postCode}
                   floatingLabelText="Post Code"
-                  value={this.state.fields.postCode}
+                  value={this.state.fields.postCode || ''}
                   // onChange={this.handleTextFieldChange.bind(this)}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
-
                 <TextField
                   style={styles.textFieldSmall}
                   name="longitude"
