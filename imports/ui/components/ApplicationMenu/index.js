@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -46,6 +47,9 @@ class ApplicationMenu extends Component {
   }
 
   render() {
+    console.log(`Meteor User ID: ${Meteor.userId()}`);
+    // console.log(`Meteor user logging in: ${Meteor.loggingIn()}`);
+
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
