@@ -81,24 +81,26 @@ class ShareSpotAdd extends Component {
     return errors;
   }
 
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    const { address } = this.state
+
+    geocodeByAddress(address, (err, { lat, lng }) => {
+      if (err) { console.log('Oh no!', err) }
+
+      console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
+      this.setState({ fields: { ...this.state.fields, longitude: lng } });
+      this.setState({ fields: { ...this.state.fields, latitude: lat } });
+    })
+  }
+
   handleSubmit(e) {
     const parkingSpot = this.state.fields;
     const fieldErrors = this.validate(parkingSpot);
 
     this.setState({ fieldErrors });
-    const { address } = this.state;
 
     e.preventDefault();
-
-    // geocodeByAddress function from React Places Autocomplete
-    geocodeByAddress(address, (err, { lat, lng }) => {
-      if (err) { console.log('Oh no!', err); }
-      console.log({ lat, lng });
-
-      this.setState({ fields: { ...this.state.fields, longitude: lng } });
-      this.setState({ fields: { ...this.state.fields, latitude: lat } });
-
-    });
 
     console.log(parkingSpot);
 
@@ -143,6 +145,13 @@ class ShareSpotAdd extends Component {
               <ToolbarTitle text="Add a new spot to share" />
             </Toolbar>
             <CardText>
+              <form onSubmit={this.handleFormSubmit}>
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.onChange}
+                />
+                <button type="submit">Submit</button>
+              </form>
               <form>
                 <TextField
                   style={styles.textField}
@@ -164,11 +173,6 @@ class ShareSpotAdd extends Component {
                   // onChange={this.handleTextFieldChange.bind(this)}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
-                <PlacesAutocomplete
-                  value={this.state.address}
-                  onChange={this.onChange}
-                />
-
                 <TextField
                   style={styles.textFieldSmall}
                   name="longitude"
