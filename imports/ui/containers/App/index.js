@@ -19,7 +19,6 @@ class App extends Component {
 
     this.state = {
       open: false,
-      // signInMessage: '',
     };
   }
 
@@ -27,12 +26,7 @@ class App extends Component {
     this.props.setApplicationLocation(currentLocation);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.signInMessage);
-    // console.log(nextProps.signInMessage.text);
-    console.log('next.props:' + nextProps.signInMessage.active);
-    console.log('this.props:' + nextProps.signInMessage.active);
-
+  componentWillReceiveProps() {
     if (this.props.signInMessage.active) {
       this.setState({
         open: true,
@@ -51,7 +45,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        {console.log(this.state.open)}
         <Snackbar
           open={this.state.open}
           message={this.props.signInMessage.text === undefined ? '' : this.props.signInMessage.text}
