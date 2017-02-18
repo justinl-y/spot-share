@@ -9,12 +9,12 @@ const styles = {
 
 const Booking = ({ id, bookingCost, duration, parkingSpotId, dateBooked, timeBooked }) => (
   <li style={styles.component}>
-    <h3> Booking ID: { id } </h3>
-    <p> Duration: { duration } </p>
-    <p> Booking Cost: { bookingCost } </p>
-    <p> Parking Spot ID: { parkingSpotId } </p>
-    <p> Date Booked: { dateBooked } </p>
-    <p> Time Booked: { timeBooked } </p>
+    <h3>Booking ID: { id }</h3>
+    <p>Duration: { duration } | Booking Cost: { bookingCost } | Parking Spot ID: { parkingSpotId }</p>
+    <p>Date Booked: { dateBooked } |Time Booked: { timeBooked }</p>
+    <button onClick={ (e)=> {e.preventDefault(); console.log('Edit Clicked')}}>Edit</button>
+    <button onClick={ (e)=> {e.preventDefault(); console.log('Eliminate Charlie')}}>Delete</button>
+
   </li>
 );
 

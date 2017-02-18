@@ -4,6 +4,7 @@ import processLoginReducer from '../ui/containers/ProcessLogin/reducer';
 import applicationLocationReducer from '../ui/containers/App/reducer';
 import shareSpotListReducer from '../ui/containers/ShareSpotList/reducer';
 import shareSpotInputReducer from '../ui/containers/ShareSpotInput/reducer';
+import bookSpotInputReducer from '../ui/containers/BookSpotInput/reducer';
 
 // combined reducer
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     userLocation: applicationLocationReducer,
     shareSpotList: shareSpotListReducer,
     shareSpotInput: shareSpotInputReducer,
+    bookSpotInput: bookSpotInputReducer,
   }),
 });

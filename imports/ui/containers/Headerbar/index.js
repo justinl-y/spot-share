@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import MapsDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
 import { addParkingSpot } from '../ShareSpotInput/actions';
+import { addBookingSpot } from '../BookSpotInput/actions';
 import { userSignOut } from '../ProcessLogin/actions';
 
 class HeaderBar extends Component {
@@ -56,6 +57,30 @@ class HeaderBar extends Component {
       case 'FIND-SPOT':
         break;
       case 'BOOK-SPOT':
+        display = (<AppBar
+          iconElementLeft={
+            <IconButton>
+              <Link
+                to="/menu"
+              >
+                <MapsDirectionsCar />
+              </Link>
+            </IconButton>
+          }
+          iconElementRight={
+            <div>
+              <Link
+                to="/bookspot/new"
+              >
+                <FlatButton
+                  label="New book spot"
+                  onClick={this.props.addBookingSpot}
+                />
+              </Link>
+              { signedInLinks }
+            </div>
+          }
+        />);
         break;
       case 'SHARE-SPOT':
         display = (<AppBar
@@ -109,6 +134,9 @@ const mapDispatchToProps = dispatch => ({
   addParkingSpot: () => {
     dispatch(addParkingSpot());
   },
+  addBookingSpot: () => {
+    dispatch(addBookingSpot());
+  },
   userLogout: () => {
     dispatch(userSignOut());
   },
@@ -116,6 +144,7 @@ const mapDispatchToProps = dispatch => ({
 
 HeaderBar.propTypes = {
   addParkingSpot: PropTypes.func.isRequired,
+  addBookingSpot: PropTypes.func.isRequired,
   userLocation: PropTypes.string.isRequired,
   userLoggedIn: PropTypes.bool.isRequired,
   userLogout: PropTypes.func.isRequired,
