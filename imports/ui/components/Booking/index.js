@@ -1,19 +1,27 @@
 import React, { PropTypes } from 'react';
 
 const styles = {
-  'not-found': {
-    height: '85vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  component: {
+    textAlign: 'center',
+    listStyle: 'none',
   },
 };
 
-const Booking = ({ duration }) => (
-  <div style={styles['not-found']}>
-    <h1> Booking ID: {duration} </h1>
-  </div>
+const Booking = ({ id, bookingCost, duration, parkingSpotId, dateBooked, timeBooked }) => (
+  <li style={styles.component}>
+    <h3>Booking ID: { id }</h3>
+    <p>Duration: { duration } | Booking Cost: { bookingCost } | Parking Spot ID: { parkingSpotId }</p>
+    <p>Date Booked: { dateBooked } |Time Booked: { timeBooked }</p>
+    <button onClick={ (e)=> {e.preventDefault(); console.log('Edit Clicked')}}>Edit</button>
+    <button onClick={ (e)=> {e.preventDefault(); console.log('Eliminate Charlie')}}>Delete</button>
+
+  </li>
 );
+
+Booking.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
 
 
 export default Booking;
