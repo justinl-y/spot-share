@@ -7,14 +7,13 @@ const styles = {
   },
 };
 
-const Booking = ({ id, bookingCost, duration, parkingSpotId, dateBooked, timeBooked }) => (
+const Booking = ({ id, userId, bookingCost, duration, parkingSpotId, dateBooked, timeBooked }) => (
   <li style={styles.component}>
     <h3>Booking ID: { id }</h3>
-    <p>Duration: { duration } | Booking Cost: { bookingCost } | Parking Spot ID: { parkingSpotId }</p>
-    <p>Date Booked: { dateBooked } |Time Booked: { timeBooked }</p>
-    <button onClick={(e) => { e.preventDefault(); console.log('Edit Clicked')}}>Edit</button>
-    <button onClick={(e) => { e.preventDefault(); console.log('Eliminate Charlie')}}>Delete</button>
-
+    <p>User ID: {userId} | Duration: { duration } | Booking Cost: { bookingCost } | Parking Spot ID: { parkingSpotId }</p>
+    <p>Date Booked: { dateBooked } | Time Booked: { timeBooked }</p>
+    <button onClick={(e) => { e.preventDefault(); console.log('Edit Clicked'); }}>Edit</button>
+    <button onClick={(e) => { e.preventDefault(); console.log('Eliminate Charlie'); }}>Delete</button>
   </li>
 );
 
@@ -26,7 +25,5 @@ Booking.propTypes = {
   dateBooked: PropTypes.string.isRequired,
   timeBooked: PropTypes.string.isRequired,
 };
-
-
 
 export default Booking;

@@ -89,6 +89,11 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+BookSpotEdit.propTypes = {
+  addBookingSpot: PropTypes.func.isRequired,
+  bookingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 const BookSpaceEditContainer = createContainer((parkingSpotId) => {
   Meteor.subscribe('getBookings');
   return {
