@@ -96,10 +96,10 @@ BookSpotEdit.propTypes = {
   bookingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const BookSpaceEditContainer = createContainer((parkingSpotId) => {
+const BookSpaceEditContainer = createContainer((bookingSpotId) => {
   Meteor.subscribe('getBookings');
   return {
-    bookingSpot: Bookings.find({ _id: parkingSpotId.parkingSpotId }).fetch(),
+    bookingSpot: Bookings.find({ _id: bookingSpotId.bookingSpotId }).fetch(),
   };
 }, BookSpotEdit);
 
