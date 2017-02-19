@@ -2,8 +2,16 @@ import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 
+const styles = {
+  infoBox: {
+    width: '200px',
+    height: '200px',
+    padding: '10px',
+  },
+};
+
 const InfoBox = ({ address, postal, price, info, link, label }) => (
-  <div style={{ width: '200px', height: '200px' }}>
+  <div style={styles.infoBox}>
     <h2>{address}, {postal}</h2>
     <p>Price per hour: {price}</p>
     <p>{info}</p>
