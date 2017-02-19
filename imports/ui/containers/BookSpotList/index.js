@@ -23,7 +23,7 @@ class BookSpotList extends Component {
   }
 
   render() {
-    const bookingsList = this.props.bookingsList;//eslint-disable-line
+    const bookingsList = this.props.bookingsList;
 
     return (
       <div>
