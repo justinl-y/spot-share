@@ -40,9 +40,14 @@ class BookSpotEdit extends Component {
     const fields = {};
 
     fields._id = bookingSpot[0]._id;
+    fields.dateBooked = new Date(bookingSpot[0].dateBooked);
+    // fields.timeBooked = bookingSpot[0].timeBooked;
+    fields.duration = bookingSpot[0].duration;
+    fields.bookingCost = bookingSpot[0].bookingCost;
 
     this.setState({ fields });
   }
+
 
   handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
