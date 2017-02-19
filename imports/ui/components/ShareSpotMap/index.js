@@ -20,7 +20,7 @@ class ShareSpotMap extends Component {
     return (
       <ShareGoogleMap
         containerElement={
-          <div style={{ height: '200px' }} />
+          <div style={{ height: '200px', marginTop: '20px' }} />
         }
         mapElement={
           <div style={{ height: '100%' }} />
