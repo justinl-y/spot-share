@@ -40,10 +40,10 @@ class BookSpotEdit extends Component {
     const fields = {};
 
     fields._id = bookingSpot[0]._id;
-    fields.dateBooked = new Date(bookingSpot[0].dateBooked);
-    // fields.timeBooked = bookingSpot[0].timeBooked;
+    fields.dateBooked = new Date(bookingSpot[0].date_booked);
+    fields.timeBooked = new Date(bookingSpot[0].time_booked);
     fields.duration = bookingSpot[0].duration;
-    fields.bookingCost = bookingSpot[0].bookingCost;
+    fields.bookingCost = bookingSpot[0].booking_cost;
 
     this.setState({ fields });
   }
