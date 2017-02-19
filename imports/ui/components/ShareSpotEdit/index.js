@@ -46,6 +46,7 @@ class ShareSpotEdit extends Component {
     const fields = {};
 
     fields._id = parkingSpot[0]._id;
+    fields.userId = parkingSpot[0].user_id;
     fields.address = parkingSpot[0].address;
     fields.postCode = parkingSpot[0].post_code;
     fields.longitude = parkingSpot[0].geolocation.lng;
@@ -125,12 +126,12 @@ class ShareSpotEdit extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
     const parkingSpot = this.state.fields;
     const fieldErrors = this.validate(parkingSpot);
 
     this.setState({ fieldErrors });
-
-    e.preventDefault();
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -267,7 +268,7 @@ class ShareSpotEdit extends Component {
                   floatingLabelText="Additional Information"
                   multiLine
                   rows={3}
-                  value={this.state.fields.additionalInformation}
+                  value={this.state.fields.additionalInformation === null ? '' : this.state.fields.additionalInformation}
                   onChange={e => this.handleTextFieldChange(e, [])}
                 />
                 <RaisedButton

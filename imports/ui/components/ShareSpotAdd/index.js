@@ -199,6 +199,7 @@ class ShareSpotAdd extends Component {
                   floatingLabelText="Longitude"
                   value={this.state.fields.longitude}
                   onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                  disabled
                 />
 
                 <TextField
@@ -209,6 +210,7 @@ class ShareSpotAdd extends Component {
                   floatingLabelText="Latitude"
                   value={this.state.fields.latitude}
                   onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                  disabled
                 />
 
                 <div style={styles.datePickerContainer}>

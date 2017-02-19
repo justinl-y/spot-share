@@ -15,7 +15,7 @@ class ShareSpotMap extends Component {
 
   render() {
 
-    console.log('I be in the ShareSpotMap!', this.props.position)
+    // console.log('I be in the ShareSpotMap!', this.props.position)
 
     return (
       <ShareGoogleMap

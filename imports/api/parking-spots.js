@@ -43,11 +43,13 @@ Meteor.methods({
 
     // data validataion
     /* new SimpleSchema({
-      inputValue: { type: String },
-    }).validate({ inputValue }); */
+      // id: { type: String },
+      address: { type: String },
+      postCode: { type: String },
+    }).validate({ parkingSpot }); */
 
     const insert = ParkingSpots.insert({
-      user_id: Meteor.userId(), // TODO get user id from login
+      user_id: Meteor.userId(),
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
       geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
@@ -80,25 +82,40 @@ Meteor.methods({
   },
   updateParkingSpot(parkingSpot) {
     // check permissions
-    if (!this.userId) {
+    // console.log(this.userId);
+    // if (!this.userId) {
+
+    console.log(parkingSpot.userId);
+    console.log(this.userId);
+
+    if (parkingSpot.userId !== this.userId) {
       throw new Meteor.Error('Not-Authorised');
     }
 
+    console.log(parkingSpot);
+
     // data validataion
     /* new SimpleSchema({
-      inputValue: { type: String },
-    }).validate({ inputValue }); */
+      _id: { type: String },
+      address: { type: String },
+      postCode: { type: String },
+      longitude: { type: Number },
+      latitude: { type: Number },
+      availableFrom: { type: Date },
+      availableTo: { type: Date },
+      pricePerHour: { type: Number },
+
+    }).validate({ ...parkingSpot });*/
 
     const update = ParkingSpots.update(
       { _id: parkingSpot._id },
       {
         $set: {
-          user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
           address: parkingSpot.address,
           post_code: parkingSpot.postCode,
           geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
-          available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
-          available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
+          available_from: parkingSpot.availableFrom.toString(),
+          available_to: parkingSpot.availableTo.toString(),
           price_per_hour: Number(parkingSpot.pricePerHour),
           additional_information: parkingSpot.additionalInformation,
         },
@@ -124,7 +141,7 @@ Meteor.methods({
 });
 
 
-/*if (item.owner !== this.userId) {
+/* if (item.owner !== this.userId) {
   throw new Meteor.Error('todos.toggleComplete.not-authorized',
     'You are not allowed to update to-dos for other users.');
 }
