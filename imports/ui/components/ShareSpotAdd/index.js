@@ -20,7 +20,7 @@ class ShareSpotAdd extends Component {
     super();
     this.state = {
       fields: {
-        longitude: -123.12073750000002, // Default location
+        longitude: -123.1207375, // Default location
         latitude: 49.2827291, // Default location
       },
       fieldErrors: {},
@@ -100,14 +100,12 @@ class ShareSpotAdd extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
     const parkingSpot = this.state.fields;
     const fieldErrors = this.validate(parkingSpot);
 
     this.setState({ fieldErrors });
-
-    e.preventDefault();
-
-    // console.log(parkingSpot);
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -161,12 +159,16 @@ class ShareSpotAdd extends Component {
             <CardText>
               <form onSubmit={this.handleFormSubmit.bind(this)}>
                 <PlacesAutocomplete
-                  value={this.state.address}
+                  // name="defaultLocation"
+                  value={this.state.address === undefined ? '' : this.state.address}
                   onChange={this.onChange}
-                  placeholder='Enter address here'
+                  placeholder="Enter address here"
                   style={{ width: '100%' }}
                 />
-                <RaisedButton type='submit' label='submit' />
+                <RaisedButton
+                  type="submit"
+                  label="Find on map"
+                />
               </form>
               <ShareSpotMap position={position} center={position} />
               <form>
