@@ -16,7 +16,7 @@ const InfoBox = ({ address, postal, price, info, link, label }) => (
     <p>Price per hour: {price}</p>
     <p>{info}</p>
     <Link to={link}>
-      <RaisedButton label={label} />
+      <RaisedButton label={label} primary={true} />
     </Link>
   </div>
 );
