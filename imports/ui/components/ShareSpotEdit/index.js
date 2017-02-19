@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -10,8 +9,9 @@ import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
-
+import ShareSpotMap from './../../components/ShareSpotMap';
 import { ParkingSpots } from '../../../api/parking-spots';
 import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
 
@@ -24,6 +24,7 @@ class ShareSpotEdit extends Component {
       fieldErrors: {},
       address: 'Vancouver, BC',
     };
+
     this.onChange = address => this.setState({ address });
   }
 
@@ -108,18 +109,18 @@ class ShareSpotEdit extends Component {
     return errors;
   }
 
-  //Google Map input functionality
-  handleFormSubmit = (event) => {
-    event.preventDefault()
-    const { address } = this.state
+  // Google Map input functionality
+  handleFormSubmit(event) {
+    event.preventDefault();
+    const { address } = this.state;
 
     geocodeByAddress(address, (err, { lat, lng }) => {
-      if (err) { console.log('Oh no!', err) }
+      if (err) { console.log('Oh no!', err); }
 
-      console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
+      // console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
       this.setState({ fields: { ...this.state.fields, longitude: lng } });
       this.setState({ fields: { ...this.state.fields, latitude: lat } });
-    })
+    });
   }
 
   handleSubmit(e) {
@@ -163,13 +164,13 @@ class ShareSpotEdit extends Component {
       },
     };
 
-    const lat = this.state.fields.latitude
-    const lng = this.state.fields.longitude
+    const lat = this.state.fields.latitude;
+    const lng = this.state.fields.longitude;
 
     const position = {
-      lat: lat,
-      lng: lng
-    }
+      lat,
+      lng,
+    };
 
     return (
       <div style={styles.component}>
@@ -179,7 +180,7 @@ class ShareSpotEdit extends Component {
               <ToolbarTitle text="Edit an existing share spot" />
             </Toolbar>
             <CardText>
-              <form onSubmit={this.handleFormSubmit}>
+              <form onSubmit={this.handleFormSubmit.bind(this)}>
                 <PlacesAutocomplete
                   value={this.state.address}
                   onChange={this.onChange}
@@ -197,7 +198,6 @@ class ShareSpotEdit extends Component {
                   value={this.state.fields.address}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
-
                 <TextField
                   style={styles.textField}
                   name="postCode"
@@ -208,7 +208,6 @@ class ShareSpotEdit extends Component {
                   // onChange={this.handleTextFieldChange.bind(this)}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
-
                 <TextField
                   style={styles.textFieldSmall}
                   name="longitude"
@@ -218,7 +217,6 @@ class ShareSpotEdit extends Component {
                   value={this.state.fields.longitude}
                   onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
-
                 <TextField
                   style={styles.textFieldSmall}
                   name="latitude"
@@ -228,7 +226,6 @@ class ShareSpotEdit extends Component {
                   value={this.state.fields.latitude}
                   onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
-
                 <div style={styles.datePickerContainer}>
                   <DatePicker
                     textFieldStyle={{ width: '100%' }}
@@ -240,7 +237,6 @@ class ShareSpotEdit extends Component {
                     value={this.state.fields.availableFrom}
                     onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableFrom: d } }); }}
                   />
-
                   <DatePicker
                     textFieldStyle={{ width: '100%' }}
                     floatingLabelText="Available to"
@@ -252,7 +248,6 @@ class ShareSpotEdit extends Component {
                     onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableTo: d } }); }}
                   />
                 </div>
-
                 <TextField
                   style={styles.textField}
                   name="pricePerHour"
@@ -262,7 +257,6 @@ class ShareSpotEdit extends Component {
                   value={this.state.fields.pricePerHour}
                   onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                 />
-
                 <TextField
                   style={styles.textField}
                   name="additionalInformation"
@@ -273,18 +267,14 @@ class ShareSpotEdit extends Component {
                   value={this.state.fields.additionalInformation}
                   onChange={e => this.handleTextFieldChange(e, [])}
                 />
-
                 <RaisedButton
-                  // backgroundColor="rgb(183, 28, 28)"
-                  // labelColor="white"
                   label="Submit"
                   onClick={e => this.handleSubmit(e)}
                 />
-
                 <Link
                   to="/sharespot/list"
                 >
-                  <RaisedButton
+                  <FlatButton
                     label="Cancel"
                   />
                 </Link>

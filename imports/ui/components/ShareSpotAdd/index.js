@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -8,9 +7,9 @@ import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
-// import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
-
+import ShareSpotMap from './../../components/ShareSpotMap';
 import { setApplicationLocation } from '../../containers/App/actions';
 
 const currentLocation = 'SHARE-SPOT';
@@ -20,8 +19,8 @@ class ShareSpotAdd extends Component {
     super();
     this.state = {
       fields: {
-        longitude: -123.12073750000002,//Default location
-        latitude: 49.2827291,//Default location
+        longitude: -123.12073750000002, // Default location
+        latitude: 49.2827291, // Default location
       },
       fieldErrors: {},
       address: 'Vancouver, BC',
@@ -85,18 +84,19 @@ class ShareSpotAdd extends Component {
     return errors;
   }
 
-  //Google Map input functionality
-  handleFormSubmit = (event) => {
-    event.preventDefault()
-    const { address } = this.state
+  // Google Map input functionality
+  handleFormSubmit(event) {
+    event.preventDefault();
+
+    const { address } = this.state;
 
     geocodeByAddress(address, (err, { lat, lng }) => {
-      if (err) { console.log('Oh no!', err) }
+      if (err) { console.log('Oh no!', err); }
 
-      console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
+      // console.log(`Latitude & Longitude for ${address} is...`, { lat, lng });
       this.setState({ fields: { ...this.state.fields, longitude: lng } });
       this.setState({ fields: { ...this.state.fields, latitude: lat } });
-    })
+    });
   }
 
   handleSubmit(e) {
@@ -107,7 +107,7 @@ class ShareSpotAdd extends Component {
 
     e.preventDefault();
 
-    console.log(parkingSpot);
+    // console.log(parkingSpot);
 
     if (Object.keys(fieldErrors).length) return;
 
@@ -143,13 +143,13 @@ class ShareSpotAdd extends Component {
       },
     };
 
-    const lat = this.state.fields.latitude
-    const lng = this.state.fields.longitude
+    const lat = this.state.fields.latitude;
+    const lng = this.state.fields.longitude;
 
     const position = {
-      lat: lat,
-      lng: lng
-    }
+      lat,
+      lng,
+    };
 
     return (
       <div style={styles.component}>
@@ -159,7 +159,7 @@ class ShareSpotAdd extends Component {
               <ToolbarTitle text="Add a new spot to share" />
             </Toolbar>
             <CardText>
-              <form onSubmit={this.handleFormSubmit}>
+              <form onSubmit={this.handleFormSubmit.bind(this)}>
                 <PlacesAutocomplete
                   value={this.state.address}
                   onChange={this.onChange}
@@ -254,8 +254,6 @@ class ShareSpotAdd extends Component {
                 />
 
                 <RaisedButton
-                  // backgroundColor="rgb(183, 28, 28)"
-                  // labelColor="white"
                   label="Submit"
                   onClick={e => this.handleSubmit(e)}
                 />
@@ -263,7 +261,7 @@ class ShareSpotAdd extends Component {
                 <Link
                   to="/sharespot/list"
                 >
-                  <RaisedButton
+                  <FlatButton
                     label="Cancel"
                   />
                 </Link>

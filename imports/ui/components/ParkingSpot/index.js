@@ -14,10 +14,16 @@ const ParkingSpot = ({ id, userId, address, postCode, availableFrom, availableTo
     <p>Available From: {availableFrom} To: {availableTo} | Price per hour: {pricePerHour}</p>
     <p>Additional Info: {additionalInformation}</p>
     <button
-      onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
+      onClick={(e) => {
+        e.preventDefault();
+        onClickEdit(id);
+      }}
     >Edit</button>
     <button
-      onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
+      onClick={(e) => {
+        e.preventDefault();
+        onClickDelete(id);
+      }}
     >Delete</button>
   </li>
 );
