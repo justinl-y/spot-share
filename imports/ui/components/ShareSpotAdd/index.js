@@ -72,10 +72,6 @@ class ShareSpotAdd extends Component {
 
     if (!data.address) errors.address = 'Required field';
     if (!data.postCode) errors.postCode = 'Required field';
-    if (isNaN(data.longitude)) errors.longitude = 'Number required';
-    if (!data.longitude) errors.longitude = 'Required field';
-    if (isNaN(data.latitude)) errors.latitude = 'Number required';
-    if (!data.latitude) errors.latitude = 'Required field';
     if (!data.availableFrom) errors.availableFrom = 'Required field';
     if (!data.availableTo) errors.availableTo = 'Required field';
     if (isNaN(data.pricePerHour)) errors.pricePerHour = 'Number required';
@@ -126,7 +122,19 @@ class ShareSpotAdd extends Component {
         overflow: 'auto',
       },
       card: {
-        width: '500px',
+        width: '1000px',
+        height: '500px',
+      },
+      paper: {
+        width: '100%',
+      },
+      formWrap: {
+        width: '100%',
+        display: 'flex',
+      },
+      form: {
+        width: '50%',
+        padding: '8px',
       },
       textField: {
         width: '100%',
@@ -152,125 +160,106 @@ class ShareSpotAdd extends Component {
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
-          <Paper>
+          <Paper style={styles.paper}>
             <Toolbar>
               <ToolbarTitle text="Add a new spot to share" />
             </Toolbar>
-            <CardText>
-              <form onSubmit={this.handleFormSubmit.bind(this)}>
-                <PlacesAutocomplete
-                  // name="defaultLocation"
-                  value={this.state.address === undefined ? '' : this.state.address}
-                  onChange={this.onChange}
-                  placeholder="Enter address here"
-                  style={{ width: '100%' }}
-                />
-                <RaisedButton
-                  type="submit"
-                  label="Find on map"
-                />
-              </form>
-              <ShareSpotMap position={position} center={position} />
-              <form>
-                <TextField
-                  style={styles.textField}
-                  name="address"
-                  hintText="Address"
-                  errorText={this.state.fieldErrors.address}
-                  floatingLabelText="Address"
-                  value={this.state.fields.address || ''}
-                  onChange={e => this.handleTextFieldChange(e, ['req'])}
-                />
-                <TextField
-                  style={styles.textField}
-                  name="postCode"
-                  hintText="Post Code"
-                  errorText={this.state.fieldErrors.postCode}
-                  floatingLabelText="Post Code"
-                  value={this.state.fields.postCode || ''}
-                  // onChange={this.handleTextFieldChange.bind(this)}
-                  onChange={e => this.handleTextFieldChange(e, ['req'])}
-                />
-                <TextField
-                  style={styles.textFieldSmall}
-                  name="longitude"
-                  hintText="Longitude"
-                  errorText={this.state.fieldErrors.longitude}
-                  floatingLabelText="Longitude"
-                  value={this.state.fields.longitude}
-                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
-                  disabled
-                />
+            <CardText style={{ padding: '8px' }}>
+              <div style={styles.formWrap}>
+                <form onSubmit={this.handleFormSubmit.bind(this)} style={styles.form}>
+                  <PlacesAutocomplete
+                    // name="defaultLocation"
+                    value={this.state.address === undefined ? '' : this.state.address}
+                    onChange={this.onChange}
+                    hintText="Enter address here"
+                    floatingLabelText="Enter address here"
+                    style={{ width: '100%' }}
+                  />
+                  <RaisedButton
+                    type="submit"
+                    label="Find on map"
+                  />
+                  <ShareSpotMap position={position} center={position} />
+                </form>
+                <form style={styles.form}>
+                  <TextField
+                    style={styles.textField}
+                    name="address"
+                    hintText="Address"
+                    errorText={this.state.fieldErrors.address}
+                    floatingLabelText="Address"
+                    value={this.state.fields.address || ''}
+                    onChange={e => this.handleTextFieldChange(e, ['req'])}
+                  />
+                  <TextField
+                    style={styles.textField}
+                    name="postCode"
+                    hintText="Post Code"
+                    errorText={this.state.fieldErrors.postCode}
+                    floatingLabelText="Post Code"
+                    value={this.state.fields.postCode || ''}
+                    // onChange={this.handleTextFieldChange.bind(this)}
+                    onChange={e => this.handleTextFieldChange(e, ['req'])}
+                  />
+                  <div style={styles.datePickerContainer}>
+                    <DatePicker
+                      textFieldStyle={{ width: '100%' }}
+                      floatingLabelText="Available from"
+                      errorText={this.state.fieldErrors.availableFrom}
+                      hintText="Available from"
+                      container="inline"
+                      autoOk
+                      value={this.state.fields.availableFrom}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableFrom: d } }); }}
+                    />
 
-                <TextField
-                  style={styles.textFieldSmall}
-                  name="latitude"
-                  hintText="Latitude"
-                  errorText={this.state.fieldErrors.latitude}
-                  floatingLabelText="Latitude"
-                  value={this.state.fields.latitude}
-                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
-                  disabled
-                />
+                    <DatePicker
+                      textFieldStyle={{ width: '100%' }}
+                      floatingLabelText="Available to"
+                      errorText={this.state.fieldErrors.availableTo}
+                      hintText="Available to"
+                      container="inline"
+                      autoOk
+                      value={this.state.fields.availableTo}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableTo: d } }); }}
+                    />
+                  </div>
 
-                <div style={styles.datePickerContainer}>
-                  <DatePicker
-                    textFieldStyle={{ width: '100%' }}
-                    floatingLabelText="Available from"
-                    errorText={this.state.fieldErrors.availableFrom}
-                    hintText="Available from"
-                    container="inline"
-                    autoOk
-                    value={this.state.fields.availableFrom}
-                    onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableFrom: d } }); }}
+                  <TextField
+                    style={styles.textField}
+                    name="pricePerHour"
+                    hintText="Price per hour"
+                    errorText={this.state.fieldErrors.pricePerHour}
+                    floatingLabelText="Price per hour"
+                    value={this.state.fields.pricePerHour}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                   />
 
-                  <DatePicker
-                    textFieldStyle={{ width: '100%' }}
-                    floatingLabelText="Available to"
-                    errorText={this.state.fieldErrors.availableTo}
-                    hintText="Available to"
-                    container="inline"
-                    autoOk
-                    value={this.state.fields.availableTo}
-                    onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableTo: d } }); }}
+                  <TextField
+                    style={styles.textField}
+                    name="additionalInformation"
+                    hintText={this.state.fieldErrors.additionalInformation}
+                    floatingLabelText="Additional Information"
+                    multiLine
+                    rows={3}
+                    value={this.state.fields.additionalInformation}
+                    onChange={e => this.handleTextFieldChange(e, [])}
                   />
-                </div>
 
-                <TextField
-                  style={styles.textField}
-                  name="pricePerHour"
-                  hintText="Price per hour"
-                  errorText={this.state.fieldErrors.pricePerHour}
-                  floatingLabelText="Price per hour"
-                  value={this.state.fields.pricePerHour}
-                  onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
-                />
-
-                <TextField
-                  style={styles.textField}
-                  name="additionalInformation"
-                  hintText={this.state.fieldErrors.additionalInformation}
-                  floatingLabelText="Additional Information"
-                  multiLine
-                  rows={3}
-                  value={this.state.fields.additionalInformation}
-                  onChange={e => this.handleTextFieldChange(e, [])}
-                />
-
-                <RaisedButton
-                  label="Submit"
-                  onClick={e => this.handleSubmit(e)}
-                />
-
-                <Link
-                  to="/sharespot/list"
-                >
-                  <FlatButton
-                    label="Cancel"
+                  <RaisedButton
+                    label="Submit"
+                    onClick={e => this.handleSubmit(e)}
                   />
-                </Link>
-              </form>
+
+                  <Link
+                    to="/sharespot/list"
+                  >
+                    <FlatButton
+                      label="Cancel"
+                    />
+                  </Link>
+                </form>
+              </div>
             </CardText>
           </Paper>
         </Card>
