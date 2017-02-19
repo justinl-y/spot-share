@@ -185,10 +185,10 @@ class ShareSpotEdit extends Component {
                 <PlacesAutocomplete
                   value={this.state.address}
                   onChange={this.onChange}
-                  placeholder='Enter address here'
+                  placeholder="Enter address here"
                   style={{ width: '100%' }}
                 />
-                <RaisedButton type='submit' label='submit' />
+                <RaisedButton type="submit" label="submit" />
               </form>
               <ShareSpotMap position={position} center={position} />
               <form>

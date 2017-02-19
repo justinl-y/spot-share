@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -5,13 +6,10 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 
-// import { addParkingSpot } from '../ShareSpotInput/actions';
-// import { addBookingSpot } from '../BookSpotInput/actions';
-import { userSignOut } from '../ProcessLogin/actions';
-
 // import Home from 'material-ui/svg-icons/action/home';
 import MapsDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
 
+import { userSignOut } from '../ProcessLogin/actions';
 
 class HeaderBar extends Component {
   render() {
@@ -20,27 +18,32 @@ class HeaderBar extends Component {
     let signedInLinksLeft = '';
     let signedInLinksRight = '';
 
+    const styles = {
+      menuLeft: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+      },
+    };
+
     // set up sign in/ sign out cmponent on user login
     if (userLoggedIn) {
-      signedInLinksLeft = (
-        <Link
-          to="/bookspot/list"
-        >
-          <FlatButton
-            label="View Bookings"
-            // onClick={this.props.addParkingSpot}
-          />
-        </Link>
-      );
+      const userEmail = Meteor.user().emails[0].address;
 
-      signedInLinksRight = (
+      signedInLinksLeft = (
         <div>
+          <Link
+            to="/bookspot/list"
+          >
+            <FlatButton
+              label="View Bookings"
+            />
+          </Link>
           <Link
             to="/sharespot/list"
           >
             <FlatButton
               label="View Share Shots"
-              // onClick={this.props.addParkingSpot}
             />
           </Link>
           <Link
@@ -48,7 +51,18 @@ class HeaderBar extends Component {
           >
             <FlatButton
               label="Add Share Spot"
-              // onClick={this.props.addParkingSpot}
+            />
+          </Link>
+        </div>
+      );
+
+      signedInLinksRight = (
+        <div>
+          <Link
+            to="/profile"
+          >
+            <FlatButton
+              label={userEmail}
             />
           </Link>
           <Link
@@ -78,7 +92,7 @@ class HeaderBar extends Component {
     // set display
     display = (<AppBar
       iconElementLeft={
-        <div>
+        <div style={styles.menuLeft}>
           <IconButton>
             <Link
               to="/"
@@ -188,21 +202,12 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  /* addParkingSpot: () => {
-    dispatch(addParkingSpot());
-  },
-  addBookingSpot: () => {
-    dispatch(addBookingSpot());
-  },*/
   userLogout: () => {
     dispatch(userSignOut());
   },
 });
 
 HeaderBar.propTypes = {
-  // addParkingSpot: PropTypes.func.isRequired,
-  // addBookingSpot: PropTypes.func.isRequired,
-  // userLocation: PropTypes.string.isRequired,
   userLoggedIn: PropTypes.bool.isRequired,
   userLogout: PropTypes.func.isRequired,
 };
