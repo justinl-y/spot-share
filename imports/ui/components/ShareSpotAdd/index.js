@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { geocodeByAddress } from 'react-places-autocomplete';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -9,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+import PlacesAutocomplete from './../../components/PlacesAutoComplete';
 import ShareSpotMap from './../../components/ShareSpotMap';
 import { setApplicationLocation } from '../../containers/App/actions';
 
@@ -23,7 +24,6 @@ class ShareSpotAdd extends Component {
         latitude: 49.2827291, // Default location
       },
       fieldErrors: {},
-      address: 'Vancouver, BC',
     };
     this.onChange = address => this.setState({ address });
   }
@@ -163,8 +163,10 @@ class ShareSpotAdd extends Component {
                 <PlacesAutocomplete
                   value={this.state.address}
                   onChange={this.onChange}
+                  placeholder='Enter address here'
+                  style={{ width: '100%' }}
                 />
-                <button type="submit">Submit</button>
+                <RaisedButton type='submit' label='submit' />
               </form>
               <ShareSpotMap position={position} center={position} />
               <form>
@@ -177,7 +179,6 @@ class ShareSpotAdd extends Component {
                   value={this.state.fields.address || ''}
                   onChange={e => this.handleTextFieldChange(e, ['req'])}
                 />
-
                 <TextField
                   style={styles.textField}
                   name="postCode"
