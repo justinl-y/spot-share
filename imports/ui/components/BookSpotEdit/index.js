@@ -23,13 +23,16 @@ class BookSpotEdit extends Component {
     };
     this.onChange = address => this.setState({ address });
   }
+
   componentWillMount() {
     const bookingSpot = this.props.bookingSpot;
     this.addBookingSpotToState(bookingSpot);
   }
+
   componentWillUnmount() {
     this.props.addBookingSpot();
   }
+
   addBookingSpotToState(bookingSpot) {
     this.setState({
       fields: {},
@@ -86,6 +89,28 @@ class BookSpotEdit extends Component {
     return errors;
   }
   render() {
+    const styles = {
+      component: {
+        height: '85vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      card: {
+        width: '500px',
+      },
+      textField: {
+        width: '100%',
+      },
+      textFieldSmall: {
+        width: '50%',
+      },
+      datePickerContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      },
+    };
     return (
       <div>
         <div style={styles.component}>
