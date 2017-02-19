@@ -8,11 +8,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-// import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
 
 import { setApplicationLocation } from '../../containers/App/actions';
-
-
 
 const currentLocation = 'BOOK-SPOT';
 
@@ -76,6 +73,9 @@ class BookSpotAdd extends Component {
   }
   handleSubmit(e) {
     const bookingSpot = this.state.fields;
+
+    console.log(bookingSpot);
+
     const fieldErrors = this.validate(bookingSpot);
 
     this.setState({ fieldErrors });
@@ -196,7 +196,6 @@ const mapDispatchToProps = dispatch => ({
   setApplicationLocation: (location) => {
     dispatch(setApplicationLocation(location));
   },
-  
 });
 
 BookSpotAdd.propTypes = {

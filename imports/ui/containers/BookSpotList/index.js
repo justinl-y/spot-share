@@ -2,12 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-
 import { browserHistory } from 'react-router';
-
 import { Bookings } from '../../../api/bookings';
 import Booking from '../../components/Booking';
-
 import { deleteBookingSpot } from './actions';
 import { editBookingSpot } from '../BookSpotInput/actions';
 import { setApplicationLocation } from '../App/actions';
@@ -70,6 +67,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(deleteBookingSpot(id));
   },
 });
+
 // proptypes validation
 BookSpotList.propTypes = {
   bookingsList: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -82,7 +80,8 @@ BookSpotList.propTypes = {
 const BookSpaceContainer = createContainer(() => {
   Meteor.subscribe('getBookings');
   return {
-    bookingsList: Bookings.find({}).fetch(),
+    bookingsList: Bookings.find({ }).fetch(),
+    // bookingsList: Bookings.find({ _id: Meteor.userId() }).fetch(), TODO for final version
   };
 }, BookSpotList);
 

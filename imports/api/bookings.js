@@ -11,30 +11,36 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  insertBooking(booking) {
+  insertBookingSpot(booking) {
+    console.log(booking);
+
     const insert = Bookings.insert({
-      user_id: booking.user_id,
-      parking_spot_id: booking.parkingSpotId,
-      date_booked: booking.dateBooked,
-      time_booked: booking.timeBooked,
-      duration: booking.duration,
-      booking_cost: booking.bookingCost,
+      user_id: Meteor.userId(),
+      parking_spot_id: 'BT5WGoGqrQzcX2Qrx', // booking.parkingSpotId, TODO add this from parking spot data
+      date_booked: booking.dateBooked.toString(),
+      time_booked: booking.timeBooked.toString(),
+      duration: Number(booking.duration),
+      // pricePerHour: booking.pricePerHour,  // TODO add this from parking spot data
+      booking_cost: Number(booking.bookingCost),
     });
+
+    console.log('Inserted Booking');
     return insert;
   },
-  updateBooking(booking) {
+  updateBookingSpot(booking) {
     const update = Bookings.update(
       { _id: booking._id },
       {
         $set: {
-          user_id: booking.user_id,
           parking_spot_id: booking.parkingSpotId,
-          date_booked: booking.dateBooked,
-          time_booked: booking.TimeBooked,
-          duration: booking.duration,
-          booking_cost: booking.bookingCost,
+          date_booked: booking.dateBooked.toString(),
+          time_booked: booking.TimeBooked.toString(),
+          duration: Number(booking.duration),
+          booking_cost: Number(booking.bookingCost),
         },
       });
+
+    console.log('Updated Booking');
     return update;
   },
 });
