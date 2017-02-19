@@ -2,8 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Link } from 'react-router';
+import { Card, CardText } from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
+import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 import { Bookings } from '../../../api/bookings';
 import { addBookingSpot } from '../../containers/BookSpotInput/actions';
+
 
 class BookSpotEdit extends Component {
   constructor(props) {
@@ -79,14 +88,78 @@ class BookSpotEdit extends Component {
   render() {
     return (
       <div>
-        hello
+        <div style={styles.component}>
+          <Card style={styles.card}>
+            <Paper>
+              <Toolbar>
+                <ToolbarTitle text="Book a Spot" />
+              </Toolbar>
+              <CardText>
+                <form>
+                  <div style={styles.datePickerContainer}>
+                    <DatePicker
+                      textFieldStyle={{ width: '100%' }}
+                      floatingLabelText="Date Booked"
+                      errorText={this.state.fieldErrors.dateBooked}
+                      hintText="Available from"
+                      container="inline"
+                      autoOk
+                      value={this.state.fields.dateBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
+                    />
+                    <TimePicker
+                      format="ampm"
+                      hintText="12hr Format"
+                      errorText={this.state.fieldErrors.timeBooked}
+                      value={this.state.fields.timeBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
+                    />
+                  </div>
+                  <TextField
+                    style={styles.textField}
+                    name="duration"
+                    hintText="Duration"
+                    errorText={this.state.fieldErrors.duration}
+                    floatingLabelText="Duration"
+                    value={this.state.fields.duration}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                  />
+                  <TextField
+                    style={styles.textField}
+                    name="bookingCost"
+                    hintText="Booking Cost"
+                    errorText={this.state.fieldErrors.bookingCost}
+                    floatingLabelText="Booking Cost"
+                    value={this.state.fields.bookingCost}
+                  // onChange={this.handleTextFieldChange.bind(this)}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                  />
+                  <RaisedButton
+                    // backgroundColor="rgb(183, 28, 28)"
+                    // labelColor="white"
+                    label="Submit"
+                    onClick={e => this.handleSubmit(e)}
+                  />
+
+                  <Link
+                    to="/bookspot/list"
+                  >
+                    <RaisedButton
+                      label="Cancel"
+                    />
+                  </Link>
+                </form>
+              </CardText>
+            </Paper>
+          </Card>
+        </div>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  addBookSpot: () => {
+  addBookingSpot: () => {
     dispatch(addBookingSpot());
   },
 });
