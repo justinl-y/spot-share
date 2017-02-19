@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -112,27 +113,6 @@ class SignIn extends Component {
     this.props.onSignInClick(login);
   }
 
-  /* submitAction() {
-    const { email, password } = this.state;
-
-    // login
-    Meteor.loginWithPassword(email, password, (error) => {
-      if (error) {
-        console.log(`There was an error: ${error.reason}`);
-      } else {
-        this.props.router.push('/menu');
-        console.log('Login Successful');
-      }
-    });
-  }*/
-
-  /* handleInputChange(input, event) {
-    const updateState = {};
-
-    updateState[input] = event.target.value;
-    this.setState(updateState);
-  }*/
-
   render() {
     return (
       <div style={styles.component}>
@@ -169,13 +149,12 @@ class SignIn extends Component {
                 <RaisedButton
                   style={styles.buttonStyle}
                   labelColor="black"
-                  label="Login"
+                  label="Sign In"
                   onClick={(e) => { this.handleSubmit(e); }}
                 />
-                <RaisedButton
+                <FlatButton
                   style={styles.buttonStyle}
-                  labelColor="black"
-                  label="SignUp"
+                  label="Sign Up"
                   onClick={(e) => { e.preventDefault(); this.props.onSignUpClick(); }}
                 />
               </div>
