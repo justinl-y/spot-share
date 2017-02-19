@@ -115,7 +115,7 @@ class BookSpotAdd extends Component {
           <Card style={styles.card}>
             <Paper>
               <Toolbar>
-                <ToolbarTitle text="Add a new spot to share" />
+                <ToolbarTitle text="Book a Spot" />
               </Toolbar>
               <CardText>
                 <form>
