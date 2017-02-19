@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Bookings } from '../../../api/parking-spots';
-import { addBookingSpot } from '../../containers/ShareSpotInput/actions';
+import { Bookings } from '../../../api/bookings';
+import { addBookingSpot } from '../../containers/BookSpotInput/actions';
 
 class BookSpotEdit extends Component {
   constructor(props) {
@@ -16,18 +16,18 @@ class BookSpotEdit extends Component {
   }
   componentWillMount() {
     const bookingSpot = this.props.bookingSpot;
-    this.addBookingPortToState(bookingSpot);
+    this.addBookingSpotToState(bookingSpot);
   }
   componentWillUnmount() {
     this.props.addBookingSpot();
   }
-  addParkingPortToState(parkingSpot) {
+  addBookingSpotToState(bookingSpot) {
     this.setState({
       fields: {},
     });
     const fields = {};
 
-    fields._id = parkingSpot[0]._id;
+    fields._id = bookingSpot[0]._id;
 
     this.setState({ fields });
   }
@@ -69,8 +69,10 @@ class BookSpotEdit extends Component {
 
     if (!data.dateBooked) errors.dateBooked = 'Required field';
     if (!data.timeBooked) errors.timeBooked = 'Required field';
-    if (!data.duration) errors.duration = 'Number Required';
-    if (!data.bookingCost) errors.bookingCost = 'Number Required';
+    if (isNaN(data.duration)) errors.duration = 'Number required';
+    if (isNaN(data.bookingCost)) errors.bookingCost = 'Number required';
+    if (!data.duration) errors.duration = 'Required field';
+    if (!data.bookingCost) errors.bookingCost = 'Required field';
 
     return errors;
   }
