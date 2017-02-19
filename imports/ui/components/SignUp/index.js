@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -36,8 +37,8 @@ const styles = {
 };
 
 class SignUp extends Component {
-  constructor(onSignUpSignInClick) {
-    super(onSignUpSignInClick);
+  constructor(onSignUpSignInClick, onSignUpCancelClick) {
+    super(onSignUpSignInClick, onSignUpCancelClick);
 
     this.state = {
       fields: {
@@ -121,40 +122,6 @@ class SignUp extends Component {
     this.props.onSignUpSignInClick(signUp);
   }
 
-  /* submitAction() {
-    const { email, password, confirmPassword } = this.state;
-
-    if (password === confirmPassword && password !== '' && confirmPassword !== '') {
-      const accountInfo = {
-        email,
-        password,
-      };
-
-      // Accounts from meteor package
-      Accounts.createUser(accountInfo, (error) => {
-        if (error) {
-          console.log('There was an error, you suck!', 4000);
-        } else {
-          Meteor.loginWithPassword(email, password, (err) => {
-            if (err) {
-              console.log('There was an error creating your account!', 4000);
-            } else {
-              this.props.router.push('/menu');
-            }
-          });
-        }
-      });
-    } else {
-      console.log('Your passwords do not match!');
-    }
-  } */
-
-  /* handleInputChange(input, event) {
-    const updateState = {};
-    updateState[input] = event.target.value;
-    this.setState(updateState);
-  }*/
-
   render() {
     return (
       <div style={styles.component}>
@@ -196,12 +163,20 @@ class SignUp extends Component {
                 value={this.state.fields.confirmPassword}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               /><br />
-              <RaisedButton
-                style={styles.buttonStyle}
-                labelColor="black"
-                label="Sign Up"
-                onClick={(e) => { this.handleSubmit(e); }}
-              />
+              <div style={styles.buttonContainer}>
+                <RaisedButton
+                  style={styles.buttonStyle}
+                  labelColor="black"
+                  label="Sign Up"
+                  onClick={(e) => { this.handleSubmit(e); }}
+                />
+                <FlatButton
+                  style={styles.buttonStyle}
+                  // labelColor="black"
+                  label="Cancel"
+                  onClick={(e) => { e.preventDefault(); this.props.onSignUpCancelClick(); }}
+                />
+              </div>
             </CardText>
           </Paper>
         </Card>
@@ -213,6 +188,7 @@ class SignUp extends Component {
 SignUp.propTypes = {
   // router: PropTypes.object.isRequired,
   onSignUpSignInClick: PropTypes.func.isRequired,
+  onSignUpCancelClick: PropTypes.func.isRequired,
 };
 
 export default SignUp;

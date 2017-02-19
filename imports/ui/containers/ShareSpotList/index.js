@@ -22,6 +22,12 @@ const currentLocation = 'SHARE-SPOT';
 
 class ShareSpotList extends Component {
   componentWillMount() {
+    console.log(Meteor.userId());
+
+    if (!Meteor.userId()) {
+      browserHistory.push('/login');
+    }
+
     this.props.setApplicationLocation(currentLocation);
   }
 

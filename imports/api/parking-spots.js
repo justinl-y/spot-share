@@ -108,17 +108,17 @@ Meteor.methods({
     return update;
   },
 
-  //Set showInfo to true
+  // Set showInfo to true
   handleMarkerClick(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: parkingSpot.showInfo = true }
+      $set: { showInfo: parkingSpot.showInfo = true },
     });
   },
 
-  //Set showInfo to false
+  // Set showInfo to false
   handleMarkerClose(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: parkingSpot.showInfo = false }
+      $set: { showInfo: parkingSpot.showInfo = false },
     });
   },
 });
