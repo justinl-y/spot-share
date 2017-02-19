@@ -33,6 +33,7 @@ class BookSpotList extends Component {
             <Booking
               key={booking._id}
               id={booking._id}
+              userId={booking.user_id}
               parkingSpotId={booking.parking_spot_id}
               dateBooked={booking.date_booked}
               timeBooked={booking.time_booked}
