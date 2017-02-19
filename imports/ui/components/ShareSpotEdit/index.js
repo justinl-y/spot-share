@@ -122,6 +122,7 @@ class ShareSpotEdit extends Component {
       // console.log(`Latitude & Longitude for ${address} is...`, { lat, lng })
       this.setState({ fields: { ...this.state.fields, longitude: lng } });
       this.setState({ fields: { ...this.state.fields, latitude: lat } });
+      this.setState({ fields: { ...this.state.fields, address: this.state.address } });
     });
   }
 
