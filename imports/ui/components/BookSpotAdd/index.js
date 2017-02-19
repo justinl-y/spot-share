@@ -63,9 +63,11 @@ class BookSpotAdd extends Component {
       fieldErrors: {},
     });
     const errors = {};
-    // TODO date comparison
-    // TODO validation errors into central source
-    // TODO data formats
+
+    if (!data.dateBooked) errors.dateBooked = 'Required field';
+    if (!data.timeBooked) errors.timeBooked = 'Required field';
+    if (!data.duration) errors.duration = 'Number Required';
+    if (!data.bookingCost) errors.bookingCost = 'Number Required';
 
     return errors;
   }
@@ -123,7 +125,7 @@ class BookSpotAdd extends Component {
                     <DatePicker
                       textFieldStyle={{ width: '100%' }}
                       floatingLabelText="Date Booked"
-                      errorText={this.state.fieldErrors.availableFrom}
+                      errorText={this.state.fieldErrors.dateBooked}
                       hintText="Available from"
                       container="inline"
                       autoOk
@@ -133,6 +135,7 @@ class BookSpotAdd extends Component {
                     <TimePicker
                       format="ampm"
                       hintText="12hr Format"
+                      errorText={this.state.fieldErrors.timeBooked}
                       value={this.state.value12}
                     />
                   </div>
