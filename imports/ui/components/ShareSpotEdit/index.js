@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { geocodeByAddress } from 'react-places-autocomplete';
+import PlacesAutocomplete from './../../components/PlacesAutoComplete'
 import ShareSpotMap from './../../components/ShareSpotMap'
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
