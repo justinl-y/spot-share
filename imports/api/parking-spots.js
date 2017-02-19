@@ -50,10 +50,10 @@ Meteor.methods({
       user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
-      geolocation: { lat: parseInt(parkingSpot.latitude, 10), lng: parseInt(parkingSpot.longitude, 10) },
+      geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
       available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
       available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
-      price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
+      price_per_hour: Number(parkingSpot.pricePerHour),
       additional_information: parkingSpot.additionalInformation,
     });
 
@@ -99,8 +99,8 @@ Meteor.methods({
           geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
           available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
           available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
-          price_per_hour: parseInt(parkingSpot.pricePerHour, 10),
-          additional_information: parkingSpot.additionalInformation
+          price_per_hour: Number(parkingSpot.pricePerHour),
+          additional_information: parkingSpot.additionalInformation,
         },
       });
 
@@ -111,14 +111,14 @@ Meteor.methods({
   //Set showInfo to true
   handleMarkerClick(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: !parkingSpot.showInfo }
+      $set: { showInfo: parkingSpot.showInfo = true }
     });
   },
 
   //Set showInfo to false
   handleMarkerClose(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: parkingSpot.showInfo }
+      $set: { showInfo: parkingSpot.showInfo = false }
     });
   },
 });

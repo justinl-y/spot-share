@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ParkingSpots } from '../../../api/parking-spots';
+import InfoBox from './../../components/InfoBox'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import SearchBox from './lib/places/SearchBox';
+import RaisedButton from 'material-ui/RaisedButton';
+
+// console.log(InfoBox)
 
 //Styles for the mapContainer & intoBox
 const styles = {
   mapContainer: {
-    height: '93vh',
+    height: 'calc(100vh - 64px)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'gray',
   },
-  infoBox: {
-    width: '200px',
-    height: '300px',
-  }
 };
 
 //Style for Search Box
@@ -39,7 +39,7 @@ const INPUT_STYLE = {
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
     style={{ height: `100%`, width: '100%' }}
-    defaultZoom={13}
+    defaultZoom={15}
     center={props.center}
   >
     {props.markers.map((marker, index) => (
@@ -50,12 +50,14 @@ const ParkingGoogleMap = withGoogleMap(props => (
       >
         {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-            <div style={styles.infoBox}>
-              <h2>{marker.address}</h2>
-              <p>Price per hour: {marker.price_per_hour}</p>
-              <p>{marker.additional_information}</p>
-              <p>{marker.showInfo}</p>
-            </div>
+            <InfoBox
+              address={marker.address}
+              postal={marker.post_code}
+              price={marker.price_per_hour}
+              info={marker.additional_information}
+              link={props.currentUser ? '/bookspot/list' : '/login'}
+              label={props.currentUser ? 'Book Spot' : 'Login to Book'}
+            />
           </InfoWindow>
         )}
       </Marker>
@@ -73,15 +75,18 @@ const ParkingGoogleMap = withGoogleMap(props => (
 
 //This contains the map
 class mapContainer extends Component {
+  constructor(props) {
+    super(props);
 
-  //Initial state for the map's current location
-  state = {
-    bounds: null,
-    center: {
-      lat: 49.2827291,
-      lng: -123.12073750000002,
-    },
-  };
+    //Initial state for the map's current location
+    this.state = {
+      bounds: null,
+      center: {
+        lat: 49.2827291,
+        lng: -123.12073750000002,
+      },
+    };
+  }
 
   //Functions for the Search Box events
 
@@ -138,7 +143,6 @@ class mapContainer extends Component {
   }
 
   render() {
-    const parkingSpot = this.props.parkingSpotList
     return (
       <div style={styles.mapContainer}>
         <ParkingGoogleMap
@@ -148,7 +152,8 @@ class mapContainer extends Component {
           mapElement={
             <div style={{ height: `100%`, width: '100%' }} />
           }
-          markers={parkingSpot}
+          markers={this.props.parkingSpotList}
+          currentUser={this.props.currentUser}
           onMarkerClick={this.handleMarkerClick}
           onMarkerClose={this.handleMarkerClose}
           center={this.state.center}
@@ -164,12 +169,14 @@ class mapContainer extends Component {
 }
 
 mapContainer.propTypes = {
-  parkingSpotList: PropTypes.array.isRequired
+  parkingSpotList: PropTypes.array.isRequired,
+  currentUser: PropTypes.object,
 };
 
 const ShareSpaceContainer = createContainer(() => {
   Meteor.subscribe('getParkingSpots');
   return {
+    currentUser: Meteor.user(),
     parkingSpotList: ParkingSpots.find({}).fetch(),
   };
 }, mapContainer);
