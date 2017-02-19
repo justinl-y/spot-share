@@ -66,8 +66,8 @@ class BookSpotAdd extends Component {
 
     if (!data.dateBooked) errors.dateBooked = 'Required field';
     if (!data.timeBooked) errors.timeBooked = 'Required field';
-    if (!data.duration) errors.duration = 'Number Required';
-    if (!data.bookingCost) errors.bookingCost = 'Number Required';
+    if (isNaN(data.duration)) errors.duration = 'Number Required';
+    if (isNaN(data.bookingCost)) errors.bookingCost = 'Number Required';
 
     return errors;
   }
@@ -147,7 +147,7 @@ class BookSpotAdd extends Component {
                     errorText={this.state.fieldErrors.duration}
                     floatingLabelText="Duration"
                     value={this.state.fields.duration}
-                    onChange={e => this.handleTextFieldChange(e, ['req'])}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                   />
                   <TextField
                     style={styles.textField}
@@ -157,7 +157,7 @@ class BookSpotAdd extends Component {
                     floatingLabelText="Booking Cost"
                     value={this.state.fields.bookingCost}
                   // onChange={this.handleTextFieldChange.bind(this)}
-                    onChange={e => this.handleTextFieldChange(e, ['req'])}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                   />
                   <RaisedButton
                     // backgroundColor="rgb(183, 28, 28)"
@@ -193,6 +193,7 @@ const mapDispatchToProps = dispatch => ({
   setApplicationLocation: (location) => {
     dispatch(setApplicationLocation(location));
   },
+  
 });
 
 BookSpotAdd.propTypes = {
