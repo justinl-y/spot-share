@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { geocodeByAddress } from 'react-places-autocomplete';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
@@ -11,6 +11,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+import PlacesAutocomplete from './../../components/PlacesAutoComplete';
 import ShareSpotMap from './../../components/ShareSpotMap';
 import { ParkingSpots } from '../../../api/parking-spots';
 import { addParkingSpot } from '../../containers/ShareSpotInput/actions';
