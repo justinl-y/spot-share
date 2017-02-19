@@ -32,7 +32,7 @@ class BookSpotEdit extends Component {
     this.setState({ fields });
   }
 
-handleTextFieldChange(e, validation) {
+  handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
     delete fieldErrors[e.target.name];
 
