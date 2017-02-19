@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import BookSpotAdd from '../../components/BookSpotAdd';
 import BookSpotEdit from '../../components/BookSpotEdit';
 
-
 import { insertBookingSpot, updateBookingSpot } from './actions';
 
 class BookSpotInput extends Component {

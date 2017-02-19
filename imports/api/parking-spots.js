@@ -37,17 +37,19 @@ if (Meteor.isServer) {
 Meteor.methods({
   insertParkingSpot(parkingSpot) {
     // check permissions
-    /* if (!this.userId) {
+    if (!this.userId) {
       throw new Meteor.Error('Not-Authorised');
-    }*/
+    }
 
     // data validataion
     /* new SimpleSchema({
-      inputValue: { type: String },
-    }).validate({ inputValue }); */
+      // id: { type: String },
+      address: { type: String },
+      postCode: { type: String },
+    }).validate({ parkingSpot }); */
 
     const insert = ParkingSpots.insert({
-      user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
+      user_id: Meteor.userId(),
       address: parkingSpot.address,
       post_code: parkingSpot.postCode,
       geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
@@ -62,9 +64,9 @@ Meteor.methods({
   },
   deleteParkingSpot(id) {
     // check permissions
-    /* if (!this.userId) {
+    if (!this.userId) {
       throw new Meteor.Error('Not-Authorised');
-    }*/
+    }
 
     // data validataion
     new SimpleSchema({
@@ -80,25 +82,40 @@ Meteor.methods({
   },
   updateParkingSpot(parkingSpot) {
     // check permissions
-    /* if (!this.userId) {
+    // console.log(this.userId);
+    // if (!this.userId) {
+
+    console.log(parkingSpot.userId);
+    console.log(this.userId);
+
+    if (parkingSpot.userId !== this.userId) {
       throw new Meteor.Error('Not-Authorised');
-    }*/
+    }
+
+    console.log(parkingSpot);
 
     // data validataion
     /* new SimpleSchema({
-      inputValue: { type: String },
-    }).validate({ inputValue }); */
+      _id: { type: String },
+      address: { type: String },
+      postCode: { type: String },
+      longitude: { type: Number },
+      latitude: { type: Number },
+      availableFrom: { type: Date },
+      availableTo: { type: Date },
+      pricePerHour: { type: Number },
+
+    }).validate({ ...parkingSpot });*/
 
     const update = ParkingSpots.update(
       { _id: parkingSpot._id },
       {
         $set: {
-          user_id: 'JLjpvCHbBvkSaaKwm', // TODO get user id from login
           address: parkingSpot.address,
           post_code: parkingSpot.postCode,
           geolocation: { lat: Number(parkingSpot.latitude), lng: Number(parkingSpot.longitude) },
-          available_from: parkingSpot.availableFrom.toString(), // TODO format into correct date type
-          available_to: parkingSpot.availableTo.toString(), // TODO format into correct date type
+          available_from: parkingSpot.availableFrom.toString(),
+          available_to: parkingSpot.availableTo.toString(),
           price_per_hour: Number(parkingSpot.pricePerHour),
           additional_information: parkingSpot.additionalInformation,
         },
@@ -108,17 +125,27 @@ Meteor.methods({
     return update;
   },
 
-  //Set showInfo to true
+  // Set showInfo to true
   handleMarkerClick(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: parkingSpot.showInfo = true }
+      $set: { showInfo: parkingSpot.showInfo = true },
     });
   },
 
-  //Set showInfo to false
+  // Set showInfo to false
   handleMarkerClose(parkingSpot) {
     ParkingSpots.update(parkingSpot._id, {
-      $set: { showInfo: parkingSpot.showInfo = false }
+      $set: { showInfo: parkingSpot.showInfo = false },
     });
   },
 });
+
+
+/* if (item.owner !== this.userId) {
+  throw new Meteor.Error('todos.toggleComplete.not-authorized',
+    'You are not allowed to update to-dos for other users.');
+}
+
+ToDos.update(item._id, {
+  $set: { complete: !item.complete },
+});*/

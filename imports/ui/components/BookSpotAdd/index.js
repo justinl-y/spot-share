@@ -62,12 +62,15 @@ class BookSpotAdd extends Component {
     this.setState({
       fieldErrors: {},
     });
+
     const errors = {};
 
     if (!data.dateBooked) errors.dateBooked = 'Required field';
     if (!data.timeBooked) errors.timeBooked = 'Required field';
-    if (isNaN(data.duration)) errors.duration = 'Number Required';
-    if (isNaN(data.bookingCost)) errors.bookingCost = 'Number Required';
+    if (isNaN(data.duration)) errors.duration = 'Number required';
+    if (isNaN(data.bookingCost)) errors.bookingCost = 'Number required';
+    if (!data.duration) errors.duration = 'Required field';
+    if (!data.bookingCost) errors.bookingCost = 'Required field';
 
     return errors;
   }

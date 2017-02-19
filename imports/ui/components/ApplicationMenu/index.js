@@ -1,10 +1,11 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 import { setApplicationLocation } from '../../containers/App/actions';
 
@@ -35,17 +36,25 @@ const styles = {
 
 const menuItems = [
   { link: '/', label: 'Book A Spot' },
-  { link: '/sharespot/new', label: 'Share A Spot' },
   { link: '/bookspot/list', label: 'Manage Book Spots' },
   { link: '/sharespot/list', label: 'Manage Share Spots' },
+  { link: '/sharespot/new', label: 'Share A Spot' },
 ];
 
 class ApplicationMenu extends Component {
   componentWillMount() {
+    if (!Meteor.userId()) {
+      // browserHistory.push('/login');
+      this.props.router.push('/login');
+    }
+
     this.props.setApplicationLocation(currentLocation);
   }
 
   render() {
+    // console.log(`Meteor User ID: ${Meteor.userId()}`);
+    // console.log(`Meteor user logging in: ${Meteor.loggingIn()}`);
+
     return (
       <div style={styles.component}>
         <Card style={styles.card}>
@@ -64,10 +73,9 @@ class ApplicationMenu extends Component {
                     <Link
                       to={e.link}
                     >
-                      <RaisedButton
+                      <FlatButton
                         style={styles.button}
                         label={e.label}
-                        // onClick={userLogout}
                       />
                     </Link>
                   </li>,
@@ -94,6 +102,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 ApplicationMenu.propTypes = {
+  router: PropTypes.object.isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
 };
 

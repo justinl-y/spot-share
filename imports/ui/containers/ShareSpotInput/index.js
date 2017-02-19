@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ShareSpotAdd from '../../components/ShareSpotAdd';
@@ -11,6 +12,11 @@ class ShareSpotInput extends Component {
 
     this.state = {
     };
+  }
+  componentWillMount() {
+    if (!Meteor.userId()) {
+      this.props.router.push('/login');
+    }
   }
 
   render() {
@@ -55,6 +61,7 @@ ShareSpotInput.defaultProps = {
 };
 
 ShareSpotInput.propTypes = {
+  router: PropTypes.object.isRequired,
   shareSpotInputType: PropTypes.string.isRequired,
   parkingSpotId: PropTypes.string.isRequired,
   addParkingSpot: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_SIGN_IN = 'SIGN_UP_SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+export const SIGN_UP_CANCEL = 'SIGN_UP_CANCEL';
 export const CLEAR_MESSAGE_TEXT = 'CLEAR_MESSAGE_TEXT';
 
 // action creator
@@ -21,6 +22,11 @@ export const updateSignUp = () => ({
 const updateSignUpSignIn = result => ({
   type: SIGN_UP_SIGN_IN,
   payload: result,
+});
+
+export const signUpCancel = () => ({
+  type: SIGN_UP_CANCEL,
+  payload: null,
 });
 
 const updateSignOut = result => ({

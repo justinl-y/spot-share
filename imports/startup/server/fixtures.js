@@ -36,7 +36,7 @@ Meteor.startup(() => {
       user_id: user1,
       address: '5680 Pacific Boulevard',
       post_code: 'V5H8U3',
-      geolocation: { lat: 49.2819163, lng: -123.10831740000003 },
+      geolocation: { lat: 49.2819163, lng: -123.1083174 },
       available_from: '2016-12-01',
       available_to: '2017-11-30',
       price_per_hour: 15.00,

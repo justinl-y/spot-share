@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Login from '../../components/SignIn';
 import SignUp from '../../components/SignUp';
-import { userSignIn, updateSignUp, userSignUpSignIn } from './actions';
+import { userSignIn, updateSignUp, userSignUpSignIn, signUpCancel } from './actions';
 
 class ProcessLogin extends Component {
   componentDidUpdate() {
     if (this.props.userLoggedIn) {
-      this.props.router.push('/menu');
+      this.props.router.push('/');
     }
   }
 
@@ -25,6 +25,7 @@ class ProcessLogin extends Component {
           :
             <SignUp
               onSignUpSignInClick={this.props.signUpSignIn}
+              onSignUpCancelClick={this.props.signUpCancel}
             />
         }
       </div>
@@ -47,6 +48,9 @@ const mapDispatchToProps = dispatch => ({
   signUpSignIn: (register) => {
     dispatch(userSignUpSignIn(register));
   },
+  signUpCancel: () => {
+    dispatch(signUpCancel());
+  },
 });
 
 ProcessLogin.propTypes = {
@@ -56,6 +60,7 @@ ProcessLogin.propTypes = {
   signIn: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
   signUpSignIn: PropTypes.func.isRequired,
+  signUpCancel: PropTypes.func.isRequired,
 };
 
 export default connect(

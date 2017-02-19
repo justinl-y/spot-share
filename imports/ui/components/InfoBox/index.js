@@ -13,11 +13,15 @@ const InfoBox = ({ address, postal, price, info, link, label }) => (
   </div>
 );
 
+InfoBox.defaultProps = {
+  info: '',
+};
+
 InfoBox.propTypes = {
   address: PropTypes.string.isRequired,
   postal: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  info: PropTypes.string.isRequired,
+  info: PropTypes.string,
   link: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };

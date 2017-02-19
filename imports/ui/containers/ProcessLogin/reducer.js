@@ -2,6 +2,7 @@ import {
   SIGN_IN,
   SIGN_UP,
   SIGN_UP_SIGN_IN,
+  SIGN_UP_CANCEL,
   SIGN_OUT,
   CLEAR_MESSAGE_TEXT,
 } from './actions';
@@ -23,7 +24,6 @@ export default (state = processLoginPageInitialState, action) => {
         login = true;
       }
 
-      // console.log(action.payload.message);
       message.text = action.payload.message;
       message.active = true;
 
@@ -39,17 +39,17 @@ export default (state = processLoginPageInitialState, action) => {
         login = true;
       }
 
-      // console.log(action.payload.message);
       message.text = action.payload.message;
       message.active = true;
 
       return { ...state, login, signup: false, message };
     }
+    case SIGN_UP_CANCEL:
+      return { ...state, signup: false };
     case SIGN_OUT: {
       const login = false;
       const message = {};
 
-      // console.log(action.payload.message);
       message.text = action.payload.message;
       message.active = true;
 

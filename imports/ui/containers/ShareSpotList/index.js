@@ -2,12 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-
 import { browserHistory } from 'react-router';
-
 import { ParkingSpots } from '../../../api/parking-spots';
 import ParkingSpot from '../../components/ParkingSpot';
-
 import { deleteParkingSpot } from './actions';
 import { editParkingSpot } from '../ShareSpotInput/actions';
 import { setApplicationLocation } from '../App/actions';
@@ -22,6 +19,10 @@ const currentLocation = 'SHARE-SPOT';
 
 class ShareSpotList extends Component {
   componentWillMount() {
+    if (!Meteor.userId()) {
+      this.props.router.push('/login');
+    }
+
     this.props.setApplicationLocation(currentLocation);
   }
 
@@ -65,8 +66,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setApplicationLocation(location));
   },
   editParkingSpot: (id) => {
-    dispatch(editParkingSpot(id));
     browserHistory.push('/sharespot/edit');
+    dispatch(editParkingSpot(id));
   },
   deleteParkingSpot: (id) => {
     dispatch(deleteParkingSpot(id));
@@ -75,6 +76,7 @@ const mapDispatchToProps = dispatch => ({
 
 // proptypes validation
 ShareSpotList.propTypes = {
+  router: PropTypes.object.isRequired,
   parkingSpotList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
   editParkingSpot: PropTypes.func.isRequired,
@@ -85,7 +87,7 @@ ShareSpotList.propTypes = {
 const ShareSpaceContainer = createContainer(() => {
   Meteor.subscribe('getParkingSpots');
   return {
-    parkingSpotList: ParkingSpots.find({}).fetch(),
+    parkingSpotList: ParkingSpots.find({ user_id: Meteor.userId() }).fetch(),
   };
 }, ShareSpotList);
 
