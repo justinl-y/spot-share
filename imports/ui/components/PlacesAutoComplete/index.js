@@ -181,13 +181,14 @@ class PlacesAutocomplete extends React.Component {
   }
 
   renderInput() {
-    const { classNames, placeholder, styles, value, autoFocus } = this.props
+    const { classNames, styles, value, hintText, autoFocus, floatingLabelText } = this.props
     return (
       <TextField
         type="text"
-        placeholder={placeholder}
         className={classNames.input || ''}
         value={value}
+        hintText={hintText}
+        floatingLabelText={floatingLabelText}
         onChange={this.handleInputChange}
         onKeyDown={this.handleInputKeyDown}
         onBlur={() => this.clearAutocomplete()}
@@ -216,7 +217,8 @@ PlacesAutocomplete.propTypes = {
   onError: React.PropTypes.func,
   clearItemsOnError: React.PropTypes.bool,
   onSelect: React.PropTypes.func,
-  placeholder: React.PropTypes.string,
+  hintText: React.PropTypes.string,
+  floatingLabelText: React.PropTypes.string,
   autoFocus: React.PropTypes.bool,
   autocompleteItem: React.PropTypes.func,
   classNames: React.PropTypes.shape({
