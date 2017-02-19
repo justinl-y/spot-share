@@ -27,6 +27,24 @@ Meteor.methods({
     console.log('Inserted Booking');
     return insert;
   },
+  deleteBookingSpot(id) {
+    // check permissions
+    if (!this.userId) {
+      throw new Meteor.Error('Not-Authorised');
+    }
+
+    // data validataion
+    new SimpleSchema({
+      id: { type: String },
+    }).validate({ id });
+
+    const remove = Bookings.remove({
+      _id: id,
+    });
+
+    console.log('Booking Deleted');
+    return remove;
+  },
   updateBookingSpot(booking) {
     const update = Bookings.update(
       { _id: booking._id },
