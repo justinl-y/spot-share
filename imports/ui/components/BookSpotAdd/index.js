@@ -129,14 +129,15 @@ class BookSpotAdd extends Component {
                       hintText="Available from"
                       container="inline"
                       autoOk
-                      value={this.state.fields.availableFrom}
-                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, availableFrom: d } }); }}
+                      value={this.state.fields.dateBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
                     />
                     <TimePicker
                       format="ampm"
                       hintText="12hr Format"
                       errorText={this.state.fieldErrors.timeBooked}
-                      value={this.state.value12}
+                      value={this.state.fields.timeBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
                     />
                   </div>
                   <TextField
