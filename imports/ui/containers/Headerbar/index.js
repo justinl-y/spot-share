@@ -32,15 +32,6 @@ class HeaderBar extends Component {
 
       signedInLinksLeft = (
         <div>
-          {/* temp code */}
-          <Link
-            to="/bookspot/new"
-          >
-            <FlatButton
-              label="Add Booking"
-            />
-          </Link>
-          {/* temp code */}
           <Link
             to="/bookspot/list"
           >

@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
@@ -8,14 +10,15 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-
 import { setApplicationLocation } from '../../containers/App/actions';
+
+import { ParkingSpots } from '../../../api/parking-spots';
 
 const currentLocation = 'BOOK-SPOT';
 
 class BookSpotAdd extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       fields: {},
@@ -71,10 +74,11 @@ class BookSpotAdd extends Component {
 
     return errors;
   }
+
   handleSubmit(e) {
     const bookingSpot = this.state.fields;
 
-    console.log(bookingSpot);
+    // console.log(bookingSpot);
 
     const fieldErrors = this.validate(bookingSpot);
 
@@ -128,94 +132,100 @@ class BookSpotAdd extends Component {
         width: '70%',
       },
     };
+
+    console.log(this.props.parkingSpotId);
+    console.log(this.props.parkingSpot);
+
     return (
       <div>
         <div style={styles.component}>
           <Card style={styles.card}>
-          <div style={styles.formWrap}>
-            <Paper style={{ width: '100%', height: '350px' }}>
-              <Toolbar>
-                <ToolbarTitle text="Spot Info" />
-              </Toolbar>
-              <CardText>
-                <TextField
-                  style={styles.textField}
-                  disabled="true"
-                  name="address"
-                  floatingLabelText="Address"
-                />
-                <TextField
-                  style={styles.textField}
-                  disabled="true"
-                  name="pricePerHour"
-                  floatingLabelText="Price Per Hour"
-                />
-              </CardText>
-            </Paper>
-            <Paper style={{ width: '100%' }}>
-              <Toolbar>
-                <ToolbarTitle text="Book a Spot" />
-              </Toolbar>
+            <div style={styles.formWrap}>
+              <Paper style={{ width: '100%', height: '350px' }}>
+                <Toolbar>
+                  <ToolbarTitle text="Spot Info" />
+                </Toolbar>
                 <CardText>
-                <form>
-                  <div style={styles.datePickerContainer}>
-                    <DatePicker
-                      textFieldStyle={{ width: '90%' }}
-                      floatingLabelText="Date Booked"
-                      errorText={this.state.fieldErrors.dateBooked}
-                      hintText="Available from"
-                      container="inline"
-                      autoOk
-                      value={this.state.fields.dateBooked}
-                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
-                    />
-                    <TimePicker
-                      textFieldStyle={{ marginTop: '1.5rem' }}
-                      format="ampm"
-                      hintText="Time Booked"
-                      errorText={this.state.fieldErrors.timeBooked}
-                      value={this.state.fields.timeBooked}
-                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
-                    />
-                  </div>
                   <TextField
                     style={styles.textField}
-                    name="duration"
-                    hintText="Duration"
-                    errorText={this.state.fieldErrors.duration}
-                    floatingLabelText="Duration"
-                    value={this.state.fields.duration}
-                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    // disabled
+                    name="address"
+                    floatingLabelText="Address"
+                    defaultValue={this.props.parkingSpot[0].address}
                   />
                   <TextField
                     style={styles.textField}
-                    name="bookingCost"
-                    hintText="Booking Cost"
-                    errorText={this.state.fieldErrors.bookingCost}
-                    floatingLabelText="Booking Cost"
-                    value={this.state.fields.bookingCost}
-                  // onChange={this.handleTextFieldChange.bind(this)}
-                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    // disabled
+                    name="pricePerHour"
+                    floatingLabelText="Price Per Hour"
+                    defaultValue={this.props.parkingSpot[0].price_per_hour}
                   />
-                  <div style={styles.buttonContainer}>
-                    <RaisedButton
-                      primary="true"
-                      style={styles.submitButton}
-                      label="Submit"
-                      onClick={e => this.handleSubmit(e)}
-                    />
-
-                    <Link
-                      to="/bookspot/list"
-                    >
-                      <RaisedButton
-                        label="Cancel"
-                        primary="true"
+                </CardText>
+              </Paper>
+              <Paper style={{ width: '100%' }}>
+                <Toolbar>
+                  <ToolbarTitle text="Book a Spot" />
+                </Toolbar>
+                <CardText>
+                  <form>
+                    <div style={styles.datePickerContainer}>
+                      <DatePicker
+                        textFieldStyle={{ width: '90%' }}
+                        floatingLabelText="Date Booked"
+                        errorText={this.state.fieldErrors.dateBooked}
+                        hintText="Available from"
+                        container="inline"
+                        autoOk
+                        value={this.state.fields.dateBooked}
+                        onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
                       />
-                    </Link>
-                  </div>
-                </form>
-              </CardText>
+                      <TimePicker
+                        textFieldStyle={{ marginTop: '1.5rem' }}
+                        format="ampm"
+                        hintText="Time Booked"
+                        errorText={this.state.fieldErrors.timeBooked}
+                        value={this.state.fields.timeBooked}
+                        onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
+                      />
+                    </div>
+                    <TextField
+                      style={styles.textField}
+                      name="duration"
+                      hintText="Duration"
+                      errorText={this.state.fieldErrors.duration}
+                      floatingLabelText="Duration"
+                      value={this.state.fields.duration}
+                      onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    />
+                    <TextField
+                      style={styles.textField}
+                      name="bookingCost"
+                      hintText="Booking Cost"
+                      errorText={this.state.fieldErrors.bookingCost}
+                      floatingLabelText="Booking Cost"
+                      value={this.state.fields.bookingCost}
+                    // onChange={this.handleTextFieldChange.bind(this)}
+                      onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    />
+                    <div style={styles.buttonContainer}>
+                      <RaisedButton
+                        primary
+                        style={styles.submitButton}
+                        label="Submit"
+                        onClick={e => this.handleSubmit(e)}
+                      />
+
+                      <Link
+                        to="/bookspot/list"
+                      >
+                        <RaisedButton
+                          label="Cancel"
+                          primary
+                        />
+                      </Link>
+                    </div>
+                  </form>
+                </CardText>
               </Paper>
             </div>
           </Card>
@@ -224,6 +234,13 @@ class BookSpotAdd extends Component {
     );
   }
 }
+
+BookSpotAdd.propTypes = {
+  addBookSpot: PropTypes.func.isRequired,
+  setApplicationLocation: PropTypes.func.isRequired,
+  parkingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
+  parkingSpotId: PropTypes.string.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
@@ -237,13 +254,15 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-BookSpotAdd.propTypes = {
-  addBookSpot: PropTypes.func.isRequired,
-  setApplicationLocation: PropTypes.func.isRequired,
-};
+const BookSpotAddContainer = createContainer((parkingSpotId) => {
+  Meteor.subscribe('getParkingSpots');
+  return {
+    parkingSpot: ParkingSpots.find({ _id: parkingSpotId.parkingSpotId }).fetch(),
+  };
+}, BookSpotAdd);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BookSpotAdd);
+)(BookSpotAddContainer);
 
