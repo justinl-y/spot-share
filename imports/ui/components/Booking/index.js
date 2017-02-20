@@ -12,24 +12,28 @@ const styles = {
   bookingContainer: {
     display: 'flex',
     justifyContent: 'center',
-    width: '400px',
+    width: '100%',
+    flexDirection: 'row',
   },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    width: '400px',
+    justifyContent: 'flex-start',
+    width: '100%',
     marginBottom: '8px',
+  },
+  listContainer: {
+    textAlign: 'left',
   },
 };
 
 
-const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings, parkingSpotId }) => (
+const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings }) => (
   <div style={styles.bookingContainer}>
-    <Card style={{ marginBottom: '10px' }}>
+    <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
-        <ToolbarTitle text={`Booking Info: ${parkingSpotId}`} />
+        <ToolbarTitle text="Booking Info" />
       </Toolbar>
-      <List>
+      <List style={styles.listContainer}>
         <ListItem primaryText={`Date Booked: ${dateBooked}`} leftIcon={<Event />} />
         <ListItem primaryText={`Time Booked: ${timeBooked}`} leftIcon={<Schedule />} />
         <ListItem primaryText={`Booking-Duration: ${duration} hours`} leftIcon={<HourGlass />} />
@@ -37,7 +41,7 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
-          style={{ width: '70%', marginLeft: '5px' }}
+          style={{ width: '50%', marginLeft: '20px' }}
           label="Edit"
           primary="true"
           onClick={(e) => { e.preventDefault(); editBookings(id); }}
@@ -47,7 +51,7 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
           label="Delete"
           primary="true"
           onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
-          />
+        />
       </div>
     </Card>
   </div>
@@ -56,10 +60,8 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
 
 Booking.propTypes = {
   id: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
   bookingCost: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
-  parkingSpotId: PropTypes.string.isRequired,
   dateBooked: PropTypes.string.isRequired,
   timeBooked: PropTypes.string.isRequired,
   editBookings: PropTypes.func.isRequired,
