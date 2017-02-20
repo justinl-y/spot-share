@@ -14,6 +14,7 @@ const styles = {
 };
 
 class InfoBox extends Component {
+  
   handleBookingClick(e) {
     e.preventDefault();
 
