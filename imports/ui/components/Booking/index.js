@@ -9,11 +9,17 @@ import { Card } from 'material-ui/Card';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 const styles = {
+  componentContainer: {
+    flexBasis: '30%',
+    width: '300px',
+    justifyContent: 'center',
+    marginRight: '20px',
+  },
   bookingContainer: {
     display: 'flex',
     justifyContent: 'center',
-    width: '100%',
-    flexDirection: 'row',
+    flexBasis: '30%',
+    flexDirection: 'column',
   },
   buttonContainer: {
     display: 'flex',
@@ -28,6 +34,7 @@ const styles = {
 };
 
 const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings }) => (
+<div style={styles.componentContainer}>
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
@@ -59,6 +66,7 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
       </div>
     </Card>
   </div>
+</div>
 );
 
 Booking.propTypes = {
