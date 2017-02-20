@@ -7,7 +7,7 @@ import SearchBox from './lib/places/SearchBox';
 import RaisedButton from 'material-ui/RaisedButton';
 import blueIcon from '../../containers/MapContainer/blueIcon'
 
-console.log(InfoBox)
+// console.log(InfoBox)
 
 //Styles for the mapContainer & intoBox
 const styles = {
