@@ -24,6 +24,7 @@ const styles = {
     marginBottom: '10px',
   },
   listContainer: {
+    display: 'flex',
     textAlign: 'left',
   },
 };
@@ -32,14 +33,17 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
-        <ToolbarTitle text="Booking Info" />
+        <ToolbarTitle text={address} />
       </Toolbar>
       <List style={styles.listContainer}>
-        <ListItem primaryText={address} secondaryText="Address" leftIcon={<Location />} />
-        <ListItem primaryText={availableFrom} secondaryText="Available From" leftIcon={<DateFrom />} />
-        <ListItem primaryText={availableTo} secondaryText="Available To" leftIcon={<Event />} />
+      <div>
+        <ListItem primaryText={availableFrom.slice(0, 15)} secondaryText="Available From" leftIcon={<DateFrom />} />
         <ListItem primaryText={`$${pricePerHour}`} secondaryText="Price Per Hour" leftIcon={<Money />} />
+      </div>
+      <div>
+        <ListItem primaryText={availableTo.slice(0, 15)} secondaryText="Available To" leftIcon={<Event />} />
         <ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />
+      </div>
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
