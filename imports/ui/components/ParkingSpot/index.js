@@ -33,7 +33,7 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
-        <ToolbarTitle text={address} />
+        <ToolbarTitle text={address} leftIcon={<Location />} />
       </Toolbar>
       <List style={styles.listContainer}>
       <div>
