@@ -4,7 +4,7 @@ const blueIcon = {
   fillColor: '#00BCD4',
   fillOpacity: 1,
   strokeWeight: 0,
-  anchor: new google.maps.Point(7, 20),
+  anchor: new google.maps.Point(12, 20),
   scale: 2,
 };
 
