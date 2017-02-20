@@ -8,7 +8,10 @@ const ShareGoogleMap = withGoogleMap(props => (
     defaultZoom={13}
     center={props.center}
   >
-    <Marker position={new google.maps.LatLng(props.marker.lat, props.marker.lng)} icon={blueIcon} />
+    <Marker
+      position={new google.maps.LatLng(props.marker.lat, props.marker.lng)}
+      icon={blueIcon}
+    />
   </GoogleMap>
 ));
 

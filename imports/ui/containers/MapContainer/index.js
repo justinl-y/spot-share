@@ -5,7 +5,7 @@ import InfoBox from './../../components/InfoBox'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import SearchBox from './lib/places/SearchBox';
 import RaisedButton from 'material-ui/RaisedButton';
-import blueIcon from './blueIcon';
+import blueIcon from '../../containers/MapContainer/blueIcon'
 
 //Styles for the mapContainer & intoBox
 const styles = {
