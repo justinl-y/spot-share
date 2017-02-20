@@ -34,7 +34,6 @@ const INPUT_STYLE = {
   textOverflow: `ellipses`,
 };
 
-
 //This renders Google Map
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
