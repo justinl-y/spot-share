@@ -15,12 +15,13 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
     flexDirection: 'row',
+    margin: '25px',
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-start',
     width: '100%',
-    marginBottom: '8px',
+    marginBottom: '10px',
   },
   listContainer: {
     textAlign: 'left',
@@ -34,21 +35,21 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
         <ToolbarTitle text="Booking Info" />
       </Toolbar>
       <List style={styles.listContainer}>
-        <ListItem primaryText={`Address: ${address}`} leftIcon={<Location />} />
-        <ListItem primaryText={`From: ${availableFrom}`} leftIcon={<DateFrom />} />
-        <ListItem primaryText={`To: ${availableTo} hours`} leftIcon={<Event />} />
-        <ListItem primaryText={`Price per Hour: $${pricePerHour}`} leftIcon={<Money />} />
-        <ListItem primaryText={`Additional Info: ${additionalInformation}`} leftIcon={<Info />} />
+        <ListItem primaryText={address} secondaryText="Address" leftIcon={<Location />} />
+        <ListItem primaryText={availableFrom} secondaryText="Available From" leftIcon={<DateFrom />} />
+        <ListItem primaryText={availableTo} secondaryText="Available To" leftIcon={<Event />} />
+        <ListItem primaryText={`$${pricePerHour}`} secondaryText="Price Per Hour" leftIcon={<Money />} />
+        <ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
-          style={{ width: '50%', marginLeft: '20px' }}
+          style={{ width: '45%', marginLeft: '20px' }}
           label="Edit"
           primary="true"
           onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
         />
         <RaisedButton
-          style={{ marginLeft: '10px' }}
+          style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
           label="Delete"
           primary="true"
           onClick={(e) => { e.preventDefault(); onClickDelete(id); }}

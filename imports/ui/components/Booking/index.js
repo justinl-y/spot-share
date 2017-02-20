@@ -34,20 +34,20 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
         <ToolbarTitle text="Booking Info" />
       </Toolbar>
       <List style={styles.listContainer}>
-        <ListItem primaryText={`Date Booked: ${dateBooked}`} leftIcon={<Event />} />
-        <ListItem primaryText={`Time Booked: ${timeBooked}`} leftIcon={<Schedule />} />
-        <ListItem primaryText={`Booking-Duration: ${duration} hours`} leftIcon={<HourGlass />} />
-        <ListItem primaryText={`Booking-Cost: $${bookingCost}`} leftIcon={<Money />} />
+        <ListItem primaryText={dateBooked} secondaryText="Date Booked" leftIcon={<Event />} />
+        <ListItem primaryText={timeBooked} secondaryText="Time Booked" leftIcon={<Schedule />} />
+        <ListItem primaryText={duration} secondaryText="Duration" leftIcon={<HourGlass />} />
+        <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
-          style={{ width: '50%', marginLeft: '20px' }}
+          style={{ width: '45%', marginLeft: '20px' }}
           label="Edit"
           primary="true"
           onClick={(e) => { e.preventDefault(); editBookings(id); }}
         />
         <RaisedButton
-          style={{ marginLeft: '10px' }}
+          style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
           label="Delete"
           primary="true"
           onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
