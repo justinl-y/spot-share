@@ -25,7 +25,7 @@ const styles = {
 
 const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings, parkingSpotId }) => (
   <div style={styles.bookingContainer}>
-    <Card>
+    <Card style={{ marginBottom: '10px' }}>
       <Toolbar>
         <ToolbarTitle text={`Booking Info: ${parkingSpotId}`} />
       </Toolbar>
