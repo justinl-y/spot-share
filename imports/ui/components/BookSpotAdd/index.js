@@ -96,11 +96,18 @@ class BookSpotAdd extends Component {
       component: {
         height: '85vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'auto',
       },
       card: {
-        width: '500px',
+        width: '900px',
+        height: '350px',
+      },
+      formWrap: {
+        width: '100%',
+        display: 'flex',
       },
       textField: {
         width: '100%',
@@ -113,20 +120,47 @@ class BookSpotAdd extends Component {
         flexDirection: 'row',
         justifyContent: 'space-between',
       },
+      buttonContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
+      submitButton: {
+        width: '70%',
+      },
     };
     return (
       <div>
         <div style={styles.component}>
           <Card style={styles.card}>
-            <Paper>
+          <div style={styles.formWrap}>
+            <Paper style={{ width: '100%', height: '350px' }}>
+              <Toolbar>
+                <ToolbarTitle text="Spot Info" />
+              </Toolbar>
+              <CardText>
+                <TextField
+                  style={styles.textField}
+                  disabled="true"
+                  name="address"
+                  floatingLabelText="Address"
+                />
+                <TextField
+                  style={styles.textField}
+                  disabled="true"
+                  name="pricePerHour"
+                  floatingLabelText="Price Per Hour"
+                />
+              </CardText>
+            </Paper>
+            <Paper style={{ width: '100%' }}>
               <Toolbar>
                 <ToolbarTitle text="Book a Spot" />
               </Toolbar>
-              <CardText>
+                <CardText>
                 <form>
                   <div style={styles.datePickerContainer}>
                     <DatePicker
-                      textFieldStyle={{ width: '100%' }}
+                      textFieldStyle={{ width: '90%' }}
                       floatingLabelText="Date Booked"
                       errorText={this.state.fieldErrors.dateBooked}
                       hintText="Available from"
@@ -136,8 +170,9 @@ class BookSpotAdd extends Component {
                       onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
                     />
                     <TimePicker
+                      textFieldStyle={{ marginTop: '1.5rem' }}
                       format="ampm"
-                      hintText="12hr Format"
+                      hintText="Time Booked"
                       errorText={this.state.fieldErrors.timeBooked}
                       value={this.state.fields.timeBooked}
                       onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
@@ -162,23 +197,27 @@ class BookSpotAdd extends Component {
                   // onChange={this.handleTextFieldChange.bind(this)}
                     onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
                   />
-                  <RaisedButton
-                    // backgroundColor="rgb(183, 28, 28)"
-                    // labelColor="white"
-                    label="Submit"
-                    onClick={e => this.handleSubmit(e)}
-                  />
-
-                  <Link
-                    to="/bookspot/list"
-                  >
+                  <div style={styles.buttonContainer}>
                     <RaisedButton
-                      label="Cancel"
+                      primary="true"
+                      style={styles.submitButton}
+                      label="Submit"
+                      onClick={e => this.handleSubmit(e)}
                     />
-                  </Link>
+
+                    <Link
+                      to="/bookspot/list"
+                    >
+                      <RaisedButton
+                        label="Cancel"
+                        primary="true"
+                      />
+                    </Link>
+                  </div>
                 </form>
               </CardText>
-            </Paper>
+              </Paper>
+            </div>
           </Card>
         </div>
       </div>

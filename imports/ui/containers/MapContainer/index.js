@@ -5,8 +5,7 @@ import InfoBox from './../../components/InfoBox'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import SearchBox from './lib/places/SearchBox';
 import RaisedButton from 'material-ui/RaisedButton';
-
-// console.log(InfoBox)
+import blueIcon from './blueIcon';
 
 //Styles for the mapContainer & intoBox
 const styles = {
@@ -35,6 +34,7 @@ const INPUT_STYLE = {
   textOverflow: `ellipses`,
 };
 
+
 //This renders Google Map
 const ParkingGoogleMap = withGoogleMap(props => (
   <GoogleMap
@@ -45,6 +45,7 @@ const ParkingGoogleMap = withGoogleMap(props => (
     {props.markers.map((marker, index) => (
       <Marker
         key={index}
+        icon={blueIcon}
         position={new google.maps.LatLng(marker.geolocation.lat, marker.geolocation.lng)}
         onClick={() => props.onMarkerClick(marker)}
       >
