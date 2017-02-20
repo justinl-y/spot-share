@@ -51,12 +51,13 @@ const ParkingGoogleMap = withGoogleMap(props => (
         {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
             <InfoBox
+              parkingSpotId={marker._id}
               address={marker.address}
               postal={marker.post_code}
               price={marker.price_per_hour}
               info={marker.additional_information}
-              link={props.currentUser ? '/bookspot/list' : '/login'}
-              label={props.currentUser ? 'Book Spot' : 'Login to Book'}
+              link={props.currentUser ? '/bookspot/new' : '/login'}
+              label={props.currentUser ? 'Book Spot' : 'Sign In to Book'}
             />
           </InfoWindow>
         )}

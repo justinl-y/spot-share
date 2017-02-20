@@ -5,9 +5,9 @@ export const ADD_BOOKING_SPOT = 'ADD_BOOKING_SPOT';
 export const EDIT_BOOKING_SPOT = 'EDIT_BOOKING_SPOT';
 
 // action creators
-export const addBookingSpot = () => ({
+export const addBookingSpot = bookingParkSpot => ({
   type: ADD_BOOKING_SPOT,
-  payload: null,
+  payload: bookingParkSpot,
 });
 
 export const editBookingSpot = id => ({
