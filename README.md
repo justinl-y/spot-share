@@ -1,4 +1,4 @@
-# Rent-A-Spot Self-Directed Meteor Project - Meteor, JavaScript, React, Redux, MongoDB, Material UI, CSS
+# Share Spot - A Self-Directed Meteor Project - Meteor, JavaScript, React, Redux, MongoDB, Material UI, CSS
 
 ### Development by Justin Levett-Yeats, Djordje Vujatovic and Jonathan Funk
 
@@ -17,7 +17,7 @@ was developed to simulate the finding and renting of parking spots with an Air B
 - MongoDB
 - Material UI
 - CSS
-- Production Tools: ES Lint, Babel, NPM / Yarn, Git
+- Production Tools: ES Lint, Babel, npm / yarn, Git
 
 ## Personal Learnings
 JLY - Development of the user interface allowed me to develop a deeper understanding of React as a presentational layer and Redux for managing UI state. 
