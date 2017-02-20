@@ -29,7 +29,7 @@ class BookSpotList extends Component {
     return (
       <div style={styles.component}>
         <h2>Bookings List</h2>
-        <ul>
+        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
           {bookingsList.map(booking =>
             <Booking
               key={booking._id}
