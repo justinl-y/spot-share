@@ -10,7 +10,7 @@ import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
   component: {
-    height: '85vh',
+    height: '100vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
