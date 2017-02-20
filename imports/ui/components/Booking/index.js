@@ -14,6 +14,10 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
     flexDirection: 'row',
+    backgroundColor: 'black',
+  },
+  testing: {
+    flexDirection: 'row',
   },
   buttonContainer: {
     display: 'flex',
@@ -60,6 +64,7 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
       </div>
     </Card>
   </div>
+
 );
 
 
