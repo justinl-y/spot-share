@@ -1,4 +1,4 @@
-# Share Spot - A Self-Directed Meteor Project - Meteor, JavaScript, React, Redux, MongoDB, Material UI, CSS
+# Spot Share - A Self-Directed Meteor Project - Meteor, JavaScript, React, Redux, MongoDB, Material UI, CSS
 
 ### Development by Justin Levett-Yeats, Djordje Vujatovic and Jonathan Funk
 
