@@ -35,39 +35,39 @@ const styles = {
 };
 
 const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, additionalInformation, onClickEdit, onClickDelete }) => (
-<div style={styles.componentContainer}> 
-  <div style={styles.bookingContainer}>
-    <Card style={{ marginBottom: '20px' }}>
-      <Toolbar>
-        <ToolbarTitle text={address} leftIcon={<Location />} />
-      </Toolbar>
-      <List style={styles.listContainer}>
-      <div >
-        <ListItem primaryText={availableFrom.slice(0, 15)} secondaryText="Available From" leftIcon={<DateFrom />} />
-        <ListItem primaryText={`$${pricePerHour}`} secondaryText="Price Per Hour" leftIcon={<Money />} />
-      </div>
-      <div>
-        <ListItem primaryText={availableTo.slice(0, 15)} secondaryText="Available To" leftIcon={<Event />} />
-        <ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />
-      </div>
-      </List>
-      <div style={styles.buttonContainer}>
-        <RaisedButton
-          style={{ width: '45%', marginLeft: '20px' }}
-          label="Edit"
-          primary="true"
-          onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
-        />
-        <RaisedButton
-          style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
-          label="Delete"
-          primary="true"
-          onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
-        />
-      </div>
-    </Card>
+  <div style={styles.componentContainer}>
+    <div style={styles.bookingContainer}>
+      <Card style={{ marginBottom: '20px' }}>
+        <Toolbar>
+          <ToolbarTitle text={address} />
+        </Toolbar>
+        <List style={styles.listContainer}>
+          <div >
+            <ListItem primaryText={availableFrom.slice(0, 15)} secondaryText="Available From" leftIcon={<DateFrom />} />
+            <ListItem primaryText={`$${pricePerHour}`} secondaryText="Price Per Hour" leftIcon={<Money />} />
+          </div>
+          <div>
+            <ListItem primaryText={availableTo.slice(0, 15)} secondaryText="Available To" leftIcon={<Event />} />
+            <ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />
+          </div>
+        </List>
+        <div style={styles.buttonContainer}>
+          <RaisedButton
+            style={{ width: '45%', marginLeft: '20px' }}
+            label="Edit"
+            primary
+            onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
+          />
+          <RaisedButton
+            style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
+            label="Delete"
+            primary
+            onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
+          />
+        </div>
+      </Card>
+    </div>
   </div>
-</div>
 );
 
 ParkingSpot.defaultProps = {
