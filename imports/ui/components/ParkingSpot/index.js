@@ -10,12 +10,17 @@ import { Card } from 'material-ui/Card';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 const styles = {
+  componentContainer: {
+    flexBasis: '30%',
+    width: '300px',
+    justifyContent: 'center',
+    marginRight: '20px',
+  },
   bookingContainer: {
     display: 'flex',
     justifyContent: 'center',
-    width: '100%',
-    flexDirection: 'row',
-    margin: '25px',
+    flexBasis: '30%',
+    flexDirection: 'column',
   },
   buttonContainer: {
     display: 'flex',
@@ -30,6 +35,7 @@ const styles = {
 };
 
 const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, additionalInformation, onClickEdit, onClickDelete }) => (
+<div style={styles.componentContainer}> 
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
@@ -61,6 +67,7 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
       </div>
     </Card>
   </div>
+</div>
 );
 
 ParkingSpot.defaultProps = {

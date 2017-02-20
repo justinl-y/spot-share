@@ -32,7 +32,7 @@ class ShareSpotList extends Component {
     return (
       <div style={styles.component}>
         <h2>Parking Spots</h2>
-        <ul>
+        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
           {parkingSpots.map(parkingSpot =>
             <ParkingSpot
               key={parkingSpot._id}
