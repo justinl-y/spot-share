@@ -36,7 +36,7 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
       <List style={styles.listContainer}>
         <ListItem primaryText={dateBooked} secondaryText="Date Booked" leftIcon={<Event />} />
         <ListItem primaryText={timeBooked} secondaryText="Time Booked" leftIcon={<Schedule />} />
-        <ListItem primaryText={duration} secondaryText="Duration" leftIcon={<HourGlass />} />
+        <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
         <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
       </List>
       <div style={styles.buttonContainer}>

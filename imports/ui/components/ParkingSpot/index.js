@@ -56,7 +56,7 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
         />
       </div>
     </Card>
-  </div>  
+  </div>
 );
 
 ParkingSpot.defaultProps = {
