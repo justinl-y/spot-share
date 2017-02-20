@@ -27,7 +27,6 @@ const styles = {
   },
 };
 
-
 const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings }) => (
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
@@ -35,33 +34,32 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
         <ToolbarTitle text="Booking Info" />
       </Toolbar>
       <List style={styles.listContainer}>
-       <div>
-        <ListItem primaryText={dateBooked.slice(4, 16)} secondaryText="Date Booked" leftIcon={<Event />} />
-        <ListItem primaryText={timeBooked.slice(16, 21)} secondaryText="Time Booked" leftIcon={<Schedule />} />
-       </div>
-       <div>
-        <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
-        <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
-      </div>
+        <div>
+          <ListItem primaryText={dateBooked.slice(4, 16)} secondaryText="Date Booked" leftIcon={<Event />} />
+          <ListItem primaryText={timeBooked.slice(16, 21)} secondaryText="Time Booked" leftIcon={<Schedule />} />
+        </div>
+        <div>
+          <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
+          <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
+        </div>
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
           style={{ width: '45%', marginLeft: '20px' }}
           label="Edit"
-          primary="true"
+          primary
           onClick={(e) => { e.preventDefault(); editBookings(id); }}
         />
         <RaisedButton
           style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
           label="Delete"
-          primary="true"
+          primary
           onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
         />
       </div>
     </Card>
   </div>
 );
-
 
 Booking.propTypes = {
   id: PropTypes.string.isRequired,
