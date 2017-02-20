@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
@@ -11,13 +9,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import { setApplicationLocation } from '../../containers/App/actions';
-import { ParkingSpots } from '../../../api/parking-spots';
 
 const currentLocation = 'BOOK-SPOT';
 
 class BookSpotAdd extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       fields: {},
@@ -29,10 +26,12 @@ class BookSpotAdd extends Component {
     this.props.setApplicationLocation(currentLocation);
 
     const parkingSpot = this.props.parkingSpot;
-    this.addParkingPortToState(parkingSpot);
+    this.addParkingSpotToState(parkingSpot);
+
+    console.log(parkingSpot);
   }
 
-  addParkingPortToState(parkingSpot) {
+  addParkingSpotToState(parkingSpot) {
     const fields = {};
 
     fields.parkingSpotId = parkingSpot[0]._id;
@@ -103,6 +102,7 @@ class BookSpotAdd extends Component {
     // navigate to list
     browserHistory.push('/bookspot/list');
   }
+
 
   render() {
     const styles = {
@@ -222,25 +222,16 @@ class BookSpotAdd extends Component {
                       floatingLabelText="Booking Cost"
                       value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                     />
-                    <div style={styles.buttonContainer}>
+                    <Link
+                      to="/bookspot/list"
+                    >
                       <RaisedButton
-                        primary
-                        style={styles.submitButton}
-                        label="Submit"
-                        onClick={e => this.handleSubmit(e)}
+                        label="Cancel"
+                        primary="true"
                       />
-
-                      <Link
-                        to="/bookspot/list"
-                      >
-                        <RaisedButton
-                          label="Cancel"
-                          primary
-                        />
-                      </Link>
-                    </div>
-                  </form>
-                </CardText>
+                    </Link>
+                </form>
+              </CardText>
               </Paper>
             </div>
           </Card>
@@ -268,14 +259,12 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const BookSpotAddContainer = createContainer((parkingSpotId) => {
-  Meteor.subscribe('getParkingSpots');
-  return {
-    parkingSpot: ParkingSpots.find({ _id: parkingSpotId.parkingSpotId }).fetch(),
-  };
-}, BookSpotAdd);
+BookSpotAdd.propTypes = {
+  addBookSpot: PropTypes.func.isRequired,
+  setApplicationLocation: PropTypes.func.isRequired,
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BookSpotAddContainer);
+)(BookSpotAdd);

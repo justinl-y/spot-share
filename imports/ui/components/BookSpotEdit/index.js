@@ -153,104 +153,102 @@ class BookSpotEdit extends Component {
       },
     };
     return (
-      <div>
-        <div style={styles.component}>
-          <Card style={styles.card}>
-            <div style={styles.formWrap}>
-              <Paper style={{ width: '100%', height: '350px' }}>
-                <Toolbar>
-                  <ToolbarTitle text="Spot Info" />
-                </Toolbar>
-                <CardText>
-                  <TextField
-                    style={styles.textField}
-                    disabled
-                    name="address"
-                    floatingLabelText="Address"
-                    value={this.state.fields.address}
-                  />
-                  <TextField
-                    style={styles.textField}
-                    disabled
-                    name="postCode"
-                    floatingLabelText="Post Code"
-                    value={this.state.fields.postCode}
-                  />
-                  <TextField
-                    style={styles.textField}
-                    disabled
-                    name="pricePerHour"
-                    floatingLabelText="Price Per Hour"
-                    value={`$${this.state.fields.pricePerHour}`}
-                  />
-                </CardText>
-              </Paper>
-              <Paper style={{ width: '100%' }}>
-                <Toolbar>
-                  <ToolbarTitle text="Book a Spot" />
-                </Toolbar>
-                <CardText>
-                  <form>
-                    <div style={styles.datePickerContainer}>
-                      <DatePicker
-                        textFieldStyle={{ width: '100%' }}
-                        floatingLabelText="Date Booked"
-                        errorText={this.state.fieldErrors.dateBooked}
-                        hintText="Available from"
-                        container="inline"
-                        autoOk
-                        value={this.state.fields.dateBooked}
-                        onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
-                      />
-                      <TimePicker
-                        textFieldStyle={{ marginTop: '1.5rem' }}
-                        format="ampm"
-                        hintText="Time Booked"
-                        errorText={this.state.fieldErrors.timeBooked}
-                        value={this.state.fields.timeBooked}
-                        onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
-                      />
-                    </div>
-                    <TextField
-                      style={styles.textField}
-                      name="duration"
-                      hintText="Duration"
-                      errorText={this.state.fieldErrors.duration}
-                      floatingLabelText="Duration"
-                      value={this.state.fields.duration}
-                      onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+      <div style={styles.component}>
+        <Card style={styles.card}>
+          <div style={styles.formWrap}>
+            <Paper style={{ width: '100%', height: '350px' }}>
+              <Toolbar>
+                <ToolbarTitle text="Spot Info" />
+              </Toolbar>
+              <CardText>
+                <TextField
+                  style={styles.textField}
+                  disabled
+                  name="address"
+                  floatingLabelText="Address"
+                  value={this.state.fields.address}
+                />
+                <TextField
+                  style={styles.textField}
+                  disabled
+                  name="postCode"
+                  floatingLabelText="Post Code"
+                  value={this.state.fields.postCode}
+                />
+                <TextField
+                  style={styles.textField}
+                  disabled
+                  name="pricePerHour"
+                  floatingLabelText="Price Per Hour"
+                  value={`$${this.state.fields.pricePerHour}`}
+                />
+              </CardText>
+            </Paper>
+            <Paper style={{ width: '100%' }}>
+              <Toolbar>
+                <ToolbarTitle text="Book a Spot" />
+              </Toolbar>
+              <CardText>
+                <form>
+                  <div style={styles.datePickerContainer}>
+                    <DatePicker
+                      textFieldStyle={{ width: '100%' }}
+                      floatingLabelText="Date Booked"
+                      errorText={this.state.fieldErrors.dateBooked}
+                      hintText="Available from"
+                      container="inline"
+                      autoOk
+                      value={this.state.fields.dateBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, dateBooked: d } }); }}
                     />
-                    <TextField
-                      style={styles.textField}
-                      name="bookingCost"
-                      hintText="Booking Cost"
-                      errorText={this.state.fieldErrors.bookingCost}
-                      floatingLabelText="Booking Cost"
-                      value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
+                    <TimePicker
+                      textFieldStyle={{ marginTop: '1.5rem' }}
+                      format="ampm"
+                      hintText="Time Booked"
+                      errorText={this.state.fieldErrors.timeBooked}
+                      value={this.state.fields.timeBooked}
+                      onChange={(x, d) => { this.setState({ fields: { ...this.state.fields, timeBooked: d } }); }}
                     />
-                    <div style={styles.buttonContainer}>
-                      <RaisedButton
-                        primary
-                        style={styles.submitButton}
-                        label="Submit"
-                        onClick={e => this.handleSubmit(e)}
-                      />
+                  </div>
+                  <TextField
+                    style={styles.textField}
+                    name="duration"
+                    hintText="Duration"
+                    errorText={this.state.fieldErrors.duration}
+                    floatingLabelText="Duration"
+                    value={this.state.fields.duration}
+                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                  />
+                  <TextField
+                    style={styles.textField}
+                    name="bookingCost"
+                    hintText="Booking Cost"
+                    errorText={this.state.fieldErrors.bookingCost}
+                    floatingLabelText="Booking Cost"
+                    value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
+                  />
+                  <div style={styles.buttonContainer}>
+                    <RaisedButton
+                      primary
+                      style={styles.submitButton}
+                      label="Submit"
+                      onClick={e => this.handleSubmit(e)}
+                    />
 
-                      <Link
-                        to="/bookspot/list"
-                      >
-                        <RaisedButton
-                          label="Cancel"
-                          primary
-                        />
-                      </Link>
-                    </div>
-                  </form>
-                </CardText>
-              </Paper>
-            </div>
-          </Card>
-        </div>
+                    <Link
+                      to="/bookspot/list"
+                    >
+                      <RaisedButton
+                        label="Cancel"
+                        primary
+                      />
+                    </Link>
+                  </div>
+                </form>
+              </CardText>
+            </Paper>
+          </div>
+        </Card>
       </div>
     );
   }

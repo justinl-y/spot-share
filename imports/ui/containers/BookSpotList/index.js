@@ -12,6 +12,7 @@ import { setApplicationLocation } from '../App/actions';
 const styles = {
   component: {
     textAlign: 'center',
+    marginBottom: '15px',
   },
 };
 
@@ -26,7 +27,7 @@ class BookSpotList extends Component {
     const bookingsList = this.props.bookingsList;
 
     return (
-      <div>
+      <div style={styles.component}>
         <h2>Bookings List</h2>
         <ul>
           {bookingsList.map(booking =>
