@@ -13,7 +13,6 @@ import TimePicker from 'material-ui/TimePicker';
 import { Bookings } from '../../../api/bookings';
 import { addBookingSpot } from '../../containers/BookSpotInput/actions';
 
-
 class BookSpotEdit extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +20,7 @@ class BookSpotEdit extends Component {
       fields: {},
       fieldErrors: {},
     };
+
     this.onChange = address => this.setState({ address });
   }
 
@@ -37,9 +37,13 @@ class BookSpotEdit extends Component {
     this.setState({
       fields: {},
     });
+
     const fields = {};
 
     fields._id = bookingSpot[0]._id;
+    fields.address = bookingSpot[0].address;
+    fields.postCode = bookingSpot[0].post_code;
+    fields.pricePerHour = bookingSpot[0].price_per_hour;
     fields.dateBooked = new Date(bookingSpot[0].date_booked);
     fields.timeBooked = new Date(bookingSpot[0].time_booked);
     fields.duration = bookingSpot[0].duration;
@@ -149,9 +153,8 @@ class BookSpotEdit extends Component {
       },
     };
     return (
-      <div>
-        <div style={styles.component}>
-          <Card style={styles.card}>
+      <div style={styles.component}>
+        <Card style={styles.card}>
           <div style={styles.formWrap}>
             <Paper style={{ width: '100%', height: '350px' }}>
               <Toolbar>
@@ -160,15 +163,24 @@ class BookSpotEdit extends Component {
               <CardText>
                 <TextField
                   style={styles.textField}
-                  disabled="true"
+                  disabled
                   name="address"
                   floatingLabelText="Address"
+                  value={this.state.fields.address}
                 />
                 <TextField
                   style={styles.textField}
-                  disabled="true"
+                  disabled
+                  name="postCode"
+                  floatingLabelText="Post Code"
+                  value={this.state.fields.postCode}
+                />
+                <TextField
+                  style={styles.textField}
+                  disabled
                   name="pricePerHour"
                   floatingLabelText="Price Per Hour"
+                  value={`$${this.state.fields.pricePerHour}`}
                 />
               </CardText>
             </Paper>
@@ -176,7 +188,7 @@ class BookSpotEdit extends Component {
               <Toolbar>
                 <ToolbarTitle text="Book a Spot" />
               </Toolbar>
-                <CardText>
+              <CardText>
                 <form>
                   <div style={styles.datePickerContainer}>
                     <DatePicker
@@ -213,13 +225,11 @@ class BookSpotEdit extends Component {
                     hintText="Booking Cost"
                     errorText={this.state.fieldErrors.bookingCost}
                     floatingLabelText="Booking Cost"
-                    value={this.state.fields.bookingCost}
-                  // onChange={this.handleTextFieldChange.bind(this)}
-                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                   />
                   <div style={styles.buttonContainer}>
                     <RaisedButton
-                      primary="true"
+                      primary
                       style={styles.submitButton}
                       label="Submit"
                       onClick={e => this.handleSubmit(e)}
@@ -230,16 +240,15 @@ class BookSpotEdit extends Component {
                     >
                       <RaisedButton
                         label="Cancel"
-                        primary="true"
+                        primary
                       />
                     </Link>
                   </div>
                 </form>
               </CardText>
-              </Paper>
-            </div>
-          </Card>
-        </div>
+            </Paper>
+          </div>
+        </Card>
       </div>
     );
   }

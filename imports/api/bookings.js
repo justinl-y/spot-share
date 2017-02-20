@@ -11,15 +11,15 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   insertBookingSpot(booking) {
-    console.log(booking);
-
     const insert = Bookings.insert({
       user_id: Meteor.userId(),
-      parking_spot_id: 'BT5WGoGqrQzcX2Qrx', // booking.parkingSpotId, TODO add this from parking spot data
+      parking_spot_id: booking.parkingSpotId,
+      address: booking.address,
+      post_code: booking.postCode,
+      price_per_hour: Number(booking.pricePerHour),
       date_booked: booking.dateBooked.toString(),
       time_booked: booking.timeBooked.toString(),
       duration: Number(booking.duration),
-      // pricePerHour: booking.pricePerHour,  // TODO add this from parking spot data
       booking_cost: Number(booking.bookingCost),
     });
 
@@ -59,11 +59,9 @@ Meteor.methods({
       { _id: booking._id },
       {
         $set: {
-          parking_spot_id: 'BT5WGoGqrQzcX2Qrx', // booking.parkingSpotId, TODO add this from parking spot data
           date_booked: booking.dateBooked.toString(),
           time_booked: booking.timeBooked.toString(),
           duration: Number(booking.duration),
-          // price_per_hour: Number(booking.pricePerHour), TODO add this from parking spot data
           booking_cost: Number(booking.bookingCost),
         },
       });
