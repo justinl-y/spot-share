@@ -22,6 +22,7 @@ const styles = {
     marginBottom: '8px',
   },
   listContainer: {
+    display: 'flex',
     textAlign: 'left',
   },
 };
@@ -34,10 +35,14 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
         <ToolbarTitle text="Booking Info" />
       </Toolbar>
       <List style={styles.listContainer}>
-        <ListItem primaryText={dateBooked} secondaryText="Date Booked" leftIcon={<Event />} />
-        <ListItem primaryText={timeBooked} secondaryText="Time Booked" leftIcon={<Schedule />} />
+       <div>
+        <ListItem primaryText={dateBooked.slice(4, 16)} secondaryText="Date Booked" leftIcon={<Event />} />
+        <ListItem primaryText={timeBooked.slice(16, 21)} secondaryText="Time Booked" leftIcon={<Schedule />} />
+       </div>
+       <div>
         <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
         <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
+      </div>
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
