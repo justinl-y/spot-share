@@ -22,6 +22,9 @@ class HeaderBar extends Component {
         flexDirection: 'row',
         justifyContent: 'flex-start',
       },
+      headerButtons: {
+        color: 'white',
+      },
     };
 
     // set up sign in/ sign out cmponent on user login
@@ -34,6 +37,7 @@ class HeaderBar extends Component {
             to="/bookspot/list"
           >
             <FlatButton
+              style={styles.headerButtons}
               label="View Bookings"
             />
           </Link>
@@ -41,6 +45,7 @@ class HeaderBar extends Component {
             to="/sharespot/list"
           >
             <FlatButton
+              style={styles.headerButtons}
               label="View Share Shots"
             />
           </Link>
@@ -48,6 +53,7 @@ class HeaderBar extends Component {
             to="/sharespot/new"
           >
             <FlatButton
+              style={styles.headerButtons}
               label="Add Share Spot"
             />
           </Link>
@@ -60,6 +66,7 @@ class HeaderBar extends Component {
             to="/profile"
           >
             <FlatButton
+              style={styles.headerButtons}
               label={userEmail}
             />
           </Link>
@@ -67,6 +74,7 @@ class HeaderBar extends Component {
             to="/login"
           >
             <FlatButton
+              style={styles.headerButtons}
               label="Sign Out"
               onClick={this.props.userLogout}
             />
@@ -80,6 +88,7 @@ class HeaderBar extends Component {
             to="/login"
           >
             <FlatButton
+              style={styles.headerButtons}
               label="Sign In"
             />
           </Link>
@@ -89,13 +98,16 @@ class HeaderBar extends Component {
 
     // set display
     display = (<AppBar
+      style={styles.container}
       iconElementLeft={
         <div style={styles.menuLeft}>
           <IconButton>
             <Link
               to="/"
             >
-              <MapsDirectionsCar />
+              <MapsDirectionsCar
+                style={styles.headerButtons}
+              />
             </Link>
           </IconButton>
           { signedInLinksLeft }
