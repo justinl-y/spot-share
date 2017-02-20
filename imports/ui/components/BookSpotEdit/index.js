@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
@@ -40,9 +40,14 @@ class BookSpotEdit extends Component {
     const fields = {};
 
     fields._id = bookingSpot[0]._id;
+    fields.dateBooked = new Date(bookingSpot[0].date_booked);
+    fields.timeBooked = new Date(bookingSpot[0].time_booked);
+    fields.duration = bookingSpot[0].duration;
+    fields.bookingCost = bookingSpot[0].booking_cost;
 
     this.setState({ fields });
   }
+
 
   handleTextFieldChange(e, validation) {
     const fieldErrors = this.state.fieldErrors;
@@ -88,6 +93,24 @@ class BookSpotEdit extends Component {
 
     return errors;
   }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const bookingSpot = this.state.fields;
+    const fieldErrors = this.validate(bookingSpot);
+
+    this.setState({ fieldErrors });
+
+    if (Object.keys(fieldErrors).length) return;
+
+    // submit data
+    this.props.editBookSpot(bookingSpot);
+
+    // navigate to list
+    browserHistory.push('/bookspot/list');
+  }
+
   render() {
     const styles = {
       component: {
@@ -192,6 +215,7 @@ const mapDispatchToProps = dispatch => ({
 BookSpotEdit.propTypes = {
   addBookingSpot: PropTypes.func.isRequired,
   bookingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editBookSpot: PropTypes.func.isRequired,
 };
 
 const BookSpaceEditContainer = createContainer((bookingSpotId) => {
