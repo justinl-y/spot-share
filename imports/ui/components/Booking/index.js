@@ -34,39 +34,39 @@ const styles = {
 };
 
 const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings }) => (
-<div style={styles.componentContainer}>
-  <div style={styles.bookingContainer}>
-    <Card style={{ marginBottom: '20px' }}>
-      <Toolbar>
-        <ToolbarTitle text="Booking Info" />
-      </Toolbar>
-      <List style={styles.listContainer}>
-        <div>
-          <ListItem primaryText={dateBooked.slice(4, 16)} secondaryText="Date Booked" leftIcon={<Event />} />
-          <ListItem primaryText={timeBooked.slice(16, 21)} secondaryText="Time Booked" leftIcon={<Schedule />} />
+  <div style={styles.componentContainer}>
+    <div style={styles.bookingContainer}>
+      <Card style={{ marginBottom: '20px' }}>
+        <Toolbar>
+          <ToolbarTitle text="Booking Info" />
+        </Toolbar>
+        <List style={styles.listContainer}>
+          <div>
+            <ListItem primaryText={dateBooked.slice(4, 16)} secondaryText="Date Booked" leftIcon={<Event />} />
+            <ListItem primaryText={timeBooked.slice(16, 21)} secondaryText="Time Booked" leftIcon={<Schedule />} />
+          </div>
+          <div>
+            <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
+            <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
+          </div>
+        </List>
+        <div style={styles.buttonContainer}>
+          <RaisedButton
+            style={{ width: '45%', marginLeft: '20px' }}
+            label="Edit"
+            primary
+            onClick={(e) => { e.preventDefault(); editBookings(id); }}
+          />
+          <RaisedButton
+            style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
+            label="Delete"
+            primary
+            onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
+          />
         </div>
-        <div>
-          <ListItem primaryText={`${duration} hours`} secondaryText="Duration" leftIcon={<HourGlass />} />
-          <ListItem primaryText={`$${bookingCost}`} secondaryText="Booking Cost" leftIcon={<Money />} />
-        </div>
-      </List>
-      <div style={styles.buttonContainer}>
-        <RaisedButton
-          style={{ width: '45%', marginLeft: '20px' }}
-          label="Edit"
-          primary
-          onClick={(e) => { e.preventDefault(); editBookings(id); }}
-        />
-        <RaisedButton
-          style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
-          label="Delete"
-          primary
-          onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
-        />
-      </div>
-    </Card>
+      </Card>
+    </div>
   </div>
-</div>
 );
 
 Booking.propTypes = {

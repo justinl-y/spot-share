@@ -217,7 +217,10 @@ class BookSpotEdit extends Component {
                     errorText={this.state.fieldErrors.duration}
                     floatingLabelText="Duration"
                     value={this.state.fields.duration}
-                    onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                    onChange={(e) => {
+                      this.handleTextFieldChange(e, ['req', 'num']);
+                      this.setState({ fields: { ...this.state.fields, bookingCost: (this.state.fields.duration * this.state.fields.pricePerHour) } });
+                    }}
                   />
                   <TextField
                     style={styles.textField}
