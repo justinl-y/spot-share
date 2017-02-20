@@ -25,7 +25,10 @@ Building this application was a great opportunity for me to develop greater unde
 project environment, setting up the dependencies and configuring the development tools.  Finally, this project was a great opportunity to work collectively 
 with small development team.
 
-DV - 
+DV - Throughout the development process of this project, I have learned a great deal about not only the development side of building
+a full stack web application using Meteor, but also the UX/UI end of things by designing and mapping out the user flow of the application. This project has
+given me the opportunity to gain the invaluable experience of working concurrently with a development team with one common goal and many different assigned
+responsibilities. 
 
 JF - For this Parking Spot project, I was tasked with implementing Google Maps React for mapping out available parking spots. 
 I knew nothing about React 6 weeks ago but working with components, props, states, etc is starting to become second nature.
