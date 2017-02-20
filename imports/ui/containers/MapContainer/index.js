@@ -57,7 +57,6 @@ const ParkingGoogleMap = withGoogleMap(props => (
               postal={marker.post_code}
               price={marker.price_per_hour}
               info={marker.additional_information}
-              link={props.currentUser ? '/bookspot/new' : '/login'}
               label={props.currentUser ? 'Book Spot' : 'Sign In to Book'}
             />
           </InfoWindow>
