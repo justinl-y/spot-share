@@ -273,7 +273,7 @@ class ShareSpotEdit extends Component {
                     floatingLabelText="Additional Information"
                     multiLine
                     rows={3}
-                    value={this.state.fields.additionalInformation}
+                    value={this.state.fields.additionalInformation === null ? '' : this.state.fields.additionalInformation}
                     onChange={e => this.handleTextFieldChange(e, [])}
                   />
 
