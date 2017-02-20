@@ -71,6 +71,7 @@ class BookSpotAdd extends Component {
 
     return errors;
   }
+
   handleSubmit(e) {
     const bookingSpot = this.state.fields;
 
@@ -90,6 +91,7 @@ class BookSpotAdd extends Component {
     // navigate to list
     browserHistory.push('/bookspot/list');
   }
+
 
   render() {
     const styles = {
