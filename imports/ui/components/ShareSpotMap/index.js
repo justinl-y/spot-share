@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import blueIcon from '../../containers/MapContainer/blueIcon'
 
 
 const ShareGoogleMap = withGoogleMap(props => (
@@ -7,7 +8,7 @@ const ShareGoogleMap = withGoogleMap(props => (
     defaultZoom={13}
     center={props.center}
   >
-    <Marker position={new google.maps.LatLng(props.marker.lat, props.marker.lng)} />
+    <Marker position={new google.maps.LatLng(props.marker.lat, props.marker.lng)} icon={blueIcon} />
   </GoogleMap>
 ));
 
