@@ -5,10 +5,8 @@ import { Link } from 'react-router';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
-
 // import Home from 'material-ui/svg-icons/action/home';
 import MapsDirectionsCar from 'material-ui/svg-icons/maps/directions-car';
-
 import { userSignOut } from '../ProcessLogin/actions';
 
 class HeaderBar extends Component {
@@ -110,82 +108,6 @@ class HeaderBar extends Component {
       }
     />);
 
-    /* switch (this.props.userLocation) {
-      case 'HOME':
-        display = (<AppBar
-          iconElementLeft={
-            <IconButton
-              tooltip="Home"
-            >
-              <Link
-                to="/menu"
-              >
-                <MapsDirectionsCar />
-                <Home />
-                Home
-              </Link>
-            </IconButton>
-          }
-          iconElementRight={
-            <div>
-              { signedInLinks }
-            </div>
-          }
-        />);
-        break;
-      case 'FIND-SPOT':
-        break;
-      case 'BOOK-SPOT':
-        display = (<AppBar
-          iconElementLeft={
-            <IconButton>
-              <Link
-                to="/menu"
-              >
-                <MapsDirectionsCar />
-              </Link>
-            </IconButton>
-          }
-          iconElementRight={
-            <div>
-              <Link
-                to="/bookspot/new"
-              >
-                <FlatButton
-                  label="New book spot"
-                  // onClick={this.props.addBookingSpot}
-                />
-              </Link>
-              { signedInLinks }
-            </div>
-          }
-        />);
-        break;
-      case 'SHARE-SPOT':
-        display = (<AppBar
-          iconElementLeft={
-            <IconButton>
-              <Link
-                to="/menu"
-              >
-                <MapsDirectionsCar />
-              </Link>
-            </IconButton>
-          }
-          iconElementRight={
-            <div>
-              { signedInLinks }
-            </div>
-          }
-        />);
-        break;
-      default:
-        break;
-    }*/
-
-    /* if (!this.props) {
-      return null;
-    }*/
     return (
       <div>
         {display}
