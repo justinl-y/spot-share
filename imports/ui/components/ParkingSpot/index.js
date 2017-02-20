@@ -11,11 +11,13 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 const styles = {
   bookingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    flexDirection: 'row',
+    // display: 'flex',
+    // justifyContent: 'center',
+    width: '500px',
+    // flexDirection: 'row',
     margin: '25px',
+    // paddingBottom: '25px',
+    flexBasis: '45%',
   },
   buttonContainer: {
     display: 'flex',
@@ -32,26 +34,26 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
   <div style={styles.bookingContainer}>
     <Card style={{ marginBottom: '20px' }}>
       <Toolbar>
-        <ToolbarTitle text="Booking Info" />
+        <ToolbarTitle text="Share Spot Info" />
       </Toolbar>
       <List style={styles.listContainer}>
         <ListItem primaryText={address} secondaryText="Address" leftIcon={<Location />} />
         <ListItem primaryText={availableFrom} secondaryText="Available From" leftIcon={<DateFrom />} />
         <ListItem primaryText={availableTo} secondaryText="Available To" leftIcon={<Event />} />
         <ListItem primaryText={`$${pricePerHour}`} secondaryText="Price Per Hour" leftIcon={<Money />} />
-        <ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />
+        {/*<ListItem primaryText={additionalInformation} secondaryText="Additional Information" leftIcon={<Info />} />*/}
       </List>
       <div style={styles.buttonContainer}>
         <RaisedButton
           style={{ width: '45%', marginLeft: '20px' }}
           label="Edit"
-          primary="true"
+          primary
           onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
         />
         <RaisedButton
           style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
           label="Delete"
-          primary="true"
+          primary
           onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
         />
       </div>

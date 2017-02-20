@@ -13,6 +13,12 @@ const styles = {
   component: {
     textAlign: 'center',
   },
+  shareSpotList: {
+    width: '1250px',
+    justifyContent: 'center',
+    display: 'flex',
+    flexFlow: 'row wrap',
+  },
 };
 
 const currentLocation = 'SHARE-SPOT';
@@ -31,8 +37,8 @@ class ShareSpotList extends Component {
 
     return (
       <div style={styles.component}>
-        <h2>Parking Spots</h2>
-        <ul>
+        <h2>Share Spots</h2>
+        <ul style={styles.shareSpotList}>
           {parkingSpots.map(parkingSpot =>
             <ParkingSpot
               key={parkingSpot._id}
