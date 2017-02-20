@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
@@ -8,6 +10,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import { ParkingSpots } from '../../../api/parking-spots';
 import { setApplicationLocation } from '../../containers/App/actions';
 
 const currentLocation = 'BOOK-SPOT';
@@ -27,8 +30,6 @@ class BookSpotAdd extends Component {
 
     const parkingSpot = this.props.parkingSpot;
     this.addParkingSpotToState(parkingSpot);
-
-    console.log(parkingSpot);
   }
 
   addParkingSpotToState(parkingSpot) {
@@ -222,16 +223,22 @@ class BookSpotAdd extends Component {
                       floatingLabelText="Booking Cost"
                       value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                     />
+
+                    <RaisedButton
+                      label="Submit"
+                      onClick={e => this.handleSubmit(e)}
+                    />
+
                     <Link
                       to="/bookspot/list"
                     >
                       <RaisedButton
                         label="Cancel"
-                        primary="true"
+                        primary
                       />
                     </Link>
-                </form>
-              </CardText>
+                  </form>
+                </CardText>
               </Paper>
             </div>
           </Card>
@@ -264,7 +271,14 @@ BookSpotAdd.propTypes = {
   setApplicationLocation: PropTypes.func.isRequired,
 };
 
+const BookSpaceAddContainer = createContainer((parkingSpotId) => {
+  Meteor.subscribe('getParkingSpots');
+  return {
+    parkingSpot: ParkingSpots.find({ _id: parkingSpotId.parkingSpotId }).fetch(),
+  };
+}, BookSpotAdd);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BookSpotAdd);
+)(BookSpaceAddContainer);
