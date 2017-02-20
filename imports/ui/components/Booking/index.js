@@ -10,8 +10,8 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 const styles = {
   componentContainer: {
-    flexBasis: '30%',
-    width: '300px',
+    flexBasis: '45%',
+    width: '500px',
     justifyContent: 'center',
     marginRight: '20px',
   },

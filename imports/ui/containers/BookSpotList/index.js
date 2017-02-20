@@ -12,7 +12,12 @@ import { setApplicationLocation } from '../App/actions';
 const styles = {
   component: {
     textAlign: 'center',
-    marginBottom: '15px',
+  },
+  shareSpotList: {
+    width: '1250px',
+    justifyContent: 'center',
+    display: 'flex',
+    flexFlow: 'row wrap',
   },
 };
 
@@ -29,7 +34,7 @@ class BookSpotList extends Component {
     return (
       <div style={styles.component}>
         <h2>Bookings List</h2>
-        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <ul style={styles.shareSpotList}>
           {bookingsList.map(booking =>
             <Booking
               key={booking._id}
