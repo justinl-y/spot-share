@@ -11,7 +11,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import { setApplicationLocation } from '../../containers/App/actions';
-
 import { ParkingSpots } from '../../../api/parking-spots';
 
 const currentLocation = 'BOOK-SPOT';
@@ -28,6 +27,20 @@ class BookSpotAdd extends Component {
 
   componentWillMount() {
     this.props.setApplicationLocation(currentLocation);
+
+    const parkingSpot = this.props.parkingSpot;
+    this.addParkingPortToState(parkingSpot);
+  }
+
+  addParkingPortToState(parkingSpot) {
+    const fields = {};
+
+    fields.parkingSpotId = parkingSpot[0]._id;
+    fields.address = parkingSpot[0].address;
+    fields.postCode = parkingSpot[0].post_code;
+    fields.pricePerHour = parkingSpot[0].price_per_hour;
+
+    this.setState({ fields });
   }
 
   handleTextFieldChange(e, validation) {
@@ -76,16 +89,12 @@ class BookSpotAdd extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
     const bookingSpot = this.state.fields;
-
-    // console.log(bookingSpot);
-
     const fieldErrors = this.validate(bookingSpot);
 
     this.setState({ fieldErrors });
-
-    e.preventDefault();
-
     if (Object.keys(fieldErrors).length) return;
 
     // submit data
@@ -133,9 +142,6 @@ class BookSpotAdd extends Component {
       },
     };
 
-    console.log(this.props.parkingSpotId);
-    console.log(this.props.parkingSpot);
-
     return (
       <div>
         <div style={styles.component}>
@@ -143,28 +149,35 @@ class BookSpotAdd extends Component {
             <div style={styles.formWrap}>
               <Paper style={{ width: '100%', height: '350px' }}>
                 <Toolbar>
-                  <ToolbarTitle text="Spot Info" />
+                  <ToolbarTitle text="Parking Spot Info" />
                 </Toolbar>
                 <CardText>
                   <TextField
                     style={styles.textField}
-                    // disabled
+                    disabled
                     name="address"
                     floatingLabelText="Address"
-                    defaultValue={this.props.parkingSpot[0].address}
+                    value={this.state.fields.address}
                   />
                   <TextField
                     style={styles.textField}
-                    // disabled
+                    disabled
+                    name="postCode"
+                    floatingLabelText="Post Code"
+                    value={this.state.fields.postCode}
+                  />
+                  <TextField
+                    style={styles.textField}
+                    disabled
                     name="pricePerHour"
                     floatingLabelText="Price Per Hour"
-                    defaultValue={this.props.parkingSpot[0].price_per_hour}
+                    value={`$${this.state.fields.pricePerHour}`}
                   />
                 </CardText>
               </Paper>
               <Paper style={{ width: '100%' }}>
                 <Toolbar>
-                  <ToolbarTitle text="Book a Spot" />
+                  <ToolbarTitle text="Book the Spot" />
                 </Toolbar>
                 <CardText>
                   <form>
@@ -195,17 +208,19 @@ class BookSpotAdd extends Component {
                       errorText={this.state.fieldErrors.duration}
                       floatingLabelText="Duration"
                       value={this.state.fields.duration}
-                      onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                      onChange={(e) => {
+                        this.handleTextFieldChange(e, ['req', 'num']);
+                        this.setState({ fields: { ...this.state.fields, bookingCost: (this.state.fields.duration * this.state.fields.pricePerHour) } });
+                      }}
                     />
                     <TextField
                       style={styles.textField}
                       name="bookingCost"
+                      disabled
                       hintText="Booking Cost"
                       errorText={this.state.fieldErrors.bookingCost}
                       floatingLabelText="Booking Cost"
-                      value={this.state.fields.bookingCost}
-                    // onChange={this.handleTextFieldChange.bind(this)}
-                      onChange={e => this.handleTextFieldChange(e, ['req', 'num'])}
+                      value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                     />
                     <div style={styles.buttonContainer}>
                       <RaisedButton
@@ -239,7 +254,6 @@ BookSpotAdd.propTypes = {
   addBookSpot: PropTypes.func.isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
   parkingSpot: PropTypes.arrayOf(PropTypes.object).isRequired,
-  parkingSpotId: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -265,4 +279,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(BookSpotAddContainer);
-

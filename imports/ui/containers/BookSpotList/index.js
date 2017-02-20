@@ -81,8 +81,7 @@ BookSpotList.propTypes = {
 const BookSpaceContainer = createContainer(() => {
   Meteor.subscribe('getBookings');
   return {
-    bookingsList: Bookings.find({ }).fetch(),
-    // bookingsList: Bookings.find({ _id: Meteor.userId() }).fetch(), TODO for final version
+    bookingsList: Bookings.find({ user_id: Meteor.userId() }).fetch(),
   };
 }, BookSpotList);
 

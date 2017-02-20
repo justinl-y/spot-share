@@ -55,6 +55,8 @@ const mapDispatchToProps = dispatch => ({
 
 BookSpotInput.defaultProps = {
   bookingSpotId: '',
+  parkingSpotId: '',
+  originalLocation: '',
 };
 
 BookSpotInput.propTypes = {
@@ -62,8 +64,8 @@ BookSpotInput.propTypes = {
   bookingSpotId: PropTypes.string.isRequired,
   addBookingSpot: PropTypes.func.isRequired,
   editBookingSpot: PropTypes.func.isRequired,
-  parkingSpotId: PropTypes.string.isRequired,
-  originalLocation: PropTypes.string.isRequired,
+  parkingSpotId: PropTypes.string,
+  originalLocation: PropTypes.string,
 };
 
 export default connect(
