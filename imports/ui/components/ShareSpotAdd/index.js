@@ -179,7 +179,6 @@ class ShareSpotAdd extends Component {
                     onChange={this.onChange}
                     hintText="Enter address here"
                     floatingLabelText="Enter address here"
-                    style={{ width: '100%' }}
                   />
                   <RaisedButton
                     type="submit"
@@ -204,7 +203,6 @@ class ShareSpotAdd extends Component {
                     errorText={this.state.fieldErrors.postCode}
                     floatingLabelText="Post Code"
                     value={this.state.fields.postCode || ''}
-                    // onChange={this.handleTextFieldChange.bind(this)}
                     onChange={e => this.handleTextFieldChange(e, ['req'])}
                   />
                   <div style={styles.datePickerContainer}>

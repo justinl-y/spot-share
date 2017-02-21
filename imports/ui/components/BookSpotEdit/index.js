@@ -151,7 +151,7 @@ class BookSpotEdit extends Component {
           <div style={styles.formWrap}>
             <Paper style={{ width: '100%', height: '350px' }}>
               <Toolbar>
-                <ToolbarTitle text="Spot Info" />
+                <ToolbarTitle text="Share spot info" />
               </Toolbar>
               <CardText>
                 <TextField
@@ -179,7 +179,7 @@ class BookSpotEdit extends Component {
             </Paper>
             <Paper style={{ width: '100%' }}>
               <Toolbar>
-                <ToolbarTitle text="Book a Spot" />
+                <ToolbarTitle text="Edit your booking" />
               </Toolbar>
               <CardText>
                 <form>

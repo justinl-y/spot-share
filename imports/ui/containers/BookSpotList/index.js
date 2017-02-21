@@ -26,6 +26,10 @@ const currentLocation = 'BOOK-SPOT';
 
 class BookSpotList extends Component {
   componentWillMount() {
+    if (!Meteor.userId()) {
+      this.props.router.push('/login');
+    }
+
     this.props.setApplicationLocation(currentLocation);
   }
 
@@ -81,6 +85,7 @@ const mapDispatchToProps = dispatch => ({
 
 // proptypes validation
 BookSpotList.propTypes = {
+  router: PropTypes.object.isRequired,
   bookingsList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setApplicationLocation: PropTypes.func.isRequired,
   editBookingSpot: PropTypes.func.isRequired,
