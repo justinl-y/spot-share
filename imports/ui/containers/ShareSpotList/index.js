@@ -96,7 +96,7 @@ ShareSpotList.propTypes = {
 const ShareSpaceContainer = createContainer(() => {
   Meteor.subscribe('getParkingSpots');
   return {
-    parkingSpotList: ParkingSpots.find({ user_id: Meteor.userId() }).fetch(),
+    parkingSpotList: ParkingSpots.find({ user_id: Meteor.userId() }, { sort: { _id: -1 } }).fetch(),
   };
 }, ShareSpotList);
 
