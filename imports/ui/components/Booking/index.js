@@ -33,12 +33,12 @@ const styles = {
   },
 };
 
-const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings }) => (
+const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookings, deleteBookings, bookingAddress }) => (
   <div style={styles.componentContainer}>
     <div style={styles.bookingContainer}>
       <Card style={{ marginBottom: '20px' }}>
         <Toolbar>
-          <ToolbarTitle text="Booking Info" />
+          <ToolbarTitle text={bookingAddress} />
         </Toolbar>
         <List style={styles.listContainer}>
           <div>
@@ -77,6 +77,7 @@ Booking.propTypes = {
   timeBooked: PropTypes.string.isRequired,
   editBookings: PropTypes.func.isRequired,
   deleteBookings: PropTypes.func.isRequired,
+  bookingAddress: PropTypes.string.isRequired,
 };
 
 export default Booking;

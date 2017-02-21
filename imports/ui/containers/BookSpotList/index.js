@@ -11,7 +11,8 @@ import { setApplicationLocation } from '../App/actions';
 
 const styles = {
   component: {
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
   shareSpotList: {
     width: '1250px',
@@ -32,8 +33,9 @@ class BookSpotList extends Component {
     const bookingsList = this.props.bookingsList;
 
     return (
+    <div style={{textAlign: 'center' }}>
+    <h2>Bookings List</h2>
       <div style={styles.component}>
-        <h2>Bookings List</h2>
         <ul style={styles.shareSpotList}>
           {bookingsList.map(booking =>
             <Booking
@@ -47,10 +49,12 @@ class BookSpotList extends Component {
               bookingCost={booking.booking_cost}
               editBookings={this.props.editBookingSpot}
               deleteBookings={this.props.deleteBookingSpot}
+              bookingAddress={booking.address}
             />,
           )}
         </ul>
       </div>
+    </div>
     );
   }
 }

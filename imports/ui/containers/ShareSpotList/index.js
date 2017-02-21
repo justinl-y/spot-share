@@ -11,7 +11,8 @@ import { setApplicationLocation } from '../App/actions';
 
 const styles = {
   component: {
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
   shareSpotList: {
     width: '1250px',
@@ -36,8 +37,9 @@ class ShareSpotList extends Component {
     const parkingSpots = this.props.parkingSpotList;
 
     return (
+   <div style={{textAlign: 'center' }}>
+    <h2>Share Spots</h2>
       <div style={styles.component}>
-        <h2>Share Spots</h2>
         <ul style={styles.shareSpotList}>
           {parkingSpots.map(parkingSpot =>
             <ParkingSpot
@@ -56,6 +58,7 @@ class ShareSpotList extends Component {
           )}
         </ul>
       </div>
+    </div>
     );
   }
 }
