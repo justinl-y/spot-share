@@ -224,19 +224,21 @@ class BookSpotAdd extends Component {
                       value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                     />
 
-                    <RaisedButton
-                      label="Submit"
-                      onClick={e => this.handleSubmit(e)}
-                    />
-
                     <Link
                       to="/bookspot/list"
                     >
                       <RaisedButton
                         label="Cancel"
-                        primary
+                        style={{ width: '45%', marginLeft: '20px' }}
                       />
                     </Link>
+
+                    <RaisedButton
+                      label="Submit"
+                      primary
+                      style={{ width: '45%', marginLeft: '20px' }}
+                      onClick={e => this.handleSubmit(e)}
+                    />
                   </form>
                 </CardText>
               </Paper>

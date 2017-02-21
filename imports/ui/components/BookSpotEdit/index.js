@@ -144,13 +144,6 @@ class BookSpotEdit extends Component {
         flexDirection: 'row',
         justifyContent: 'space-between',
       },
-      buttonContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-      },
-      submitButton: {
-        width: '70%',
-      },
     };
     return (
       <div style={styles.component}>
@@ -230,22 +223,22 @@ class BookSpotEdit extends Component {
                     floatingLabelText="Booking Cost"
                     value={this.state.fields.bookingCost === undefined ? '$0' : `$${this.state.fields.bookingCost}`}
                   />
-                  <div style={styles.buttonContainer}>
-                    <RaisedButton
-                      primary
-                      style={styles.submitButton}
-                      label="Submit"
-                      onClick={e => this.handleSubmit(e)}
-                    />
-
+                  <div>
                     <Link
                       to="/bookspot/list"
                     >
                       <RaisedButton
                         label="Cancel"
-                        primary
+                        style={{ width: '45%', marginLeft: '20px' }}
                       />
                     </Link>
+
+                    <RaisedButton
+                      primary
+                      style={{ width: '45%', marginLeft: '20px' }}
+                      label="Submit"
+                      onClick={e => this.handleSubmit(e)}
+                    />
                   </div>
                 </form>
               </CardText>

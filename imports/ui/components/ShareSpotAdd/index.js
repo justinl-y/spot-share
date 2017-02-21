@@ -7,7 +7,6 @@ import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import PlacesAutocomplete from './../../components/PlacesAutoComplete';
 import ShareSpotMap from './../../components/ShareSpotMap';
@@ -185,6 +184,7 @@ class ShareSpotAdd extends Component {
                   <RaisedButton
                     type="submit"
                     label="Find on map"
+                    style={{ width: '45%' }}
                   />
                 </form>
                 <form style={styles.form}>
@@ -255,7 +255,7 @@ class ShareSpotAdd extends Component {
                     <Link
                       to="/sharespot/list"
                     >
-                      <FlatButton
+                      <RaisedButton
                         style={{ width: '45%', marginLeft: '20px' }}
                         label="Cancel"
                       />
