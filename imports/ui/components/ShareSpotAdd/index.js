@@ -248,6 +248,7 @@ class ShareSpotAdd extends Component {
 
                   <RaisedButton
                     label="Submit"
+                    primary
                     onClick={e => this.handleSubmit(e)}
                   />
 
