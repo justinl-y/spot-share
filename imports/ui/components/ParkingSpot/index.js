@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Event from 'material-ui/svg-icons/action/event';
 import DateFrom from 'material-ui/svg-icons/action/today';
-import Location from 'material-ui/svg-icons/communication/location-on';
+// import Location from 'material-ui/svg-icons/communication/location-on';
 import Money from 'material-ui/svg-icons/editor/attach-money';
 import Info from 'material-ui/svg-icons/action/info-outline';
 import RaisedButton from 'material-ui/RaisedButton';

@@ -18,8 +18,8 @@ const defaultStyles = {
     cursor: 'pointer',
   },
   autocompleteItemActive: {
-    backgroundColor: '#fafafa'
-  }
-}
+    backgroundColor: '#fafafa',
+  },
+};
 
-export default defaultStyles
+export default defaultStyles;

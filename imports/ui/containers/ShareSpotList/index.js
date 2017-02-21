@@ -37,28 +37,28 @@ class ShareSpotList extends Component {
     const parkingSpots = this.props.parkingSpotList;
 
     return (
-   <div style={{textAlign: 'center' }}>
-    <h2>Share Spots</h2>
-      <div style={styles.component}>
-        <ul style={styles.shareSpotList}>
-          {parkingSpots.map(parkingSpot =>
-            <ParkingSpot
-              key={parkingSpot._id}
-              id={parkingSpot._id}
-              userId={parkingSpot.user_id}
-              address={parkingSpot.address}
-              availableFrom={parkingSpot.available_from}
-              availableTo={parkingSpot.available_to}
-              postCode={parkingSpot.post_code}
-              pricePerHour={parkingSpot.price_per_hour}
-              additionalInformation={parkingSpot.additional_information}
-              onClickEdit={this.props.editParkingSpot}
-              onClickDelete={this.props.deleteParkingSpot}
-            />,
-          )}
-        </ul>
+      <div style={{ textAlign: 'center' }}>
+        <h2>My Share Spots</h2>
+        <div style={styles.component}>
+          <ul style={styles.shareSpotList}>
+            {parkingSpots.map(parkingSpot =>
+              <ParkingSpot
+                key={parkingSpot._id}
+                id={parkingSpot._id}
+                userId={parkingSpot.user_id}
+                address={parkingSpot.address}
+                availableFrom={parkingSpot.available_from}
+                availableTo={parkingSpot.available_to}
+                postCode={parkingSpot.post_code}
+                pricePerHour={parkingSpot.price_per_hour}
+                additionalInformation={parkingSpot.additional_information}
+                onClickEdit={this.props.editParkingSpot}
+                onClickDelete={this.props.deleteParkingSpot}
+              />,
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
     );
   }
 }

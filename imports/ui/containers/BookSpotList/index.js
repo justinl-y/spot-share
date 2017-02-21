@@ -33,28 +33,28 @@ class BookSpotList extends Component {
     const bookingsList = this.props.bookingsList;
 
     return (
-    <div style={{textAlign: 'center' }}>
-    <h2>Bookings List</h2>
-      <div style={styles.component}>
-        <ul style={styles.shareSpotList}>
-          {bookingsList.map(booking =>
-            <Booking
-              key={booking._id}
-              id={booking._id}
-              userId={booking.user_id}
-              parkingSpotId={booking.parking_spot_id}
-              dateBooked={booking.date_booked}
-              timeBooked={booking.time_booked}
-              duration={booking.duration}
-              bookingCost={booking.booking_cost}
-              editBookings={this.props.editBookingSpot}
-              deleteBookings={this.props.deleteBookingSpot}
-              bookingAddress={booking.address}
-            />,
-          )}
-        </ul>
+      <div style={{ textAlign: 'center' }}>
+        <h2>My Bookings</h2>
+        <div style={styles.component}>
+          <ul style={styles.shareSpotList}>
+            {bookingsList.map(booking =>
+              <Booking
+                key={booking._id}
+                id={booking._id}
+                userId={booking.user_id}
+                parkingSpotId={booking.parking_spot_id}
+                dateBooked={booking.date_booked}
+                timeBooked={booking.time_booked}
+                duration={booking.duration}
+                bookingCost={booking.booking_cost}
+                editBookings={this.props.editBookingSpot}
+                deleteBookings={this.props.deleteBookingSpot}
+                bookingAddress={booking.address}
+              />,
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
     );
   }
 }

@@ -23,7 +23,7 @@ Meteor.methods({
       booking_cost: Number(booking.bookingCost),
     });
 
-    console.log('Inserted Booking');
+    console.log('Booking Inserted ');
     return insert;
   },
   deleteBookingSpot(id) {
@@ -66,7 +66,7 @@ Meteor.methods({
         },
       });
 
-    console.log('Updated Booking');
+    console.log('Booking Updated ');
     return update;
   },
 });

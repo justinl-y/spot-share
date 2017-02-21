@@ -59,7 +59,7 @@ Meteor.methods({
       additional_information: parkingSpot.additionalInformation,
     });
 
-    console.log('Inserted');
+    console.log('Share Spot Inserted');
     return insert;
   },
   deleteParkingSpot(id) {
@@ -77,7 +77,7 @@ Meteor.methods({
       _id: id,
     });
 
-    console.log('Deleted');
+    console.log('Share Spot Deleted');
     return remove;
   },
   updateParkingSpot(parkingSpot) {
@@ -85,14 +85,9 @@ Meteor.methods({
     // console.log(this.userId);
     // if (!this.userId) {
 
-    console.log(parkingSpot.userId);
-    console.log(this.userId);
-
     if (parkingSpot.userId !== this.userId) {
       throw new Meteor.Error('Not-Authorised');
     }
-
-    console.log(parkingSpot);
 
     // data validataion
     /* new SimpleSchema({
@@ -121,7 +116,7 @@ Meteor.methods({
         },
       });
 
-    console.log('Updated');
+    console.log('Share Spot Updated');
     return update;
   },
 
