@@ -26,10 +26,14 @@ const styles = {
     justifyContent: 'flex-start',
     width: '100%',
     marginBottom: '8px',
+
   },
   listContainer: {
     display: 'flex',
     textAlign: 'left',
+    justifyContent: 'space-between',
+    marginLeft: '3rem',
+    marginRight: '5rem',
   },
 };
 
