@@ -6,7 +6,6 @@ import FlatButton from 'material-ui/FlatButton';
 import { Card, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import { cyan500 } from 'material-ui/styles/colors';
 
 const styles = {
   component: {
@@ -20,12 +19,6 @@ const styles = {
   },
   textField: {
     width: '100%',
-  },
-  floatingLabelStyle: {
-    color: cyan500,
-  },
-  errorStyle: {
-    color: cyan500,
   },
   buttonContainer: {
     display: 'flex',
@@ -137,7 +130,6 @@ class SignUp extends Component {
                 hintText="Email"
                 errorText={this.state.fieldErrors.email}
                 floatingLabelText="Email"
-                floatingLabelStyle={styles.floatingLabelStyle}
                 value={this.state.fields.email}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               />
@@ -147,7 +139,6 @@ class SignUp extends Component {
                 hintText="Password"
                 errorText={this.state.fieldErrors.password}
                 floatingLabelText="Password"
-                floatingLabelStyle={styles.floatingLabelStyle}
                 type="password"
                 value={this.state.fields.password}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
@@ -164,17 +155,16 @@ class SignUp extends Component {
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               /><br />
               <div style={styles.buttonContainer}>
-                <RaisedButton
-                  style={styles.buttonStyle}
-                  labelColor="black"
-                  label="Sign Up"
-                  onClick={(e) => { this.handleSubmit(e); }}
-                />
                 <FlatButton
                   style={styles.buttonStyle}
-                  // labelColor="black"
                   label="Cancel"
                   onClick={(e) => { e.preventDefault(); this.props.onSignUpCancelClick(); }}
+                />
+                <RaisedButton
+                  style={styles.buttonStyle}
+                  primary
+                  label="Sign Up"
+                  onClick={(e) => { this.handleSubmit(e); }}
                 />
               </div>
             </CardText>

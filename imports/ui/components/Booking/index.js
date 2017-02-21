@@ -57,15 +57,14 @@ const Booking = ({ id, bookingCost, duration, dateBooked, timeBooked, editBookin
         <div style={styles.buttonContainer}>
           <RaisedButton
             style={{ width: '45%', marginLeft: '20px' }}
-            label="Edit"
-            primary
-            onClick={(e) => { e.preventDefault(); editBookings(id); }}
+            label="Delete"
+            onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
           />
           <RaisedButton
             style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
-            label="Delete"
             primary
-            onClick={(e) => { e.preventDefault(); deleteBookings(id); }}
+            label="Edit"
+            onClick={(e) => { e.preventDefault(); editBookings(id); }}
           />
         </div>
       </Card>

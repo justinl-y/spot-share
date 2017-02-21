@@ -57,15 +57,14 @@ const ParkingSpot = ({ id, address, availableFrom, availableTo, pricePerHour, ad
         <div style={styles.buttonContainer}>
           <RaisedButton
             style={{ width: '45%', marginLeft: '20px' }}
-            label="Edit"
-            primary
-            onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
+            label="Delete"
+            onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
           />
           <RaisedButton
             style={{ width: '45%', marginLeft: '20px', marginRight: '15px' }}
-            label="Delete"
+            label="Edit"
             primary
-            onClick={(e) => { e.preventDefault(); onClickDelete(id); }}
+            onClick={(e) => { e.preventDefault(); onClickEdit(id); }}
           />
         </div>
       </Card>

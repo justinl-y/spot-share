@@ -23,7 +23,7 @@ class ShareSpotEdit extends Component {
     this.state = {
       fields: {},
       fieldErrors: {},
-      address: 'Vancouver, BC',
+      address: '', // Vancouver, BC',
     };
 
     this.onChange = address => this.setState({ address });
@@ -146,7 +146,7 @@ class ShareSpotEdit extends Component {
   render() {
     const styles = {
       component: {
-        height: 'calc(100vh - 64px)',
+        height: '85vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -193,13 +193,13 @@ class ShareSpotEdit extends Component {
         <Card style={styles.card}>
           <Paper style={styles.paper}>
             <Toolbar>
-              <ToolbarTitle text="Add a new spot to share" />
+              <ToolbarTitle text="Edit your share spot" />
             </Toolbar>
             <CardText style={{ padding: '8px' }}>
               <div style={styles.formWrap}>
                 <form onSubmit={this.handleFormSubmit.bind(this)} style={styles.form}>
+                  <ShareSpotMap position={position} center={position} />
                   <PlacesAutocomplete
-                    // name="defaultLocation"
                     value={this.state.address === undefined ? '' : this.state.address}
                     onChange={this.onChange}
                     hintText="Enter address here"
@@ -210,7 +210,6 @@ class ShareSpotEdit extends Component {
                     type="submit"
                     label="Find on map"
                   />
-                  <ShareSpotMap position={position} center={position} />
                 </form>
                 <form style={styles.form}>
                   <TextField
@@ -277,19 +276,23 @@ class ShareSpotEdit extends Component {
                     onChange={e => this.handleTextFieldChange(e, [])}
                   />
 
-                  <RaisedButton
-                    label="Submit"
-                    primary
-                    onClick={e => this.handleSubmit(e)}
-                  />
+                  <div>
+                    <Link
+                      to="/sharespot/list"
+                    >
+                      <FlatButton
+                        style={{ width: '45%', marginLeft: '20px' }}
+                        label="Cancel"
+                      />
+                    </Link>
 
-                  <Link
-                    to="/sharespot/list"
-                  >
-                    <FlatButton
-                      label="Cancel"
+                    <RaisedButton
+                      style={{ width: '45%', marginLeft: '20px' }}
+                      label="Submit"
+                      primary
+                      onClick={e => this.handleSubmit(e)}
                     />
-                  </Link>
+                  </div>
                 </form>
               </div>
             </CardText>

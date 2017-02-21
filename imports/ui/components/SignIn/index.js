@@ -21,12 +21,6 @@ const styles = {
   textField: {
     width: '100%',
   },
-  floatingLabelStyle: {
-    color: cyan500,
-  },
-  errorStyle: {
-    color: cyan500,
-  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -130,7 +124,6 @@ class SignIn extends Component {
                 hintText="Email"
                 errorText={this.state.fieldErrors.email}
                 floatingLabelText="Email"
-                floatingLabelStyle={styles.floatingLabelStyle}
                 value={this.state.fields.email}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               />
@@ -140,22 +133,21 @@ class SignIn extends Component {
                 hintText="Password"
                 errorText={this.state.fieldErrors.password}
                 floatingLabelText="Password"
-                floatingLabelStyle={styles.floatingLabelStyle}
                 type="password"
                 value={this.state.fields.password}
                 onChange={e => this.handleTextFieldChange(e, ['req'])}
               />
               <div style={styles.buttonContainer}>
-                <RaisedButton
-                  style={styles.buttonStyle}
-                  labelColor="black"
-                  label="Sign In"
-                  onClick={(e) => { this.handleSubmit(e); }}
-                />
                 <FlatButton
                   style={styles.buttonStyle}
                   label="Sign Up"
                   onClick={(e) => { e.preventDefault(); this.props.onSignUpClick(); }}
+                />
+                <RaisedButton
+                  style={styles.buttonStyle}
+                  primary
+                  label="Sign In"
+                  onClick={(e) => { this.handleSubmit(e); }}
                 />
               </div>
             </CardText>

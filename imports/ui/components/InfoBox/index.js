@@ -31,7 +31,7 @@ class InfoBox extends Component {
     return (
       <div style={styles.infoBox}>
         <h2>{this.props.address}, {this.props.postal}</h2>
-        <p>Price per hour: {this.props.price}</p>
+        <p>Price per hour: ${this.props.price}</p>
         <p>{this.props.info}</p>
         <RaisedButton
           label={this.props.label}
